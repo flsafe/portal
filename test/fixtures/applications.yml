@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cover_letter: MyText
+  reviewed: false
+  opportunity_id: 
+  user_id: 
+
+two:
+  cover_letter: MyText
+  reviewed: false
+  opportunity_id: 
+  user_id: 

@@ -1,32 +1,33 @@
-%h1 Listing opportunities
-
-%table
+- model_class = Opportunity
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
   %thead
     %tr
-      %th Title
-      %th Description
-      %th City
-      %th State
-      %th Is open
-      %th Is affilated
-      %th  
-      %th
-      %th
-      %th
-      
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:title)
+      %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:city)
+      %th= model_class.human_attribute_name(:state)
+      %th= model_class.human_attribute_name(:is_open)
+      %th= model_class.human_attribute_name(:is_affilated)
+      %th= model_class.human_attribute_name(:company_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @opportunities.each do |opportunity|
       %tr
+        %td= link_to opportunity.id, opportunity_path(opportunity)
         %td= opportunity.title
         %td= opportunity.description
         %td= opportunity.city
         %td= opportunity.state
         %td= opportunity.is_open
         %td= opportunity.is_affilated
-        %td= link_to 'Show', opportunity
-        %td= link_to 'Edit', edit_opportunity_path(opportunity)
-        %td= link_to 'Destroy', opportunity, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= opportunity.company_id
+        %td=l opportunity.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_opportunity_path(opportunity), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), opportunity_path(opportunity), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-%br
-
-= link_to 'New Opportunity', new_opportunity_path
+= link_to t('.new', :default => t("helpers.links.new")), new_opportunity_path, :class => 'btn btn-primary'

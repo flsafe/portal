@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Cover letter:
+  = @application.cover_letter
+%p
+  %b Reviewed:
+  = @application.reviewed
+%p
+  %b Opportunity:
+  = @application.opportunity
+%p
+  %b User:
+  = @application.user
+
+= link_to 'Edit', edit_application_path(@application)
+\|
+= link_to 'Back', applications_path

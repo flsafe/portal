@@ -1,0 +1,22 @@
+= form_for @application do |f|
+  - if @application.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@application.errors.count, "error")} prohibited this application from being saved:"
+      %ul
+        - @application.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :cover_letter
+    = f.text_area :cover_letter
+  .field
+    = f.label :reviewed
+    = f.check_box :reviewed
+  .field
+    = f.label :opportunity
+    = f.text_field :opportunity
+  .field
+    = f.label :user
+    = f.text_field :user
+  .actions
+    = f.submit 'Save'

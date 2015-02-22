@@ -1,24 +1,37 @@
-%p#notice= notice
+- model_class = Opportunity
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
 
 %p
-  %b Title:
+  %strong= model_class.human_attribute_name(:title) + ':'
+  %br
   = @opportunity.title
 %p
-  %b Description:
+  %strong= model_class.human_attribute_name(:description) + ':'
+  %br
   = @opportunity.description
 %p
-  %b City:
+  %strong= model_class.human_attribute_name(:city) + ':'
+  %br
   = @opportunity.city
 %p
-  %b State:
+  %strong= model_class.human_attribute_name(:state) + ':'
+  %br
   = @opportunity.state
 %p
-  %b Is open:
+  %strong= model_class.human_attribute_name(:is_open) + ':'
+  %br
   = @opportunity.is_open
 %p
-  %b Is affilated:
+  %strong= model_class.human_attribute_name(:is_affilated) + ':'
+  %br
   = @opportunity.is_affilated
+%p
+  %strong= model_class.human_attribute_name(:company_id) + ':'
+  %br
+  = @opportunity.company_id
 
-= link_to 'Edit', edit_opportunity_path(@opportunity)
-\|
-= link_to 'Back', opportunities_path
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), opportunities_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_opportunity_path(@opportunity), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), opportunity_path(@opportunity), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
