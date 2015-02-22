@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @opportunity.title
+%p
+  %b Description:
+  = @opportunity.description
+%p
+  %b City:
+  = @opportunity.city
+%p
+  %b State:
+  = @opportunity.state
+%p
+  %b Is open:
+  = @opportunity.is_open
+%p
+  %b Is affilated:
+  = @opportunity.is_affilated
+
+= link_to 'Edit', edit_opportunity_path(@opportunity)
+\|
+= link_to 'Back', opportunities_path

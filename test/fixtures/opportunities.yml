@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  city: MyString
+  state: MyString
+  is_open: false
+  is_affilated: false
+
+two:
+  title: MyString
+  description: MyText
+  city: MyString
+  state: MyString
+  is_open: false
+  is_affilated: false
