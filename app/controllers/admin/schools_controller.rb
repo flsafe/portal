@@ -1,15 +1,17 @@
-class SchoolsController < ApplicationController
+class Admin::SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
 
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.all
+    @schools = School.order('name').all
   end
 
   # GET /schools/1
   # GET /schools/1.json
   def show
+    @school = School.find(params[:id])
+
   end
 
   # GET /schools/new
@@ -28,7 +30,7 @@ class SchoolsController < ApplicationController
 
     respond_to do |format|
       if @school.save
-        format.html { redirect_to @school, notice: 'School was successfully created.' }
+        format.html { redirect_to [:admin, @school], notice: 'School was successfully created.' }
         format.json { render :show, status: :created, location: @school }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class SchoolsController < ApplicationController
   def update
     respond_to do |format|
       if @school.update(school_params)
-        format.html { redirect_to @school, notice: 'School was successfully updated.' }
+        format.html { redirect_to [:admin, @school], notice: 'School was successfully updated.' }
         format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class SchoolsController < ApplicationController
   def destroy
     @school.destroy
     respond_to do |format|
-      format.html { redirect_to schools_url, notice: 'School was successfully destroyed.' }
+      format.html { redirect_to admin_schools_url, notice: 'School was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
 
   # User login sessions
-  get 'admin', to: 'admin#index'
   controller :sessions do 
     get 'login' => :new 
     post 'login' => :create
     delete 'logout' => :destroy
+
+  end
+
+  namespace :admin do
+    root to: 'admin#index'
+    resources :schools, shallow: true do
+      resources :users
+    end
   end
 
   resources :applications
@@ -16,7 +23,6 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :schools
 
   root 'landing#index'
 end
