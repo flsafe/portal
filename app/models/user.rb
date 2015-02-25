@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  belongs_to :school
+  
   has_secure_password
   enum role: {
     admin: 1,

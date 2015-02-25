@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'admin#index'
-    resources :schools, shallow: true do
+    resources :schools do
       resources :users
     end
   end
@@ -20,9 +20,6 @@ Rails.application.routes.draw do
   resources :opportunities
 
   resources :companies
-
-  resources :users
-
 
   root 'landing#index'
 end

@@ -1,5 +1,6 @@
-class Admin::SchoolsController < ApplicationController
-  before_action :set_school, only: [:show, :edit, :update, :destroy]
+class Admin::SchoolsController < Admin::ApplicationController
+
+  skip_before_action :set_school, only: [:index]
 
   # GET /schools
   # GET /schools.json
@@ -11,7 +12,7 @@ class Admin::SchoolsController < ApplicationController
   # GET /schools/1.json
   def show
     @school = School.find(params[:id])
-
+    @users = @school.users.all
   end
 
   # GET /schools/new
@@ -64,13 +65,9 @@ class Admin::SchoolsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_school
-      @school = School.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def school_params
-      params.require(:school).permit(:name, :phone, :custom_domain, :website, :address1, :address2, :city, :state, :zip)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def school_params
+    params.require(:school).permit(:name, :phone, :custom_domain, :website, :address1, :address2, :city, :state, :zip)
+  end
 end

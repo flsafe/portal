@@ -28,7 +28,9 @@ class SessionsController < ApplicationController
   def redirect_to_role(user)
     case
     when user.role == 'admin'
-      redirect_to admin_url
+      redirect_to admin_root_url
+    when user.role == 'instructor'
+      redirect_to admin_school_url(user.school)
     else
       raise "Unknown role #{user.role}"
     end
