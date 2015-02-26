@@ -59,7 +59,7 @@
     .form-group
       = f.label :role, :class => ''
       .form-control
-        = f.select :role, options_for_select([:career_services, :instructor, :student], @user.role)
+        = f.select :role, options_for_select([:student, :instructor, :employer, :career_services], @user.role)
 
     .form-actions
       = f.submit nil, :class => 'btn btn-primary'

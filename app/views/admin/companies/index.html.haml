@@ -6,6 +6,7 @@
     %tr
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:slug)
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:website)
       %th= model_class.human_attribute_name(:address1)
@@ -19,8 +20,9 @@
   %tbody
     - @companies.each do |company|
       %tr
-        %td= link_to company.id, company_path(company)
+        %td= link_to company.id, admin_company_path(company)
         %td= company.name
+        %td= company.slug
         %td= company.description
         %td= company.website
         %td= company.address1
@@ -31,7 +33,7 @@
         %td= company.phone
         %td=l company.created_at
         %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_company_path(company), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), company_path(company), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_company_path(company), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_company_path(company), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_company_path, :class => 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_admin_company_path, :class => 'btn btn-primary'

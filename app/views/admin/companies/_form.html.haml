@@ -1,12 +1,16 @@
-= form_for @company, :html => { :class => 'form-horizontal' } do |f|
+= form_for [:admin, @company], :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :name, :class => 'control-label'
     .controls
       = f.text_field :name, :class => 'text_field'
   .control-group
+    = f.label :slug, :class => 'control-label'
+    .controls
+      = f.text_field :slug, :class => 'text_field'
+  .control-group
     = f.label :description, :class => 'control-label'
     .controls
-      = f.text_field :description, :class => 'text_field'
+      = f.text_area :description, :class => 'text_field'
   .control-group
     = f.label :website, :class => 'control-label'
     .controls
@@ -37,4 +41,4 @@
       = f.text_field :phone, :class => 'text_field'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), companies_path, :class => 'btn'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_companies_path, :class => 'btn'

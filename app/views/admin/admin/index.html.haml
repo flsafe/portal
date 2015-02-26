@@ -4,4 +4,6 @@
 %p= current_user.first_name
 
 
-= link_to "Schools", admin_schools_path
+%ul
+  %li= link_to "Schools", admin_schools_path
+  %li= link_to "Companies", admin_companies_path

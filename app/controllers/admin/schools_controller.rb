@@ -66,6 +66,12 @@ class Admin::SchoolsController < Admin::ApplicationController
 
   private
 
+  def set_school
+    @school = School.find(params[:id])
+    return if current_user.role == 'admin'
+    redirect_to(admin_school_url(current_user.school)) unless @school == current_user.school
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def school_params
     params.require(:school).permit(:name, :phone, :custom_domain, :website, :address1, :address2, :city, :state, :zip)

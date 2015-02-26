@@ -1,3 +1,6 @@
+%h1= @company.name
+%p
+  = link_to "Employers", admin_company_employers_path(@company)
 - model_class = Company
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
@@ -40,6 +43,6 @@
   = @company.phone
 
 .form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), companies_path, :class => 'btn'
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_company_path(@company), :class => 'btn'
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), company_path(@company), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  = link_to t('.back', :default => t("helpers.links.back")), admin_companies_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_company_path(@company), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_company_path(@company), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

@@ -13,13 +13,20 @@ Rails.application.routes.draw do
     resources :schools do
       resources :users
     end
+    resources :companies do
+      resources :employers
+    end
+  end
+
+  # Under an employer scope 
+  scope '/:company-slug', controller: :companies do
+    get '/' => :show
+    get '/edit' => :edit
+    post '/' => :update
+    resources :opportunities
   end
 
   resources :applications
-
-  resources :opportunities
-
-  resources :companies
 
   root 'landing#index'
 end

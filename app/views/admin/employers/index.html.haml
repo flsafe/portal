@@ -1,0 +1,16 @@
+%h1= @company.name
+
+= link_to "New Employer", new_admin_company_employer_path(@company)
+
+%table.table
+  %thead
+    %tr
+      %th Email
+      %th First Name
+      %th Last Name
+  %tbody
+  - @users.each do |u|
+    %tr
+      %td= u.email
+      %td= u.first_name
+      %td= u.last_name
