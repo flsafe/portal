@@ -7,6 +7,7 @@
     %tr
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:email)
+      %th= model_class.human_attribute_name(:type)
       %th= model_class.human_attribute_name(:first_name)
       %th= model_class.human_attribute_name(:last_name)
       %th= model_class.human_attribute_name(:bio)
@@ -16,7 +17,6 @@
       %th= model_class.human_attribute_name(:state)
       %th= model_class.human_attribute_name(:zip)
       %th= model_class.human_attribute_name(:password_digest)
-      %th= model_class.human_attribute_name(:role)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
@@ -24,6 +24,7 @@
       %tr
         %td= link_to user.id, edit_admin_school_user_path(user.school, user)
         %td= user.email
+        %td= user.type
         %td= user.first_name
         %td= user.last_name
         %td= user.bio
@@ -33,7 +34,6 @@
         %td= user.state
         %td= user.zip
         %td= user.password_digest
-        %td= user.role
         %td=l user.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_school_user_path(user.school, user), :class => 'btn btn-mini'

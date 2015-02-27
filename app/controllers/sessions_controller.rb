@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  include UserHomePage
   skip_before_action :authorize
   
   def new
@@ -21,18 +22,5 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to root_url
-  end
-
-  private
-
-  def redirect_to_role(user)
-    case
-    when user.role == 'admin'
-      redirect_to admin_root_url
-    when user.role == 'instructor'
-      redirect_to admin_school_url(user.school)
-    else
-      raise "Unknown role #{user.role}"
-    end
   end
 end

@@ -1,6 +1,7 @@
 class Admin::SchoolsController < Admin::ApplicationController
 
-  skip_before_action :set_school, only: [:index]
+  before_filter :ensure_admin, except: [:show, :edit, :update]
+  before_action :set_user_school, except: [:index, :new, :create]
 
   # GET /schools
   # GET /schools.json
@@ -66,9 +67,9 @@ class Admin::SchoolsController < Admin::ApplicationController
 
   private
 
-  def set_school
+  def set_user_school
     @school = School.find(params[:id])
-    return if current_user.role == 'admin'
+    return if current_user.type == 'Admin'
     redirect_to(admin_school_url(current_user.school)) unless @school == current_user.school
   end
 

@@ -5,7 +5,7 @@ class Admin::EmployersController < Admin::ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.where(company: @company)
+    @employers = User.where(company: @company)
   end
 
   # GET /users/1
@@ -15,27 +15,27 @@ class Admin::EmployersController < Admin::ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @employer = Employer.new
   end
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @employer = User.find(params[:id])
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    @user.company = @company
+    @employer = User.new(user_params)
+    @employer.company = @company
 
     respond_to do |format|
-      if @user.save
+      if @employer.save
         format.html { redirect_to admin_company_users_url(@company), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.json { render :show, status: :created, location: @employer }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @employer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,12 +44,12 @@ class Admin::EmployersController < Admin::ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @employer.update(user_params)
         format.html { redirect_to admin_company_users_url(@company), notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.json { render :show, status: :ok, location: @employer }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @employer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +57,7 @@ class Admin::EmployersController < Admin::ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+    @employer.destroy
     respond_to do |format|
       format.html { redirect_to admin_company_users_url(@company), notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
@@ -72,7 +72,7 @@ class Admin::EmployersController < Admin::ApplicationController
 
   def set_user
     return if params[:id].nil?
-    @user = User.find(params[:id])
+    @employer = User.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,4 @@
-= form_for [:admin, @school, @user], :html => { :class => 'form-horizontal' } do |f|
+= form_for target_path, :html => { :class => 'form-horizontal' } do |f|
   .form-group
     = f.label :email, :class => ''
     .form-control
@@ -57,10 +57,9 @@
         = f.text_field :zip, :class => 'form-control'
 
     .form-group
-      = f.label :role, :class => ''
+      = f.label :type, :class => ''
       .form-control
-        = f.select :role, options_for_select([:student, :instructor, :employer, :career_services], @user.role)
+        = f.select :type, options_for_select(['Student', 'Instructor', 'Staff'], @user.type)
 
     .form-actions
       = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), admin_school_users_path(@school), :class => 'btn'

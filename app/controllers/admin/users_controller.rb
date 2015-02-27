@@ -1,10 +1,11 @@
 class Admin::UsersController < Admin::ApplicationController
+  before_action :set_school
   before_action :set_user
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.where(school: @school)
+    @users = User.where(school: @school, type: ['Student', 'Instructor'])
   end
 
   # GET /users/1
@@ -65,15 +66,21 @@ class Admin::UsersController < Admin::ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      return if params[:id].nil?
-      @user = User.find(params[:id])
-      return if current_user.role == 'admin'
-      redirect_to admin_school_path(current_user.school) unless @user.school == @school
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :bio, :address1, :address2, :password, :password_confirmation, :role)
-    end
+  def set_school
+    @school = School.find(params[:school_id])
+  end
+
+  def set_user
+    return if params[:id].nil?
+    @user = User.find(params[:id])
+    return if current_user.role == 'admin'
+    redirect_to admin_school_path(current_user.school) unless @user.school == @school
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    user_type = params[:type] ? params[:type].downcase : :user
+    params.require(user_type).permit(:email, :first_name, :last_name, :bio, :address1, :address2, :password, :password_confirmation, :type)
+  end
 end
