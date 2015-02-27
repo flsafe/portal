@@ -1,7 +1,7 @@
 class Admin::ApplicationController < ApplicationController
   include UserHomePage
 
-  before_filter :ensure_admin_or_staff
+  before_action :ensure_admin_or_staff
 
   private
 

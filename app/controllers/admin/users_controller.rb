@@ -5,7 +5,7 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.where(school: @school, type: ['Student', 'Instructor'])
+    @users = User.where(school: @school)
   end
 
   # GET /users/1
@@ -68,7 +68,9 @@ class Admin::UsersController < Admin::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
 
   def set_school
+    return if current_user.type == 'Admin'
     @school = School.find(params[:school_id])
+    redirect_to_role(current_user) unless current_user.school == @school
   end
 
   def set_user

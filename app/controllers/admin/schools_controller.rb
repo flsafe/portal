@@ -1,6 +1,6 @@
 class Admin::SchoolsController < Admin::ApplicationController
 
-  before_filter :ensure_admin, except: [:show, :edit, :update]
+  before_action :ensure_admin, except: [:show, :edit, :update]
   before_action :set_user_school, except: [:index, :new, :create]
 
   # GET /schools
