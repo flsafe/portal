@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get '/' => :show
     get '/edit' => :edit
     patch '/' => :update
-    resources :opportunities
+    resources :opportunities, shallow: true
   end
 
   resources :applications

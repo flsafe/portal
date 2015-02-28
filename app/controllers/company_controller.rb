@@ -1,7 +1,9 @@
 class CompanyController < ApplicationController
+  before_action :ensure_admin_staff_or_employer
   before_action :set_company
 
   def show
+    @opportunities = @company.opportunities.all
   end
 
   def edit

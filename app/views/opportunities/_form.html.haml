@@ -1,4 +1,5 @@
-= form_for @opportunity, :html => { :class => 'form-horizontal' } do |f|
+- target_path = @opportunity.new_record? ? company_opportunities_url(@company.slug) : company_opportunity_url(@company.slug, @opportunity)
+= form_for [@company.slug, @opportunity], url: target_path, :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :title, :class => 'control-label'
     .controls
@@ -6,7 +7,7 @@
   .control-group
     = f.label :description, :class => 'control-label'
     .controls
-      = f.text_field :description, :class => 'text_field'
+      = f.text_area :description, :class => 'text_field'
   .control-group
     = f.label :city, :class => 'control-label'
     .controls
@@ -15,18 +16,5 @@
     = f.label :state, :class => 'control-label'
     .controls
       = f.text_field :state, :class => 'text_field'
-  .control-group
-    = f.label :is_open, :class => 'control-label'
-    .controls
-      = f.text_field :is_open, :class => 'text_field'
-  .control-group
-    = f.label :is_affilated, :class => 'control-label'
-    .controls
-      = f.text_field :is_affilated, :class => 'text_field'
-  .control-group
-    = f.label :company_id, :class => 'control-label'
-    .controls
-      = f.text_field :company_id, :class => 'text_field'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), opportunities_path, :class => 'btn'

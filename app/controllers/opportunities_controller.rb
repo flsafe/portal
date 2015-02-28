@@ -1,4 +1,6 @@
 class OpportunitiesController < ApplicationController
+  before_action :ensure_admin_staff_or_employer
+  before_action :set_company
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy]
 
   # GET /opportunities
@@ -24,11 +26,11 @@ class OpportunitiesController < ApplicationController
   # POST /opportunities
   # POST /opportunities.json
   def create
-    @opportunity = Opportunity.new(opportunity_params)
+    @opportunity = @company.opportunities.build(opportunity_params)
 
     respond_to do |format|
       if @opportunity.save
-        format.html { redirect_to @opportunity, notice: 'Opportunity was successfully created.' }
+        format.html { redirect_to company_url(@company.slug), notice: 'Opportunity was successfully created.' }
         format.json { render :show, status: :created, location: @opportunity }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class OpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @opportunity.update(opportunity_params)
-        format.html { redirect_to @opportunity, notice: 'Opportunity was successfully updated.' }
+        format.html { redirect_to company_url(@company.slug), notice: 'Opportunity was successfully updated.' }
         format.json { render :show, status: :ok, location: @opportunity }
       else
         format.html { render :edit }
@@ -62,13 +64,19 @@ class OpportunitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_opportunity
-      @opportunity = Opportunity.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def opportunity_params
-      params.require(:opportunity).permit(:title, :description, :city, :state, :is_open, :is_affilated, :is_affilated)
-    end
+  def set_company
+    @company = Company.find_by_slug!(params[:companyslug])
+    redirect_home(current_user) unless current_user.company == @company
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_opportunity
+    @opportunity = Opportunity.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def opportunity_params
+    params.require(:opportunity).permit(:title, :description, :city, :state)
+  end
 end

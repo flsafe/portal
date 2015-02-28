@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def ensure_admin_staff_or_employer
+    redirect_home(current_user) unless current_user.admin_or_staff? || current_user.employer?
+  end 
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
