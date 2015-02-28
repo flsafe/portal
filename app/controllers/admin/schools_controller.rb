@@ -13,7 +13,6 @@ class Admin::SchoolsController < Admin::ApplicationController
   # GET /schools/1.json
   def show
     @school = School.find(params[:id])
-    @users = @school.users.all
   end
 
   # GET /schools/new

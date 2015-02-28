@@ -1,6 +1,22 @@
-%h1 New Employer
 = form_for [:admin, @company, @employer] do |f|
   .form-group
     = label :email, 'Email'
     .form-control
     = f.text_field :email
+  .form-group
+    = label :first_name, 'First Name'
+    .form-control
+    = f.text_field :first_name
+  .form-group
+    = label :last_name, 'Last Name'
+    .form-control
+    = f.text_field :last_name
+  .form-group
+    = label :password, 'Password'
+    .form-control
+    = f.password_field :password
+  .form-group
+    = label :password_confirmation, 'Password Confirmation'
+    .form-control
+    = f.password_field :password_confirmation
+  = f.submit "Save", class: 'btn btn-primary' 

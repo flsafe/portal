@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def new
     if session[:user_id]
       user = User.find(session[:user_id])
-      redirect_to_role user
+      redirect_home user
     end
   end
 
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to_role user
+      redirect_home user
     else
       redirect_to login_url, alert: "Invalid email or password."
     end

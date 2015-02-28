@@ -3,12 +3,14 @@ module UserHomePage
 
   private
 
-  def redirect_to_role(user)
+  def redirect_home(user)
     case
-    when user.type == 'Admin'
+    when user.admin?
       redirect_to admin_root_url
-    when %w[Staff Instructor].include?(user.type)
+    when user.staff? 
       redirect_to admin_school_url(user.school)
+    when user.employer? 
+      redirect_to company_url(user.company.slug)
     else
       raise "Unknown user type #{user.type}"
     end

@@ -68,9 +68,9 @@ class Admin::UsersController < Admin::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
 
   def set_school
-    return if current_user.type == 'Admin'
     @school = School.find(params[:school_id])
-    redirect_to_role(current_user) unless current_user.school == @school
+    return if current_user.type == 'Admin'
+    redirect_home(current_user) unless current_user.school == @school
   end
 
   def set_user

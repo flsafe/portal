@@ -22,10 +22,10 @@ Rails.application.routes.draw do
   end
 
   # Under an employer scope 
-  scope '/:company-slug', controller: :companies do
+  scope '/:companyslug', controller: :company, as: :company do
     get '/' => :show
     get '/edit' => :edit
-    post '/' => :update
+    patch '/' => :update
     resources :opportunities
   end
 

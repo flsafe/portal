@@ -5,12 +5,15 @@
 %table.table
   %thead
     %tr
+      %th ID
       %th Email
       %th First Name
       %th Last Name
   %tbody
   - @employers.each do |u|
     %tr
-      %td= u.email
+      %td= u.id
+      %td= link_to u.email, edit_admin_company_employer_path(@company, u)
       %td= u.first_name
       %td= u.last_name
+      %td= link_to "Destroy", admin_company_employer_path(@company, u), method: :delete

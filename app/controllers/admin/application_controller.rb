@@ -6,12 +6,10 @@ class Admin::ApplicationController < ApplicationController
   private
 
   def ensure_admin
-    redirect_to_role(current_user) if current_user.type != "Admin"
+    redirect_home(current_user) unless current_user.admin?
   end
 
   def ensure_admin_or_staff
-    unless ["Admin", "Staff", "Instructor"].include?(current_user.type)
-      redirect_to_role(current_user)
-    end
+      redirect_home(current_user) unless current_user.admin_or_staff?
   end
 end

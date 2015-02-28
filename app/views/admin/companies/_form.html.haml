@@ -1,4 +1,7 @@
-= form_for [:admin, @company], :html => { :class => 'form-horizontal' } do |f|
+- unless defined? target_path
+  - target_path = [:admin, @company]
+
+= form_for target_path, :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :name, :class => 'control-label'
     .controls

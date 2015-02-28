@@ -5,7 +5,7 @@ class Admin::EmployersController < Admin::ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @employers = User.where(company: @company)
+    @employers = Employer.where(company: @company)
   end
 
   # GET /users/1
@@ -20,18 +20,18 @@ class Admin::EmployersController < Admin::ApplicationController
 
   # GET /users/1/edit
   def edit
-    @employer = User.find(params[:id])
+    @employer = Employer.find(params[:id])
   end
 
   # POST /users
   # POST /users.json
   def create
-    @employer = User.new(user_params)
+    @employer = Employer.new(user_params)
     @employer.company = @company
 
     respond_to do |format|
       if @employer.save
-        format.html { redirect_to admin_company_users_url(@company), notice: 'User was successfully created.' }
+        format.html { redirect_to admin_company_employers_url(@company), notice: 'Employer was successfully created.' }
         format.json { render :show, status: :created, location: @employer }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class Admin::EmployersController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @employer.update(user_params)
-        format.html { redirect_to admin_company_users_url(@company), notice: 'User was successfully updated.' }
+        format.html { redirect_to admin_company_employers_url(@company), notice: 'Employer was successfully updated.' }
         format.json { render :show, status: :ok, location: @employer }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class Admin::EmployersController < Admin::ApplicationController
   def destroy
     @employer.destroy
     respond_to do |format|
-      format.html { redirect_to admin_company_users_url(@company), notice: 'User was successfully destroyed.' }
+      format.html { redirect_to admin_company_employers_url(@company), notice: 'Employer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,11 +72,11 @@ class Admin::EmployersController < Admin::ApplicationController
 
   def set_user
     return if params[:id].nil?
-    @employer = User.find(params[:id])
+    @employer = Employer.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :bio, :address1, :address2, :password, :password_confirmation, :role)
+    params.require(:employer).permit(:email, :first_name, :last_name, :bio, :address1, :address2, :password, :password_confirmation)
   end
 end

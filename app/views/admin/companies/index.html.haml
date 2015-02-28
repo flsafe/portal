@@ -21,7 +21,7 @@
     - @companies.each do |company|
       %tr
         %td= link_to company.id, admin_company_path(company)
-        %td= company.name
+        %td= link_to company.name, admin_company_path(company)
         %td= company.slug
         %td= company.description
         %td= company.website
