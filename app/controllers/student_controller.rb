@@ -3,6 +3,6 @@ class StudentController < ApplicationController
 
   def show
     @student = current_user
-    @opportunities = Opportunity.all
+    @opportunities = Opportunity.includes(:company).order(created_at: :desc).limit(25)
   end
 end
