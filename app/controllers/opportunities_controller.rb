@@ -53,23 +53,13 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  # DELETE /opportunities/1
-  # DELETE /opportunities/1.json
-  def destroy
-    @opportunity.destroy
-    respond_to do |format|
-      format.html { redirect_to opportunities_url, notice: 'Opportunity was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
 
   def set_company
     @company = Company.find_by_slug!(params[:companyslug])
     redirect_home(current_user) unless current_user.company == @company
   end
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_opportunity
     @opportunity = Opportunity.find(params[:id])

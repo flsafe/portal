@@ -6,5 +6,6 @@
 
 %h2 Career Opportunities
 %ul
-  - @opportunities.each do |o|
+  - @opportunities[0..2].each do |o|
     %li= link_to o.title, edit_company_opportunity_url(@company.slug, o) 
+  = link_to "More..", company_opportunities_path(@company.slug)
