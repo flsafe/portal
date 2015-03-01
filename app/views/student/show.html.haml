@@ -1,0 +1,8 @@
+%h1 Student Home Page
+
+= @student.email
+
+%h2 Career Opportunities
+%ul
+  - @opportunities.each do |opp|
+    %li= link_to "#{opp.title} at #{opp.company.name}", opportunity_path(opp)

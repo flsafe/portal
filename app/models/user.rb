@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   ADMINS = %w[Admin]
   STAFFERS = %w[Staff Instructor]
   EMPLOYERS = %w[Employer]
+  STUDENTS = %w[Student]
 
   def admin?
     ADMINS.include?(type)
@@ -21,5 +22,9 @@ class User < ActiveRecord::Base
 
   def employer?
     EMPLOYERS.include?(type)
+  end
+
+  def student?
+    STUDENTS.include?(type)
   end
 end

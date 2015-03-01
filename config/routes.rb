@@ -21,13 +21,17 @@ Rails.application.routes.draw do
     end
   end
 
-  # Under an employer scope 
+  # Employer 
   scope '/:companyslug', controller: :company, as: :company do
     get '/' => :show
     get '/edit' => :edit
     patch '/' => :update
-    resources :opportunities, shallow: true
+    resources :opportunities
   end
+
+  # Students
+  resources :student, only: [:show, :edit, :update]
+  resources :opportunities, only: [:show]
 
   resources :applications
 

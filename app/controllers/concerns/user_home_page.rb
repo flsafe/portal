@@ -11,6 +11,8 @@ module UserHomePage
       redirect_to admin_school_url(user.school)
     when user.employer? 
       redirect_to company_url(user.company.slug)
+    when user.student?
+      redirect_to student_url(current_user)
     else
       raise "Unknown user type #{user.type}"
     end

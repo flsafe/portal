@@ -1,17 +1,18 @@
 class OpportunitiesController < ApplicationController
-  before_action :ensure_admin_staff_or_employer
-  before_action :set_company
+  before_action :ensure_admin_staff_or_employer, except: [:show]
+  before_action :set_company, except: [:show]
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy]
 
   # GET /opportunities
   # GET /opportunities.json
   def index
-    @opportunities = Opportunity.all
+    @opportunities = Opportunity.joins(:company).all
   end
 
   # GET /opportunities/1
   # GET /opportunities/1.json
   def show
+    @company = @opportunity.company
   end
 
   # GET /opportunities/new
