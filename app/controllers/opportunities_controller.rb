@@ -57,6 +57,7 @@ class OpportunitiesController < ApplicationController
 
   def set_company
     @company = Company.find_by_slug!(params[:companyslug])
+    return if current_user.admin_or_staff?
     redirect_home(current_user) unless current_user.company == @company
   end
 

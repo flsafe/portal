@@ -1,6 +1,8 @@
 %h1= @company.name
-%p
-  = link_to "Employers", admin_company_employers_path(@company)
+%ul
+  %li= link_to "Employers", admin_company_employers_path(@company)
+  %li= link_to "Opportunities", company_opportunities_path(@company.slug)
+
 - model_class = Company
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
