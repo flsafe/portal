@@ -1,4 +1,6 @@
 class ApplicationsController < ApplicationController
+  before_action :ensure_admin_staff_or_student
+  before_action :set_opportunity
   before_action :set_application, only: [:show, :edit, :update, :destroy]
 
   # GET /applications
@@ -24,11 +26,12 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
-    @application = Application.new(application_params)
+    @application = @opportunity.applications.build(application_params) 
+    @application.user = current_user
 
     respond_to do |format|
       if @application.save
-        format.html { redirect_to @application, notice: 'Application was successfully created.' }
+        format.html { redirect_to student_url(current_user), notice: 'Application was successfully created.' }
         format.json { render :show, status: :created, location: @application }
       else
         format.html { render :new }
@@ -62,6 +65,11 @@ class ApplicationsController < ApplicationController
   end
 
   private
+
+  def set_opportunity
+    @opportunity = Opportunity.find(params[:opportunity_id])
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_application
       @application = Application.find(params[:id])
@@ -69,6 +77,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:cover_letter, :reviewed, :opportunity_id, :user_id)
+      params.require(:application).permit(:cover_letter, :resume)
     end
 end

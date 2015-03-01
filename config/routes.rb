@@ -31,9 +31,9 @@ Rails.application.routes.draw do
 
   # Students
   resources :student, only: [:show, :edit, :update]
-  resources :opportunities, only: [:show]
-
-  resources :applications
+  resources :opportunities, only: [:show] do
+    resources :applications
+  end
 
   root 'landing#index'
 end
