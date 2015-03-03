@@ -1,7 +1,7 @@
 class ApplicationsController < ApplicationController
   before_action :ensure_admin_staff_or_student
-  before_action :set_opportunity
-  before_action :set_application, only: [:show, :edit, :update, :destroy]
+  before_action :set_opportunity, except: [:show, :edit, :update]
+  before_action :set_application, except: [:index, :new, :create] 
 
   # GET /applications
   # GET /applications.json
@@ -16,6 +16,10 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/new
   def new
+    if existing_app = Application.find_by(opportunity_id: @opportunity.id, user_id: current_user.id)
+      redirect_to application_url(existing_app, notice: "You've already applied!")
+      return
+    end
     @application = Application.new
   end
 
@@ -45,7 +49,7 @@ class ApplicationsController < ApplicationController
   def update
     respond_to do |format|
       if @application.update(application_params)
-        format.html { redirect_to @application, notice: 'Application was successfully updated.' }
+        format.html { redirect_to student_url(current_user), notice: 'Application was successfully updated.' }
         format.json { render :show, status: :ok, location: @application }
       else
         format.html { render :edit }
@@ -70,13 +74,15 @@ class ApplicationsController < ApplicationController
     @opportunity = Opportunity.find(params[:opportunity_id])
   end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_application
-      @application = Application.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_application
+    @application = Application.find(params[:id])
+    return unless current_user.admin_or_staff?
+    rediect_home current_user unless @application.user == current_user
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def application_params
-      params.require(:application).permit(:cover_letter, :resume)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def application_params
+    params.require(:application).permit(:cover_letter, :resume)
+  end
 end

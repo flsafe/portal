@@ -4,15 +4,13 @@
   %b Cover letter:
   = @application.cover_letter
 %p
-  %b Reviewed:
-  = @application.reviewed
+  %b Resume:
+  = @application.resume
 %p
   %b Opportunity:
-  = @application.opportunity
+  = @application.opportunity.title
 %p
-  %b User:
-  = @application.user
+  %b Company:
+  = @application.opportunity.company.name
 
 = link_to 'Edit', edit_application_path(@application)
-\|
-= link_to 'Back', applications_path

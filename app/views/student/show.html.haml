@@ -5,4 +5,9 @@
 %h2 Career Opportunities
 %ul
   - @opportunities.each do |opp|
-    %li= link_to "#{opp.title} at #{opp.company.name}", opportunity_path(opp)
+    %li= link_to "#{opp.title} at #{opp.company.name} #{'**Applied**' if @application_opportunity_ids.include?(opp.id)}", opportunity_path(opp)
+
+%h2 Previous Applications
+%ul
+  - @applications.each do |app|
+    %li= link_to "#{app.opportunity.title} at #{app.opportunity.company.name}", edit_application_path(app)
