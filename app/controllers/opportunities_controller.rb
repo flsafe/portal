@@ -6,7 +6,7 @@ class OpportunitiesController < ApplicationController
   # GET /opportunities
   # GET /opportunities.json
   def index
-    @opportunities = Opportunity.joins(:company).all
+    @opportunities = Opportunity.where(company: @company).includes(:company).all
   end
 
   # GET /opportunities/1
