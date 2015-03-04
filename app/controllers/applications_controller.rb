@@ -1,12 +1,11 @@
 class ApplicationsController < ApplicationController
-  before_action :ensure_admin_staff_or_student
   before_action :set_opportunity, except: [:show, :edit, :update]
   before_action :set_application, except: [:index, :new, :create] 
 
   # GET /applications
   # GET /applications.json
   def index
-    @applications = Application.all
+    @applications = @opportunity.applications
   end
 
   # GET /applications/1
@@ -72,13 +71,15 @@ class ApplicationsController < ApplicationController
 
   def set_opportunity
     @opportunity = Opportunity.find(params[:opportunity_id])
+    return unless current_user.admin_or_staff?
+    redirect_home current_user unless @opportunity.company == current_user.company 
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_application
     @application = Application.find(params[:id])
-    return unless current_user.admin_or_staff?
-    rediect_home current_user unless @application.user == current_user
+    if current_user.student?
+      redirect_home current_user unless @application.user == current_user
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

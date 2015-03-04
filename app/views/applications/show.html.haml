@@ -13,4 +13,4 @@
   %b Company:
   = @application.opportunity.company.name
 
-= link_to 'Edit', edit_application_path(@application)
+= link_to 'Edit', edit_application_path(@application) unless current_user.employer? 

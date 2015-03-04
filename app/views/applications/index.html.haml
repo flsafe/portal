@@ -1,27 +1,15 @@
 %h1 Listing applications
 
-%table
+%table.table.table-bordered
   %thead
     %tr
-      %th Cover letter
-      %th Reviewed
-      %th Opportunity
-      %th User
-      %th
-      %th
-      %th
-      
+      %th Name
+      %th Email
+      %th Application
+
   %tbody
     - @applications.each do |application|
       %tr
-        %td= application.cover_letter
-        %td= application.reviewed
-        %td= application.opportunity
-        %td= application.user
-        %td= link_to 'Show', application
-        %td= link_to 'Edit', edit_application_path(application)
-        %td= link_to 'Destroy', application, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Application', new_application_path
+        %td= link_to "#{application.user.first_name} #{application.user.last_name}"
+        %td= application.user.email
+        %td= link_to "View Application", application

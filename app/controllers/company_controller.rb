@@ -3,7 +3,7 @@ class CompanyController < ApplicationController
   before_action :set_company
 
   def show
-    @opportunities = @company.opportunities.all
+    @opportunities = @company.opportunities.includes(:applications).all
   end
 
   def edit
