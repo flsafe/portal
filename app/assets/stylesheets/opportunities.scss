@@ -1,3 +1,13 @@
 // Place all the styles related to the Opportunities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.opportunity-box {
+  .profile-pic {
+    display: inline; 
+  }  
+
+  .opportunity-details {
+    display: inline;
+  }
+}

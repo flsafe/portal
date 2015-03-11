@@ -4,15 +4,21 @@ module UserHomePage
   private
 
   def redirect_home(user)
+    redirect_to user_home_url(user)
+  end
+
+  def user_home_url(user)
     case
+    when user.nil?
+      root_url
     when user.admin?
-      redirect_to admin_root_url
+      admin_root_url
     when user.staff? 
-      redirect_to admin_school_url(user.school)
+      admin_school_url(user.school)
     when user.employer? 
-      redirect_to company_url(user.company.slug)
+      company_url(user.company.slug)
     when user.student?
-      redirect_to student_url(current_user)
+      student_url(current_user)
     else
       raise "Unknown user type #{user.type}"
     end

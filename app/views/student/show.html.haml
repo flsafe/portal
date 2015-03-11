@@ -1,13 +1,31 @@
-%h1 Student Home Page
+%ul.nav.nav-tabs
+  %li.active{:role => 'presentation'}
+    = link_to "Opportunities", student_path(current_user)
+  %li{:role => 'presentation'}
+    = link_to "Applications", student_path(current_user)
 
-= @student.email
+.row
+  .col-sm-3
+    Opportunities
 
-%h2 Career Opportunities
-%ul
-  - @opportunities.each do |opp|
-    %li= link_to "#{opp.title} at #{opp.company.name} #{'**Applied**' if @application_opportunity_ids.include?(opp.id)}", opportunity_path(opp)
+.row
+  .col-sm-3
+    %input.form-control{:type => 'text', :placeholder=>'Search'}
+.row
+  .col-sm-12
+    - @opportunities.each do |opp|
+      .opportunity-box
+        %hr
+        .row
+          .col-sm-12
+            .media
+              .media-left
+                %img.mdedia.media-top{:src => 'http://placehold.it/125x100'}
+              .media-body
+                %div
+                  %strong= opp.company.name 
+                  %span= opp.company.city + ','
+                  %span= opp.company.state
+                %span= opp.description
+        //= link_to "#{opp.title} at #{opp.company.name} #{'**Applied**' if @application_opportunity_ids.include?(opp.id)}", opportunity_path(opp)
 
-%h2 Previous Applications
-%ul
-  - @applications.each do |app|
-    %li= link_to "#{app.opportunity.title} at #{app.opportunity.company.name}", edit_application_path(app)
