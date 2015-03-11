@@ -3,11 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .opportunity-box {
-  .profile-pic {
-    display: inline; 
-  }  
+  a {
+    text-decoration: underline;
+  }
 
-  .opportunity-details {
-    display: inline;
+
+  em {
+    font-size: .80em; 
   }
 }

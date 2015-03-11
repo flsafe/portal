@@ -4,16 +4,17 @@
   %li{:role => 'presentation'}
     = link_to "Applications", student_path(current_user)
 
-.row
-  .col-sm-3
-    Opportunities
+%ol.breadcrumb
+  %li.active Opportunities
 
 .row
   .col-sm-3
-    %input.form-control{:type => 'text', :placeholder=>'Search'}
+    %input.form-control{:type => 'text', :placeholder=>'Search Keyword'}
+  .col-sm-3
+    %input.form-control{:type => 'text', :placeholder=>'City'}
 .row
   .col-sm-12
-    - @opportunities.each do |opp|
+    - @companies.each do |company|
       .opportunity-box
         %hr
         .row
@@ -23,9 +24,16 @@
                 %img.mdedia.media-top{:src => 'http://placehold.it/125x100'}
               .media-body
                 %div
-                  %strong= opp.company.name 
-                  %span= opp.company.city + ','
-                  %span= opp.company.state
-                %span= opp.description
+                  %strong= company.name 
+                  %span= company.city + ','
+                  %span= company.state
+                %p= company.description
+                %br
+                - company.opportunities.each do |opp|
+                  %div
+                    = link_to "#{opp.title} #{opp.city}, #{opp.state}", opportunity_path(opp)
+                    %em= "#{time_ago_in_words(opp.created_at)} ago"
+                    %p= opp.description
+                       
         //= link_to "#{opp.title} at #{opp.company.name} #{'**Applied**' if @application_opportunity_ids.include?(opp.id)}", opportunity_path(opp)
 

@@ -4,9 +4,7 @@ class StudentController < ApplicationController
 
   def show
     @student = current_user
-    @opportunities = Opportunity.includes(:company).order(created_at: :desc).limit(25)
-    @applications = Application.includes(opportunity: [:company]).where(user: current_user).order(created_at: :desc).limit(25)
-    @application_opportunity_ids = @applications.map{|app| app.opportunity.id}
+    @companies = Company.includes(:opportunities).order(created_at: :desc).limit(25)
   end
 
   def set_student
