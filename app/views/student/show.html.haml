@@ -27,7 +27,7 @@
                 %br
                 - company.opportunities.each do |opp|
                   %div
-                    = link_to "#{opp.title} #{opp.city}, #{opp.state}", opportunity_path(opp)
+                    = link_to "#{opp.title} #{opp.city}, #{opp.state}", student_opportunity_path(@student, opp)
                     %em= "#{time_ago_in_words(opp.created_at)} ago"
                     %p= opp.description
                        

@@ -1,7 +1,6 @@
 class StudentController < ApplicationController
   before_action :ensure_admin_staff_or_student
   before_action :set_student
-  before_action :set_application, except: [:applications, :show]
 
   def show
     @companies = Company.includes(:opportunities).order(created_at: :desc).limit(25)
@@ -12,6 +11,12 @@ class StudentController < ApplicationController
   end
 
   def application
+    @application = Application.find(params[:id])
+    redirect_home(current_user) unless @student.applications.include?(@application)
+  end
+
+  def opportunity
+    @opportunity = Opportunity.find(params[:id])
   end
 
   private
@@ -20,10 +25,5 @@ class StudentController < ApplicationController
     @student = Student.find(params[:student_id] || params[:id])
     return if current_user.admin_or_staff?
     redirect_home(current_user) unless @student == current_user
-  end
-
-  def set_application
-    @application = Application.find(params[:id])
-    redirect_home(current_user) unless @student.applications.include?(@application)
   end
 end

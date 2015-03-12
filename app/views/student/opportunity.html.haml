@@ -1,0 +1,9 @@
+= render partial: 'tabs', locals: {active_tab: {opportunities: true}}
+
+%ol.breadcrumb
+  %li
+    = link_to "Opportunities", student_path(@student)
+  %li.active
+    Opportunity
+
+= render template: 'opportunities/show'
