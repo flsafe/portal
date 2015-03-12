@@ -31,7 +31,8 @@ Rails.application.routes.draw do
 
   # Students
   resources :student, only: [:show, :edit, :update] do
-    get 'applications' => 'student#applications'
+    get 'applications/:id' => 'student#application', as: :application
+    get 'applications' => 'student#applications', as: :applications
   end
   resources :opportunities, only: [:show] do
     resources :applications, shallow: :true

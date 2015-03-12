@@ -2,3 +2,28 @@
 
 %ol.breadcrumb
   %li.active Applications
+
+.row
+  .col-sm-3
+    %input.form-control{:type => 'text', :placeholder=>'Search Keyword'}
+  .col-sm-3
+    %input.form-control{:type => 'text', :placeholder=>'City'}
+
+.row
+  .col-sm-12
+    - @applications.each do |app|
+      .application-box
+        %hr
+        .row
+          .col-sm-12
+            .media
+              .media-left
+                %img.media.media-top{:src => 'http://placehold.it/125x100'}
+              .media-body
+                .p
+                  = link_to "#{app.opportunity.title} at #{app.opportunity.company.name}", student_application_path(@student.id, app.id)
+                  = "#{app.opportunity.city}, #{app.opportunity.state}"
+                .p
+                  = app.opportunity.description
+              .media-right
+                = "#{time_ago_in_words(app.created_at)} ago"
