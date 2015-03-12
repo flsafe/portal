@@ -1,0 +1,15 @@
+%ul.nav.nav-tabs
+
+  - if active_tab[:opportunities] 
+    %li.active{:role => 'presentation'}
+      = link_to "Opportunities", student_path(current_user)
+  - else
+    %li{:role => 'presentation'}
+      = link_to "Opportunities", student_path(current_user)
+
+  - if active_tab[:applications]
+    %li.active{:role => 'presentation'}
+      = link_to "Applications", student_applications_path(@student)
+  - else 
+    %li{:role => 'presentation'}
+      = link_to "Applications", student_applications_path(@student)

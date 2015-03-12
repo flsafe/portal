@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :school
   belongs_to :company
+  has_many :applications
   has_secure_password
 
   ADMINS = %w[Admin]
