@@ -1,20 +1,25 @@
+
+- requirements_placeholder = "- Bachelor's degree in computer science or equivalent experience.\n- Solid grasp of distributed algorithms like RAFT, CHORD, etc.\n- Published work in distributed algorithms is a plus."
+
 - target_path = @opportunity.new_record? ? company_opportunities_url(@company.slug) : company_opportunity_url(@company.slug, @opportunity)
 = form_for [@company.slug, @opportunity], url: target_path, :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :title, :class => 'control-label'
-    .controls
-      = f.text_field :title, :class => 'text_field'
-  .control-group
-    = f.label :description, :class => 'control-label'
-    .controls
-      = f.text_area :description, :class => 'text_field'
+    = f.text_field :title, :class => 'text_field form-control'
   .control-group
     = f.label :city, :class => 'control-label'
-    .controls
-      = f.text_field :city, :class => 'text_field'
+    = f.text_field :city, :class => 'text_field form-control'
   .control-group
     = f.label :state, :class => 'control-label'
-    .controls
-      = f.text_field :state, :class => 'text_field'
-  .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
+    = f.text_field :state, :class => 'text_field form-control'
+  .control-group
+    = f.label :description, :class => 'control-label'
+    = f.text_area :description, :class => 'text_field form-control', rows: '8'
+  .control-group
+    = f.label :skills, :class => 'control-label'
+    = f.text_field :skills, :class => 'form-control', placeholder: 'Ruby on Rails, MySQL, Javascript, Redis, etc.'
+  .control-group
+    = f.label :requirements, :class => 'control-label'
+    = f.text_area :requirements, :class => 'form-control', value: requirements_placeholder, rows: 4
+  %br
+  = f.submit "Save", :class => 'btn btn-primary'

@@ -1,23 +1,17 @@
-- model_class = Opportunity
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.titleize
-
-%p
-  %strong= model_class.human_attribute_name(:title) + ':'
-  %br
+%hr
+%h1
   = @opportunity.title
-%p
-  %strong= model_class.human_attribute_name(:description) + ':'
-  %br
-  = @opportunity.description
-%p
-  %strong= model_class.human_attribute_name(:city) + ':'
-  %br
-  = @opportunity.city
-%p
-  %strong= model_class.human_attribute_name(:state) + ':'
-  %br
-  = @opportunity.state
+  %small
+    = " #{@opportunity.city}, #{@opportunity.state}"
+%p.lead= @opportunity.company.name
+.opportunity
+  %p.skills= @opportunity.skills
+
+  %h2 Description
+  %p!= @md.render @opportunity.description
+
+  %h2 Requirements
+  %p!= @md.render @opportunity.requirements
 
 - if current_user.student?
-  = link_to "Apply", new_opportunity_application_url(@opportunity), class: 'btn btn-primay'
+  = link_to "Apply", new_opportunity_application_url(@opportunity), role: 'button', class: 'btn btn-primary btn-lg'

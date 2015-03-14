@@ -1,3 +1,5 @@
+require 'redcarpet'
+
 class StudentController < ApplicationController
   before_action :ensure_admin_staff_or_student
   before_action :set_student
@@ -16,6 +18,7 @@ class StudentController < ApplicationController
   end
 
   def opportunity
+    @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @opportunity = Opportunity.find(params[:id])
   end
 

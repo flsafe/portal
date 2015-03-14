@@ -33,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rails_12factor', '~>0.0.3', group: :production
 
+# markdown parser
+gem 'redcarpet', '~> 3.2.2'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -48,5 +51,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'quiet_assets'
+
+  gem 'annotate', '~>2.6.6'
 end
 

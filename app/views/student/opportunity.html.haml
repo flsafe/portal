@@ -4,6 +4,6 @@
   %li
     = link_to "Opportunities", student_path(@student)
   %li.active
-    Opportunity
+    = @opportunity.title 
 
 = render template: 'opportunities/show'
