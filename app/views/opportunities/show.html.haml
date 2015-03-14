@@ -4,14 +4,16 @@
   %small
     = " #{@opportunity.city}, #{@opportunity.state}"
 %p.lead= @opportunity.company.name
+%br
 .opportunity
+  %h2 Skills
   %p.skills= @opportunity.skills
 
   %h2 Description
-  %p!= @md.render @opportunity.description
+  %p!= @md.render(@opportunity.description || '')
 
   %h2 Requirements
-  %p!= @md.render @opportunity.requirements
+  %p!= @md.render(@opportunity.requirements || '')
 
 - if current_user.student?
   = link_to "Apply", new_opportunity_application_url(@opportunity), role: 'button', class: 'btn btn-primary btn-lg'

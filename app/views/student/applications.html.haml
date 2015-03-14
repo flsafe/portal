@@ -24,6 +24,6 @@
                   = link_to "#{app.opportunity.title} at #{app.opportunity.company.name}", student_application_path(@student.id, app.id)
                   = "#{app.opportunity.city}, #{app.opportunity.state}"
                 .p
-                  = app.opportunity.description
+                  = app.opportunity.skills
               .media-right
                 = "#{time_ago_in_words(app.created_at)} ago"
