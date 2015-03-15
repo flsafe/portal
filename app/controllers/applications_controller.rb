@@ -26,23 +26,6 @@ class ApplicationsController < ApplicationController
   def edit
   end
 
-  # POST /applications
-  # POST /applications.json
-  def create
-    @application = @opportunity.applications.build(application_params) 
-    @application.user = current_user
-
-    respond_to do |format|
-      if @application.save
-        format.html { redirect_to student_url(current_user), notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
-      else
-        format.html { render :new }
-        format.json { render json: @application.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /applications/1
   # PATCH/PUT /applications/1.json
   def update

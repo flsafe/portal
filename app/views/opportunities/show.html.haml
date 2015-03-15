@@ -16,4 +16,4 @@
   %p!= @md.render(@opportunity.requirements || '')
 
 - if current_user.student?
-  = link_to "Apply", new_opportunity_application_url(@opportunity), role: 'button', class: 'btn btn-primary btn-lg'
+  = link_to "Apply", new_application_path(@opportunity), role: 'button', class: 'btn btn-primary btn-lg'

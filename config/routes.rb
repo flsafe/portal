@@ -21,6 +21,22 @@ Rails.application.routes.draw do
     end
   end
 
+  # Students
+  scope '/student' do
+    get '/' => 'student#home', as: :student_home 
+    get '/profile' => 'student#profile', as: :profile
+    patch '/profile' => 'student#update_profile', as: :update_profile
+
+    get 'applications' => 'student#applications', as: :student_applications
+    get 'applications/:id' => 'student#application', as: :student_application
+    get 'applications/:id/edit' => 'student#edit_application', as: :edit_application
+    patch 'applications/:id' => 'student#update_application', as: :update_application
+
+    get 'opportunity/:id/new' => 'student#new_application', as: :new_application
+    get 'opportunity/:id' => 'student#show_opportunity', as: :student_opportunity
+    post 'opportunity/:id' => 'student#create_application', as: :create_application
+  end
+
   # Employer 
   scope '/:companyslug', controller: :company, as: :company do
     get '/' => :show
@@ -29,15 +45,6 @@ Rails.application.routes.draw do
     resources :opportunities
   end
 
-  # Students
-  resources :student, only: [:show, :edit, :update] do
-    get 'applications/:id' => 'student#application', as: :application
-    get 'applications' => 'student#applications', as: :applications
-    get 'opportunity/:id' => 'student#opportunity', as: :opportunity
-  end
-  resources :opportunities, only: [:show] do
-    resources :applications, shallow: :true
-  end
 
   root 'landing#index'
 end

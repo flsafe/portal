@@ -2,10 +2,10 @@
 
   - if active_tab[:opportunities] 
     %li.active{:role => 'presentation'}
-      = link_to "Opportunities", student_path(current_user)
+      = link_to "Opportunities", student_home_path(current_user)
   - else
     %li{:role => 'presentation'}
-      = link_to "Opportunities", student_path(current_user)
+      = link_to "Opportunities", student_home_path(current_user)
 
   - if active_tab[:applications]
     %li.active{:role => 'presentation'}

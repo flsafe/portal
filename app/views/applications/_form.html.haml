@@ -1,4 +1,6 @@
-= form_for [@opportunity, @application] do |f|
+- method = @application.new_record? ? :post : :patch
+- url = @application.new_record? ? create_application_path(@opportunity) : update_application_path(@application)
+= form_for @application, url: url, method: method do |f|
   - if @application.errors.any?
     #error_explanation
       %h2= "#{pluralize(@application.errors.count, "error")} prohibited this application from being saved:"
@@ -6,11 +8,10 @@
         - @application.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  .form-group
     = f.label :cover_letter
-    = f.text_area :cover_letter
-  .field
+    = f.text_area :cover_letter, class: 'form-control', rows: 8
+  .form-group
     = f.label :resume
-    = f.text_area :resume
-  .actions
-    = f.submit 'Save'
+    = f.text_area :resume, class: 'form-control', rows: 8
+  = f.submit 'Save', class: 'btn btn-primary'

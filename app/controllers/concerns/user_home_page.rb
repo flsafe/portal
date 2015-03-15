@@ -18,7 +18,7 @@ module UserHomePage
     when user.employer? 
       company_url(user.company.slug)
     when user.student?
-      student_url(current_user)
+      student_home_url
     else
       raise "Unknown user type #{user.type}"
     end

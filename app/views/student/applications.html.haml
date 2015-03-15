@@ -21,7 +21,7 @@
                 %img.media.media-top{:src => 'http://placehold.it/125x100'}
               .media-body
                 .p
-                  = link_to "#{app.opportunity.title} at #{app.opportunity.company.name}", student_application_path(@student.id, app.id)
+                  = link_to "#{app.opportunity.title} at #{app.opportunity.company.name}", edit_application_path(app)
                   = "#{app.opportunity.city}, #{app.opportunity.state}"
                 .p
                   = app.opportunity.skills
