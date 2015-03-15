@@ -45,6 +45,10 @@ Rails.application.routes.draw do
     resources :opportunities
   end
 
+  # Staff
+  resources :opportunities, only: [:show] do
+    resources :applications, shallow: :true
+  end
 
   root 'landing#index'
 end
