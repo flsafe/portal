@@ -36,6 +36,12 @@ gem 'rails_12factor', '~>0.0.3', group: :production
 # markdown parser
 gem 'redcarpet', '~> 3.2.2'
 
+gem 'carrierwave', '~> 0.10.0'
+
+gem 'fog', '~> 1.28.0'
+
+gem 'mini_magick', '~> 4.1.0'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -55,5 +61,7 @@ group :development, :test do
   gem 'quiet_assets'
 
   gem 'annotate', '~>2.6.6'
+
+  gem 'awesome_print'
 end
 

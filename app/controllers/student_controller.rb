@@ -8,6 +8,17 @@ class StudentController < ApplicationController
     @companies = Company.includes(:opportunities).order(created_at: :desc).limit(25)
   end
 
+  def edit_profile
+  end
+
+  def update_profile
+    if current_user.update(student_params) 
+      redirect_to student_home_url
+    else
+      render :profile
+    end
+  end
+
   def applications
     @applications = @student.applications.includes(opportunity: [:company]).limit(25)
   end
@@ -67,5 +78,9 @@ class StudentController < ApplicationController
 
   def application_params
     params.require(:application).permit(:cover_letter, :resume)
+  end
+
+  def student_params
+    params.require(:student).permit(:email, :password, :password_confirmation, :avatar,  :first_name, :last_name, :phone, :bio, :address1, :city, :state, :zip)
   end
 end

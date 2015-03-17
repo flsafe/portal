@@ -1,0 +1,9 @@
+= form_for current_user, url: edit_student_profile_path do |f|
+  - if current_user.errors.any? 
+    .errorExplaination.alert.alert-danger
+      %p
+        = "#{pluralize(current_user.errors.count, 'error')} prevented your profile from being saved."
+      %ul
+        - current_user.errors.full_messages.each do |msg|
+          %li= msg
+  = render partial: 'admin/users/form_fields', locals: {f: f}

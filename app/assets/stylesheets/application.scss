@@ -16,7 +16,7 @@
 @import "bootstrap";
 @import "./*";
 
-.nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
+
+.field_with_errors {
+  @extend .has-error 
 }

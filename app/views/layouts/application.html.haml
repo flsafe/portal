@@ -26,7 +26,7 @@
         .collapse.navbar-collapse#navbar
           %ul.nav.navbar-nav.navbar-right
             - if current_user
-              %li= link_to "Profile", "#"
+              %li= link_to "Profile", edit_student_profile_path
               %li= link_to "Logout", logout_path, method: :delete
             - else
               %li= link_to "Login", login_path

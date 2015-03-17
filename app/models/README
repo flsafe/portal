@@ -1,0 +1,4 @@
+requirements
+
+- openssl 1.0.1  https://github.com/excon/excon/issues/467
+- image magic
