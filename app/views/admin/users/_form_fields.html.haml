@@ -1,3 +1,5 @@
+- user = @user || user
+
 %h1 Profile
 
 %br
@@ -20,6 +22,9 @@
 
 %fieldset
   %legend info 
+
+  .form-group
+    = image_tag user.avatar.medium_avatar, class: 'img-rounded'
 
   .form-group
     = f.label :avatar, "Avatar Picture"

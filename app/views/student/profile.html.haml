@@ -6,4 +6,4 @@
       %ul
         - current_user.errors.full_messages.each do |msg|
           %li= msg
-  = render partial: 'admin/users/form_fields', locals: {f: f}
+  = render partial: 'admin/users/form_fields', locals: {f: f, user: current_user}

@@ -13,7 +13,7 @@ class StudentController < ApplicationController
 
   def update_profile
     if current_user.update(student_params) 
-      redirect_to student_home_url
+      redirect_to student_home_url, flash: {notice: 'Your profile has been updated.'}
     else
       render :profile
     end
