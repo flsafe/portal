@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # Students
   scope '/student' do
     get '/' => 'student#home', as: :student_home 
-    get '/profile' => 'student#profile', as: :edit_student_profile
+    get '/profile' => 'student#edit_profile', as: :edit_student_profile
     patch '/profile' => 'student#update_profile', as: :update_student_profile
 
     get 'applications' => 'student#applications', as: :student_applications

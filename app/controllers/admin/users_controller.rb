@@ -30,7 +30,15 @@ class Admin::UsersController < Admin::ApplicationController
     @user.school = @school
 
     respond_to do |format|
-      if @user.save
+      # We let admin and staff create a new record with minimal fields. The associated user
+      # will fill out the rest.
+      @user.errors.add(:email, 'You must provide an email address.') if user_params[:email].blank?
+      @user.errors.add(:email, 'You must provide a unique email address.') if User.find_by(email: user_params[:email])
+
+      @user.errors.add(:password, 'You must provide a password.') if user_params[:password].blank?
+      @user.errors.add(:password_confirmation, 'You must provide a password confirmation.') if user_params[:password_confirmation].blank?
+      @user.errors.add(:password_confirmation, 'Password confirmation must match password.') if user_params[:password_confirmation] != user_params[:password]
+      if @user.errors.empty? && @user.save(validate: false)
         format.html { redirect_to admin_school_users_url(@school), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -83,6 +91,6 @@ class Admin::UsersController < Admin::ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     user_type = params[:type] ? params[:type].downcase : :user
-    params.require(user_type).permit(:email, :first_name, :last_name, :bio, :address1, :address2, :password, :password_confirmation, :type)
+    params.require(user_type).permit(:email, :password, :password_confirmation, :avatar,  :first_name, :last_name, :phone, :bio, :address1, :city, :state, :zip, :type)
   end
 end

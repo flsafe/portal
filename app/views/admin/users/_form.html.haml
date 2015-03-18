@@ -1,2 +1,9 @@
 = form_for target_path, :html => { multipart: true, :class => 'form-horizontal' } do |f|
+  - if @user.errors.any? 
+    .errorExplaination.alert.alert-danger
+      %p
+        = "#{pluralize(@user.errors.count, 'error')} prevented your profile from being saved."
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
   = render partial: 'form_fields', locals: {f: f}

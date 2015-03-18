@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :applications
   has_secure_password
 
-  validates :email, :avatar, :first_name, :last_name, :bio, :address1, :city, :state, :zip, presence: true
+  validates :email, :avatar, :first_name, :phone, :last_name, :bio, :address1, :city, :state, :zip, presence: true
   validates :email, uniqueness: true
 
   mount_uploader :avatar, AvatarUploader
