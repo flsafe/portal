@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   scope 'oauth' do
     get '/github' => 'oauth#callback_github'
+    post '/unlink/:account' => 'oauth#unlink', as: :oauth_unlink
   end
 
   # Students

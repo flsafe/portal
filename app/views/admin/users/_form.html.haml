@@ -7,3 +7,4 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
   = render partial: 'form_fields', locals: {f: f}
+  = f.submit "Save", class: 'btn btn-primary'

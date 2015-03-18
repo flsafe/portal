@@ -15,4 +15,14 @@ class OauthController < ApplicationController
     redirect_to edit_student_profile_url 
   end
 
+  def unlink
+    redirect_to edit_student_profile_url unless %w[github].include?(params[:account])
+
+    attr_name = "#{params[:account]}_token="
+    current_user.send(attr_name, nil)
+    current_user.save!(validate: false)
+
+    redirect_to edit_student_profile_url, flash: {success: 'You account has been unlinked.'}
+  end
+
 end
