@@ -66,10 +66,14 @@
     = f.label :zip, :class => ''
     = f.text_field :zip, :class => 'form-control'
 
+  - if user.github_token.blank?
+    .form-group
+      = link_to "Link Github Account", github_scope!
+
   - if current_user.admin_or_staff?
     .form-group
       = f.label :type, :class => ''
-      = f.select :type, options_for_select(['Student', 'Instructor', 'Staff'], @user.type), {}, class: 'form-control' 
+      = f.select :type, options_for_select(['Student', 'Instructor', 'Staff'], user.type), {}, class: 'form-control' 
 
   .form-actions
     = f.submit "Save", :class => 'btn btn-primary'

@@ -42,6 +42,8 @@ gem 'fog', '~> 1.28.0'
 
 gem 'mini_magick', '~> 4.1.0'
 
+gem 'rest_client', '~> 1.7.3'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

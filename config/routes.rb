@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     end
   end
 
+  scope 'oauth' do
+    get '/github' => 'oauth#callback_github'
+  end
+
   # Students
   scope '/student' do
     get '/' => 'student#home', as: :student_home 
