@@ -66,9 +66,16 @@
     = f.label :zip, :class => ''
     = f.text_field :zip, :class => 'form-control'
 
-  - if user.github_token.blank?
-    .form-group
-      = link_to "Link Github Account", github_scope!
+  .panel.panel-default
+    .panel-heading Link Accounts
+    .panel-body
+      = f.label :github_token, "Github"
+      - if user.github_token.blank?
+        .form-group
+          = link_to "Link Github Account", github_scope!
+      - else
+        %p.alert.alert-success
+          Your Github account is linked
 
   - if current_user.admin_or_staff?
     .form-group
