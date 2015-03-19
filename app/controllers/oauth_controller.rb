@@ -1,7 +1,7 @@
 class OauthController < ApplicationController
 
   def callback_github
-    raise OauthStateDidNotMatch unless params[:state] == session[:oauth_state]
+    raise Exceptions::OauthStateDidNotMatch unless params[:state] == session[:oauth_state]
 
     result = RestClient::Request.execute(method: 'POST',
                                 url: 'https://github.com/login/oauth/access_token',
