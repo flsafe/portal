@@ -19,6 +19,9 @@
 #  school_id       :integer
 #  company_id      :integer
 #  type            :string
+#  avatar          :string
+#  phone           :string
+#  github_token    :string
 #
 
 class Employer < User; end

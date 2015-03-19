@@ -19,6 +19,9 @@
 #  school_id       :integer
 #  company_id      :integer
 #  type            :string
+#  avatar          :string
+#  phone           :string
+#  github_token    :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
