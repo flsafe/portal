@@ -1,3 +1,5 @@
+require uri
+
 module Oauth
   extend ActiveSupport::Concern
 
@@ -7,7 +9,8 @@ module Oauth
     # oauth callback must be called with this returned
     session[:oauth_state] = SecureRandom.hex(16) 
     client_id = ENV['GITHUB_CLIENT_ID']
-    # We don't provide the scope parameter so this is read only public info
-    "https://github.com/login/oauth/authorize?client_id=#{client_id}&state=#{session[:oauth_state]}"
+    redirect_uri = URI.encode(ENV['GITHUB_REDIRECT_URI'] || github_url)
+    # Application permission scope is only public data.
+    "https://github.com/login/oauth/authorize?client_id=#{client_id}&state=#{session[:oauth_state]}&redirect_uri=#{redirect_uri}"
   end
 end
