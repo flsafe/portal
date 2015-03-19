@@ -1,9 +1,3 @@
 == School Software For SchoolSail.com
 
 TODO:
-
-- github link logo
-- github render "check mark" once the github profile is linked so the user doesn't relink
-- github oauth allow user to remove token and 'unlink'
-- don't forget the expired token case, or the 'no access' case
-
