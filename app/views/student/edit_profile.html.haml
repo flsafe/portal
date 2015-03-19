@@ -6,13 +6,9 @@
       %ul
         - current_user.errors.full_messages.each do |msg|
           %li= msg
-  = render partial: 'admin/users/form_fields', locals: {f: f, user: current_user}
-
-  %br
 
   %fieldset
     %legend accounts 
-
   .panel.panel-default
     .panel-heading Link Your Accounts
     .panel-body
@@ -23,6 +19,10 @@
         %p.alert.alert-success
           Your Github account is linked.
           = link_to "Unlink", oauth_unlink_path(:github), method: :post, class: 'btn btn-primary'
+
+  %br
+
+  = render partial: 'admin/users/form_fields', locals: {f: f, user: current_user}
 
   .form-actions
     = f.submit "Save", :class => 'btn btn-primary'
