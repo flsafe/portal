@@ -21,10 +21,11 @@
 
 
   .form-group
-    %p
-      %strong
-        Current Resume
-      = link_to "#{File.basename(@application.resume_file.url)}", @application.resume_file.url if @application.resume_file.present?
+    - if @application.resume_file.present?
+      %p
+        %strong
+          Current Resume
+        = link_to "#{File.basename(@application.resume_file.url)}", @application.resume_file.url
     = f.label :resume_file, "Or upload your resume"
     = f.file_field :resume_file
   = f.submit 'Save', class: 'btn btn-primary'
