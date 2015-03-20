@@ -44,6 +44,10 @@ gem 'mini_magick', '~> 4.1.0'
 
 gem 'rest_client', '~> 1.7.3'
 
+gem 'will_paginate', '~> 3.0.5'
+
+gem 'will_paginate-bootstrap', '~> 1.0.1'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -7,7 +7,9 @@ class StudentController < ApplicationController
   before_action :init_md
 
   def home
-    @companies = Company.includes(:opportunities).order(created_at: :desc).limit(25)
+    @companies = Company.includes(:opportunities)
+    .paginate(page: params[:page], per_page: 10)
+    .order(created_at: :desc)
   end
 
   def edit_profile
@@ -22,7 +24,9 @@ class StudentController < ApplicationController
   end
 
   def applications
-    @applications = current_user.applications.includes(opportunity: [:company]).limit(25)
+    @applications = current_user.applications.includes(opportunity: [:company])
+    .paginate(page: params[:page], per_page: 10)
+    .order(created_at: :desc)
   end
 
   def application

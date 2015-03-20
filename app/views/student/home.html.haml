@@ -30,6 +30,4 @@
                     = link_to "#{opp.title} #{opp.city}, #{opp.state}", student_opportunity_path(opp)
                     %em= "#{time_ago_in_words(opp.created_at)} ago"
                     %p= opp.skills
-                       
-        //= link_to "#{opp.title} at #{opp.company.name} #{'**Applied**' if @application_opportunity_ids.include?(opp.id)}", opportunity_path(opp)
-
+= will_paginate(@companies, renderer: BootstrapPagination::Rails)

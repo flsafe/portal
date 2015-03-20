@@ -27,3 +27,4 @@
                   = app.opportunity.skills
               .media-right
                 = "#{time_ago_in_words(app.created_at)} ago"
+= will_paginate(@applications, renderer: BootstrapPagination::Rails)
