@@ -25,9 +25,12 @@
                   %span= company.state
                 %p= company.description
                 %br
-                - company.opportunities.each do |opp|
+                - company.opportunities.order(created_at: :desc).each do |opp|
                   %div
                     = link_to "#{opp.title} #{opp.city}, #{opp.state}", student_opportunity_path(opp)
-                    %em= "#{time_ago_in_words(opp.created_at)} ago"
+                    - if @applied_opportunities.include?(opp)
+                      %em= "Applied"
+                    - else
+                      %em= "posted #{time_ago_in_words(opp.created_at)} ago"
                     %p= opp.skills
 = will_paginate(@companies, renderer: BootstrapPagination::Rails)
