@@ -1,3 +1,7 @@
+%p 
+  We recommend writing a custom cover and resume for each position you apply to.
+  You can also upload an existing resume file.
+
 - method = @application.new_record? ? :post : :patch
 - url = @application.new_record? ? create_application_path(@opportunity) : update_application_path(@application)
 = form_for @application, url: url, method: method do |f|
@@ -14,4 +18,13 @@
   .form-group
     = f.label :resume
     = f.text_area :resume, class: 'form-control', rows: 8
+
+
+  .form-group
+    %p
+      %strong
+        Current Resume
+      = link_to "#{File.basename(@application.resume_file.url)}", @application.resume_file.url if @application.resume_file.present?
+    = f.label :resume_file, "Or upload your resume"
+    = f.file_field :resume_file
   = f.submit 'Save', class: 'btn btn-primary'

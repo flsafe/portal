@@ -1,0 +1,16 @@
+- opportunity = @opportunity || opportunity
+%h1
+  = opportunity.title
+  %small
+    = " #{@opportunity.city}, #{@opportunity.state}"
+%p.lead= opportunity.company.name
+%br
+.opportunity
+  %h2 Skills
+  %p.skills= opportunity.skills
+
+  %h2 Description
+  %p!= @md.render(opportunity.description || '')
+
+  %h2 Requirements
+  %p!= @md.render(opportunity.requirements || '')

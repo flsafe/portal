@@ -4,6 +4,7 @@ class StudentController < ApplicationController
   before_action :ensure_admin_staff_or_student
   before_action :set_student
   before_action :ensure_student_profile_complete, except: [:edit_profile, :update_profile]
+  before_action :init_md
 
   def home
     @companies = Company.includes(:opportunities).order(created_at: :desc).limit(25)
@@ -73,6 +74,10 @@ class StudentController < ApplicationController
 
   private
 
+  def init_md
+    @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+  end
+
   def set_student
     @student = current_user 
   end
@@ -82,7 +87,7 @@ class StudentController < ApplicationController
   end
 
   def application_params
-    params.require(:application).permit(:cover_letter, :resume)
+    params.require(:application).permit(:cover_letter, :resume, :resume_file)
   end
 
   def student_params

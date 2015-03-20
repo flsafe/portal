@@ -6,4 +6,6 @@
   %li.active
     = @opportunity.title 
 
-= render template: 'opportunities/show'
+= render partial: 'opportunities/description'
+
+= link_to "Apply", new_application_path(@opportunity), role: 'button', class: 'btn btn-primary btn-lg'
