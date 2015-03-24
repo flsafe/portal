@@ -7,9 +7,9 @@ class StudentController < ApplicationController
   before_action :init_md
 
   def home
-    @companies = Company.includes(:opportunities)
-    .paginate(page: params[:page], per_page: 10)
-    .order(created_at: :desc)
+    @companies = Company
+      .paginate(page: params[:page], per_page: 10)
+      .order(created_at: :desc)
     @applied_opportunities = current_user.opportunities.all
   end
 

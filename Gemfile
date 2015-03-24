@@ -69,5 +69,7 @@ group :development, :test do
   gem 'annotate', '~>2.6.6'
 
   gem 'awesome_print'
+
+  gem 'bullet', '~> 4.14.4'
 end
 
