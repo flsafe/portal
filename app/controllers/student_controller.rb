@@ -10,7 +10,7 @@ class StudentController < ApplicationController
     @companies = Company.includes(:opportunities)
     .paginate(page: params[:page], per_page: 10)
     .order(created_at: :desc)
-    @applied_opportunities = current_user.opportunities
+    @applied_opportunities = current_user.opportunities.all
   end
 
   def edit_profile
