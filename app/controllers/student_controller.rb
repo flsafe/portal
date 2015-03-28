@@ -28,9 +28,8 @@ class StudentController < ApplicationController
   end
 
   def applications
-    @applications = current_user.applications.includes(opportunity: [:company])
-    .paginate(page: params[:page], per_page: 10)
-    .order(created_at: :desc)
+    @applications = current_user.applications.includes(:opportunity).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+    @opportunities = @applications.map(&:opportunity)
   end
 
   def application

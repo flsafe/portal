@@ -10,21 +10,5 @@
     %input.form-control{:type => 'text', :placeholder=>'City'}
 
 .row
-  .col-sm-12
-    - @applications.each do |app|
-      .application-box
-        %hr
-        .row
-          .col-sm-12
-            .media
-              .media-left
-                %img.media.media-top{:src => 'http://placehold.it/125x100'}
-              .media-body
-                .p
-                  = link_to "#{app.opportunity.title} at #{app.opportunity.company.name}", edit_application_path(app)
-                  = "#{app.opportunity.city}, #{app.opportunity.state}"
-                .p
-                  = app.opportunity.skills
-              .media-right
-                = "#{time_ago_in_words(app.created_at)} ago"
+  = render partial: 'opportunity_box', locals: {applied_opportunities: @opportunities, link_to_application: true}
 = will_paginate(@applications, renderer: BootstrapPagination::Rails)

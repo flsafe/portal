@@ -1,0 +1,31 @@
+- @applied_opportunities = @applied_opportunities || applied_opportunities
+- link_to_application = defined?(link_to_application) ? link_to_application : false
+.col-sm-12
+  - @opportunities.each do |opp|
+    - company = opp.company
+    .opportunity-box
+      %hr
+      .row
+        .col-sm-12
+          .media
+            .media-left
+              = ""
+            .media-body
+              .title
+                - if link_to_application
+                  = link_to "#{opp.title}", edit_application_path(@applications.find{|a| a.opportunity_id == opp.id})
+                - else
+                  = link_to "#{opp.title}", student_opportunity_path(opp)
+              .company-name
+                %strong= company.name
+                = " - #{opp.city}, #{opp.state}"
+              .description
+                = truncate(opp.description)
+              .skills
+                %span.label.label-default= opp.skills
+            .media-right
+              .time-stamp
+                - if @applied_opportunities.include?(opp)
+                  = "applied #{time_ago_in_words(@applications.find{|a| a.opportunity_id == opp.id}.created_at)} ago"
+                - else
+                  = "#{time_ago_in_words(opp.created_at)} ago"

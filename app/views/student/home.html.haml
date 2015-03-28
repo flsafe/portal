@@ -9,30 +9,5 @@
   .col-sm-3
     %input.form-control{:type => 'text', :placeholder=>'City'}
 .row
-  .col-sm-12
-    - @opportunities.each do |opp|
-      - company = opp.company
-      .opportunity-box
-        %hr
-        .row
-          .col-sm-12
-            .media
-              .media-left
-                = ""
-              .media-body
-                .title
-                  = link_to "#{opp.title}", student_opportunity_path(opp)
-                .company-name
-                  %strong= company.name
-                  = " - #{opp.city}, #{opp.state}"
-                .description
-                  = truncate(opp.description)
-                .skills
-                  %span.label.label-default= opp.skills
-              .media-right
-                .time-stamp
-                  - if @applied_opportunities.include?(opp)
-                    = "applied #{time_ago_in_words(@applications.find{|a| a.opportunity_id == opp.id}.created_at)} ago"
-                  - else
-                    = "#{time_ago_in_words(opp.created_at)} ago"
+  = render partial: 'opportunity_box'
 = will_paginate(@opportunities, renderer: BootstrapPagination::Rails)
