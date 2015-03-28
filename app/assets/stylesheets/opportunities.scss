@@ -3,12 +3,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .opportunity-box {
+  font-size: 1.20em;
+
   a {
-    text-decoration: underline;
+    font-size: 1.50em;
   }
 
+  .description {
+    color: rgb(100, 100, 100);
+  }
 
-  em {
-    font-size: .80em; 
+  .time-stamp {
+    width: 150px;
+    font-size: .70em;
+    text-align: right;
+    color: rgb(130, 130, 130);
   }
 }

@@ -10,27 +10,29 @@
     %input.form-control{:type => 'text', :placeholder=>'City'}
 .row
   .col-sm-12
-    - @companies.each do |company|
+    - @opportunities.each do |opp|
+      - company = opp.company
       .opportunity-box
         %hr
         .row
           .col-sm-12
             .media
               .media-left
-                %img.media.media-top{:src => 'http://placehold.it/125x100'}
+                = ""
               .media-body
-                %div
-                  %strong= company.name 
-                  %span= company.city + ','
-                  %span= company.state
-                %p= company.description
-                %br
-                - company.opportunities.order(created_at: :desc).each do |opp|
-                  %div
-                    = link_to "#{opp.title} #{opp.city}, #{opp.state}", student_opportunity_path(opp)
-                    - if @applied_opportunities.include?(opp)
-                      %em= "Applied"
-                    - else
-                      %em= "posted #{time_ago_in_words(opp.created_at)} ago"
-                    %p= opp.skills
-= will_paginate(@companies, renderer: BootstrapPagination::Rails)
+                .title
+                  = link_to "#{opp.title}", student_opportunity_path(opp)
+                .company-name
+                  %strong= company.name
+                  = " - #{opp.city}, #{opp.state}"
+                .description
+                  = truncate(opp.description)
+                .skills
+                  %span.label.label-default= opp.skills
+              .media-right
+                .time-stamp
+                  - if @applied_opportunities.include?(opp)
+                    = "applied #{time_ago_in_words(@applications.find{|a| a.opportunity_id == opp.id}.created_at)} ago"
+                  - else
+                    = "#{time_ago_in_words(opp.created_at)} ago"
+= will_paginate(@opportunities, renderer: BootstrapPagination::Rails)

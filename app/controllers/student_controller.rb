@@ -7,10 +7,13 @@ class StudentController < ApplicationController
   before_action :init_md
 
   def home
-    @companies = Company
+    @opportunities= Opportunity
+      .includes(:company)
       .paginate(page: params[:page], per_page: 10)
       .order(created_at: :desc)
+
     @applied_opportunities = current_user.opportunities.all
+    @applications = current_user.applications.select(:id, :opportunity_id, :created_at)
   end
 
   def edit_profile
