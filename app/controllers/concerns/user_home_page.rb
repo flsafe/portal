@@ -14,7 +14,7 @@ module UserHomePage
     when user.admin?
       admin_root_url
     when user.staff? 
-      admin_school_url(user.school)
+      staff_home_url
     when user.employer? 
       company_url(user.company.slug)
     when user.student?

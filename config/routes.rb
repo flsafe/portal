@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     post '/unlink/:account' => 'oauth#unlink', as: :oauth_unlink
   end
 
+  scope 'staff' do
+    get '/' => 'staff#home', as: :staff_home
+    get '/students' => 'staff#students', as: :staff_students
+  end
+
+
   # Students
   scope '/student' do
     get '/' => 'student#home', as: :student_home 
