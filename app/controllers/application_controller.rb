@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     redirect_home(current_user) unless current_user.admin?
   end
 
+  def ensure_staff
+    redirect_home(current_user) unless current_user.staff?
+  end
+
   def ensure_admin_or_staff
       redirect_home(current_user) unless current_user.admin_or_staff?
   end

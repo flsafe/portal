@@ -1,5 +1,5 @@
 class AddYearToStudents < ActiveRecord::Migration
   def change
-    add_column :students, :year, :integer
+    add_column :users, :year, :integer
   end
 end

@@ -1,5 +1,5 @@
 class AddSemesterToStudents < ActiveRecord::Migration
   def change
-    add_column :students, :semester, :integer
+    add_column :users, :semester, :integer
   end
 end
