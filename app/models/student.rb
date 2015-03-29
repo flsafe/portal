@@ -24,4 +24,6 @@
 #  github_token    :string
 #
 
-class Student < User; end
+class Student < User
+  enum semester: {spring: 0, summer: 1, fall: 2, winter: 3}
+end
