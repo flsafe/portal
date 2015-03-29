@@ -3,52 +3,53 @@
 %ol.breadcrumb
   %li.active Students
 
+
+
 .staff_students
   .row
-    .col-sm-3
-      .dropdown 
-        %button.btn.btn-default.dropdown-toggle{:type => 'button', :data_toggle => 'dropdown', :aria_expanded => 'true', :id=>'search'}
-          Spring 2015 
-          %span.caret
-        %ul.dropdown-menu{:role =>'menu', :aria_labelledby => 'search'}
-          %li{:role => 'presentation'}
-            = link_to 'Spring 2015', '#', role: 'menuitem', tabindex: -1
-          %li{:role => 'presentation'}
-            = link_to 'Winter 2014', '#', role: 'menuitem', tabindex: -1
-          %li{:role => 'presentation'}
-            = link_to 'Fall 2014', '#', role: 'menuitem', tabindex: -1
-          %li{:role => 'presentation'}
-            = link_to 'Summer 2014', '#', role: 'menuitem', tabindex: -1
-          %li{:role => 'presentation'}
-            = link_to 'Spring 2014', '#', role: 'menuitem', tabindex: -1
-          %li{:role => 'presentation'}
-            = link_to 'Winter 2013', '#', role: 'menuitem', tabindex: -1
-    .col-sm-9
-      .input-group
-        %input.form-control{:type => 'text', placeholder: 'Search Students'}
-        %span.input-group-btn
-          %button.btn.btn-default{:type => 'button'}
-            Search
+    .col-sm-4
+      = link_to "New Student", '#', class: 'btn btn-primary'
 
   %br
+  .row
+    .col-sm-4
+      .btn-group
+        %button.btn.btn-default.dropdown-toggle{:type => 'button', :data_toggle => 'dropdown', :aria_expanded => 'false'}
+          Spring 2015 
+          %span.caret
+        %ul.dropdown-menu{:role => 'menu'}
+          %li
+            = link_to 'Spring 2015', '#'
+          %li
+            = link_to 'Winter 2014', '#'
+          %li
+            = link_to 'Fall 2014', '#'
+          %li
+            = link_to 'Summer 2014', '#'
+          %li
+            = link_to 'Spring 2014', '#'
+          %li
+            = link_to 'Winter 2013', '#'
 
-  - @students.each do |student|
-    .row
-      %hr
-      .media.person-box
-        .media-left
-          = image_tag student.avatar.medium_avatar, class: 'img-circle'
-        .media-body
-          %h1.media-heading
-            = link_to "#{student.first_name} #{student.last_name}"
-          .info
-            .email
-              = student.email
-            .phone
-              = student.phone
-          %br
-          .help
-            =link_to "Applications"
-            |
-            =link_to "Recommend"
+  .row
+    .col-sm-12
+      - @students.each do |student|
+        .media.person-box
+          %hr
+          .media-left
+            = image_tag student.avatar.medium_avatar, class: 'img-circle'
+          .media-body
+            %h1.media-heading
+              = link_to "#{student.first_name} #{student.last_name}"
+            .info
+              .email
+                = student.email
+              .phone
+                = student.phone
+            %br
+            .help
+              =link_to "Applications"
+              |
+              =link_to "Recommend"
+      = will_paginate(@students, renderer: BootstrapPagination::Rails)
 
