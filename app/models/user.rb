@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
   EMPLOYERS = %w[Employer]
   STUDENTS = %w[Student]
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def admin?
     ADMINS.include?(type)
   end

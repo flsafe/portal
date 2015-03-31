@@ -4,7 +4,6 @@
   %li.active Students
 
 
-
 .staff_students
   .row
     .col-sm-4
@@ -50,8 +49,8 @@
                 = student.phone
             %br
             .help
-              =link_to "Applications"
+              =link_to "Applications", staff_student_applications_path(student)
               |
-              =link_to "Recommend"
+              =link_to "Recommend", staff_new_student_recommendation_path(student)
       = will_paginate(@students, renderer: BootstrapPagination::Rails)
 

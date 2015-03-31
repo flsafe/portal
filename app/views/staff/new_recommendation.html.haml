@@ -1,0 +1,84 @@
+= render partial: 'tabs', locals: {active_tab: {students: true}}
+
+%ol.breadcrumb
+  %li
+    = link_to "Students", staff_students_path
+  %li.active
+    = "Recommend #{@student.name}"
+
+.row
+  .col-sm-12
+    %form.navbar-form.navbar-left{role: 'search'}
+      .form-group
+        %input.form-control{type: 'text', placeholder: 'Email'}
+        %button.btn.btn-primary{type: 'submit'} Send
+
+.row
+  .col-sm-12
+    .panel.panel-default
+      .panel-body
+        .media.person-box
+          .media-left
+            = image_tag @student.avatar.medium_avatar, class: 'img-circle'
+          .media-body
+            %h1.media-heading
+              = link_to "#{@student.name}"
+            .info
+              %address
+                3500 N. Capital of Texas Hwy apt. #1308
+                %br
+                Austin, Texas 78746
+              .email
+                = @student.email
+              .phone
+                = @student.phone
+              .links
+                = link_to "Github"
+                |
+                = link_to "LinkedIn" 
+                |
+                = link_to "Resume"
+.row
+  .col-sm-3
+    %h1 About
+  .col-sm-8
+    %p
+      Lorem ipsum dolor sit amet, veri dictas convenire eos at, tation nullam vix ei, est graece possit putant id. Populo accusata disputationi id qui. Ferri equidem eum ne. Tollit quodsi vix te, agam purto copiosae eam at, democritum adversarium cum eu.
+
+      Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam. Et eam justo putent adolescens, nec vocibus volutpat euripidis ad, vix agam assentior id.
+%hr
+.row
+  .col-sm-3
+    %h1 Skills
+  .col-sm-8
+    %p
+      Lorem ipsum dolor sit amet, veri dictas convenire eos at, tation nullam vix ei, est graece possit putant id.
+    %ul
+      %li Javascript
+      %li Git
+      %li HTML, CSS, Design
+%hr
+.row
+  .col-sm-3
+    %h1 Projects
+  .col-sm-8
+    .row
+      .col-sm-6
+        = image_tag 'http://placehold.it/300x200', class: 'img-thumbnail'
+      .col-sm-6
+        %p
+          Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam.
+    %hr
+    .row
+      .col-sm-6
+        = image_tag 'http://placehold.it/300x200', class: 'img-thumbnail'
+      .col-sm-6
+        %p
+          Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam.    %hr
+    %hr
+    .row
+      .col-sm-6
+        = image_tag 'http://placehold.it/300x200', class: 'img-thumbnail'
+      .col-sm-6
+        %p
+          Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam.
