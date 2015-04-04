@@ -1,12 +1,10 @@
 = render partial: 'tabs', locals: {active_tab: {inbox: true}}
 
-
-
-%br
+%h1.inbox-header Task Inbox (5)
 
 = render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Software Engineer at BazaarVoice', help: 'Wish Frank luck!', todo_timestamp: 'Just Now', glyph: 'glyphicon-open-file'}
 
-= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Amanda Ryan had a screen interview with Indeed Inc.', help: 'Has Amanda gotten a screen interview?', todo_timestamp: '1 Week Ago', glyph: 'glyphicon-earphone'}
+= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Amanda Ryan had a screen interview with Indeed Inc.', help: 'Has Amanda gotten an on site interview?', todo_timestamp: '1 Week Ago', glyph: 'glyphicon-earphone'}
 
 = render partial: 'todo', locals: {subject: 'Follow Up', message: 'Jon Chappel had an on site interview with Cab Forward', help: 'Did Jon get an offer?', todo_timestamp: '1 Week Ago', glyph: 'glyphicon-plane'}
 
