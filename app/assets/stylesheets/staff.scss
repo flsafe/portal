@@ -7,3 +7,27 @@
     }
   }
 }
+
+.media.inbox-line-item {
+  .inbox-line-summary{
+    font-size: 1.30em;
+    .inbox-subject {
+      font-weight: bold;
+    } 
+    .inbox-message {
+      color: rgb(50, 50, 50);
+    }
+  }
+
+  .info {
+    color: rgb(130, 130, 130);
+    font-size: 1.1em;
+  }
+
+  .inbox-timestamp {
+    width: 200px;
+    font-style: italic;
+    text-align: right;
+    color: rgb(130, 130, 130);
+  }
+}

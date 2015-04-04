@@ -1,0 +1,36 @@
+.row
+  .col-sm-12
+    .media.inbox-line-item
+      %hr
+      .media-left
+        %form{role: 'form'}
+          .checkbox.checkbox-success.checkbox-single
+            %input{id: 'box1', type: 'checkbox'}
+            %label{for: 'box1'}
+      .media-body
+        .row
+          .col-sm-12
+            .inbox-line-summary
+              %span.inbox-subject
+                = subject
+              %span.inbox-message
+                &nbsp;
+                = message 
+            .info
+              %div
+                student-email@gmail.com
+              %div
+                (915) 920-0102
+            .inbox-actions
+              = link_to "Applications"
+              |
+              = link_to "Send Email"
+              |
+              = link_to "Send Text"
+      .media-right
+        .row
+          .col-sm-6
+            .inbox-timestamp
+              = todo_timestamp 
+
+
