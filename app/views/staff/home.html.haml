@@ -1,13 +1,15 @@
 = render partial: 'tabs', locals: {active_tab: {inbox: true}}
 
+
+
 %br
 
-= render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Software Engineer at BazaarVoice', help: 'Wish Frank luck!', todo_timestamp: 'Just Now'}
+= render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Software Engineer at BazaarVoice', help: 'Wish Frank luck!', todo_timestamp: 'Just Now', glyph: 'glyphicon-open-file'}
 
-= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Amanda Ryan had a screen interview with Indeed Inc.', help: 'Has Amanda gotten a screen interview?', todo_timestamp: '1 Week Ago'}
+= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Amanda Ryan had a screen interview with Indeed Inc.', help: 'Has Amanda gotten a screen interview?', todo_timestamp: '1 Week Ago', glyph: 'glyphicon-earphone'}
 
-= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Jon Chappel had an on site interview with Cab Forward', help: 'Did Jon get an offer?', todo_timestamp: '1 Week Ago'}
+= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Jon Chappel had an on site interview with Cab Forward', help: 'Did Jon get an offer?', todo_timestamp: '1 Week Ago', glyph: 'glyphicon-plane'}
 
-= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Nancy Ortega graduated 4 months ago', help: 'Has Nancy been placed yet?', todo_timestamp: '4 Months Ago'}
+= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Nancy Ortega graduated 4 months ago', help: 'Has Nancy been placed yet?', todo_timestamp: '4 Months Ago', glyph: 'glyphicon-question-sign'}
 
-= render partial: 'todo', locals: {subject: 'Follow Up', message: 'Ravi Parkih graduated a year ago', help: 'Congratulations! How is Ravi doing?', todo_timestamp: '1 Year Ago'}
+= render partial: 'todo', locals: {subject: 'Congrats', message: 'Ravi Parkih graduated a year ago', help: 'Congratulations! Where is Ravi now?', todo_timestamp: '1 Year Ago', glyph: 'glyphicon-thumbs-up'}
