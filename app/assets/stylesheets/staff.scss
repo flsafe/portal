@@ -19,6 +19,11 @@
     }
   }
 
+  .help {
+    font-style: italic; 
+    font-size: 1.1em;
+  }
+
   .info {
     color: rgb(130, 130, 130);
     font-size: 1.1em;
@@ -26,7 +31,6 @@
 
   .inbox-timestamp {
     width: 200px;
-    font-style: italic;
     text-align: right;
     color: rgb(130, 130, 130);
   }
