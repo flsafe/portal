@@ -1,9 +1,14 @@
 class StaffController < ApplicationController
 
   before_action :ensure_staff
-  before_action :ensure_staff_student, except: [:home, :students]
+  before_action :ensure_staff_student, except: [:home, :students, :inbox_profile]
 
   def home
+  end
+
+  # TODO: Actually set the current student profile
+  # this is currently ignored for prototyping.
+  def inbox_profile
   end
 
   def students

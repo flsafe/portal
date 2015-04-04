@@ -1,6 +1,11 @@
 = render partial: 'tabs', locals: {active_tab: {inbox: true}}
 
-%h1.inbox-header Task Inbox (5)
+%ol.breadcrumb
+  %li.active Inbox
+
+%br
+
+= render partial: 'sub_tabs', locals: {active_tab: {inbox: true}}
 
 = render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Software Engineer at BazaarVoice', help: 'Wish Frank luck!', todo_timestamp: 'Just Now', glyph: 'glyphicon-open-file'}
 

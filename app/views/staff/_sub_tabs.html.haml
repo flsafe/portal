@@ -1,0 +1,15 @@
+%ul.nav.nav-pills
+
+  - if active_tab[:inbox] 
+    %li.active{:role => 'presentation'}
+      = link_to "Inbox (5)", staff_home_path
+  - else
+    %li{:role => 'presentation'}
+      = link_to "Inbox", staff_home_path
+
+  - if active_tab[:completed]
+    %li.active{:role => 'presentation'}
+      = link_to "Completed", staff_students_path
+  - else 
+    %li{:role => 'presentation'}
+      = link_to "Completed", staff_students_path

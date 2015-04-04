@@ -1,0 +1,79 @@
+- @student = @student || student
+
+.row
+  .col-sm-12
+    .panel.panel-default
+      .panel-body
+        .media.person-box
+          .media-left
+            = image_tag @student.avatar.medium_avatar, class: 'img-circle'
+          .media-body
+            %h1.media-heading
+              = link_to "#{@student.name}"
+            .info
+              .email
+                = @student.email
+              .phone
+                = @student.phone
+          .media-right
+            %button.btn.btn-lg.btn-primary{type: 'button'}
+              Edit
+
+      %table.table.table-striped
+        %tr
+          %th Application
+          %th Status
+          %th Applied
+          %th Screening Interview
+          %th Onsite Interview
+          %th Offer
+          %th Accepted
+        %tr
+          %td
+            %div Software Engineer
+            %div Bazaarvoice - Austin, TX
+          %td Next Interview April 15, 2015
+          %td
+            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
+          %td - 
+          %td -
+          %td -
+          %td -
+        %tr
+          %td
+            %div Javascript Developer
+            %div Indeed Inc. - Austin, TX
+          %td No Offer
+          %td
+            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
+          %td
+            %span.glyphicon.glyphicon-remove{:aria_hidden => 'true'}
+          %td -
+          %td -
+          %td -
+        %tr
+          %td
+            %div Javascript Developer
+            %div Indeed Inc. - Austin, TX
+          %td Next Interview April 20, 2015
+          %td
+            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
+          %td
+            %span.glyphicon.glyphicon-ok{aria_hidden: 'true'}
+          %td
+            %span.glyphicon.glyphicon-remove{aria_hidden: 'true'}
+          %td -
+          %td -
+        %tr
+          %td
+            %div Front-End Engineer
+            %div SailSoft - Dallas, TX 
+          %td Waiting For Offer 
+          %td
+            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
+          %td
+            %span.glyphicon.glyphicon-ok{aria_hidden: 'true'}
+          %td
+            %span.glyphicon.glyphicon-ok{aria_hidden: 'true'}
+          %td -
+          %td -

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   # School staff
   scope 'staff' do
     get '/' => 'staff#home', as: :staff_home
+    get '/inbox/profile/:id' => 'staff#inbox_profile', as: :staff_inbox_profile
     get '/students' => 'staff#students', as: :staff_students
     get '/students/:id' => 'staff#show_student', as: :staff_student
     get 'students/:id/applications' => 'staff#student_applications', as: :staff_student_applications

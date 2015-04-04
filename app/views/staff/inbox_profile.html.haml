@@ -1,0 +1,10 @@
+= render partial: 'tabs', locals: {active_tab: {inbox: true}}
+
+%ol.breadcrumb
+  %li
+    = link_to 'Inbox', staff_home_path
+  %li.active Frank Licea
+
+%br
+
+= render partial: 'student_applications', locals: {student: Student.first}

@@ -14,10 +14,14 @@
 }
 
 .media.inbox-line-item {
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+
   .inbox-line-summary{
     font-size: 1.30em;
     .inbox-subject {
-      font-weight: bold;
     } 
     .inbox-message {
       color: rgb(50, 50, 50);
