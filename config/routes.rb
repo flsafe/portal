@@ -30,13 +30,13 @@ Rails.application.routes.draw do
   scope 'staff' do
     get '/' => 'staff#home', as: :staff_home
     get '/inbox/profile/:id' => 'staff#inbox_profile', as: :staff_inbox_profile
+    get '/inbox/new_auto_follow_up/:id' => 'staff#new_auto_follow_up', as: :staff_new_auto_follow_up
     get '/students' => 'staff#students', as: :staff_students
     get '/students/:id' => 'staff#show_student', as: :staff_student
     get 'students/:id/applications' => 'staff#student_applications', as: :staff_student_applications
     get 'students/:id/recommend' => 'staff#new_recommendation', as: :staff_new_student_recommendation
     post 'students/:id/recommend' => 'staff#create_recommendation', as: :staff_create_student_recommendation
   end
-
 
   # Students
   scope '/student' do

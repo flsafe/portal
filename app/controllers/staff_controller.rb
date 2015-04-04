@@ -1,7 +1,7 @@
 class StaffController < ApplicationController
 
   before_action :ensure_staff
-  before_action :ensure_staff_student, except: [:home, :students, :inbox_profile]
+  before_action :ensure_staff_student, except: [:home, :students, :inbox_profile, :new_auto_follow_up]
 
   def home
   end
@@ -9,6 +9,11 @@ class StaffController < ApplicationController
   # TODO: Actually set the current student profile
   # this is currently ignored for prototyping.
   def inbox_profile
+  end
+
+  # TODO: Actually set the current student profile
+  # this is currently ignored for prototyping.
+  def new_auto_follow_up
   end
 
   def students
