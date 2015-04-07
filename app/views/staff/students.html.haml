@@ -40,9 +40,8 @@
               .phone
                 = student.phone
             %br
-            .help
-              =link_to "Applications", staff_student_applications_path(student)
-              |
-              =link_to "Recommend", staff_new_student_recommendation_path(student)
+            .actions
+              = link_to "Applications", staff_student_applications_path(student), class: 'btn btn-default'
+              = link_to "Recommend", staff_new_student_recommendation_path(student), class: 'btn btn-default'
       = will_paginate(@students, renderer: BootstrapPagination::Rails)
 

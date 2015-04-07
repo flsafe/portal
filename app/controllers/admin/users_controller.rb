@@ -52,7 +52,8 @@ class Admin::UsersController < Admin::ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      @user.attributes = user_params
+      if @user.save(validate: false)
         format.html { redirect_to admin_school_users_url(@school), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else

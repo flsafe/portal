@@ -20,7 +20,7 @@
                 %strong= company.name
                 = " - #{opp.city}, #{opp.state}"
               .description
-                = truncate(opp.description)
+                = truncate(opp.description, length: 150)
               .skills
                 %span.label.label-default= opp.skills
             .media-right

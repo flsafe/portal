@@ -1,37 +1,24 @@
-.row
+- @id = (@id && @id + 1) || 1
+.row.inbox-item{id: @id}
   .col-sm-12
     .media.inbox-line-item
       %hr
-      .media-left
-        %form{role: 'form'}
-          .checkbox
-            %label
-              %input{id: 'box1', type: 'checkbox'}
       .media-body
         .row
-          .col-sm-12
-            .inbox-line-summary
-              %span.glyphicon{class: glyph}
-              %span.inbox-subject
-                = subject
-              %span.inbox-message
-                &nbsp;
-                = message 
+          .col-sm-4
+            %span.date
+              = todo_timestamp
+          .col-sm-8
+            %span.inbox-message
+              = message 
             .help
               = help 
-            .info
-              %div
-                student-email@gmail.com
-              %div
-                (915) 920-0102
+            %br
             .inbox-actions
-              = link_to "Profile", staff_inbox_profile_path(1) 
-              |
-              = link_to "Send Auto Follow Up", staff_new_auto_follow_up_path(1)
-      .media-right
-        .row
-          .col-sm-6
-            .inbox-timestamp
-              = todo_timestamp 
+              = link_to "View Profile", staff_inbox_profile_path(1), class: 'btn btn-default'
+              = link_to "View Application", '', class: 'btn btn-default'
+              = link_to "Send Auto Follow Up", staff_new_auto_follow_up_path(1), class: 'btn btn-default'
+      .media-left
+        = link_to "OK", "#", class: 'inbox-item-ok btn btn-success', line_item_id: @id
 
 

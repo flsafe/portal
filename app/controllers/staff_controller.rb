@@ -6,12 +6,12 @@ class StaffController < ApplicationController
   def home
   end
 
-  # TODO: Actually set the current student profile
+  # TODO: Actually set the current student profile and authorize the access.
   # this is currently ignored for prototyping.
   def inbox_profile
   end
 
-  # TODO: Actually set the current student profile
+  # TODO: Actually set the current student profile and authorize the access.
   # this is currently ignored for prototyping.
   def new_auto_follow_up
   end

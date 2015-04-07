@@ -6,3 +6,12 @@
   %li.active Follow Up
 
 %br
+
+%form
+  .form-group
+    %label{for: 'follow-up-message'}
+      Message
+    %textarea{class: 'form-control', id: 'follow-up-message', rows: '8'}
+      Hey Frank! I noticed you applied for Software Engineer at Bazaarvoice about a week ago. Have you heard back for a screening interview?
+  =link_to "Send Email", '', class: 'btn btn-primary'
+  =link_to "Send Text Message", '', class: 'btn btn-primary'

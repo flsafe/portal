@@ -6,6 +6,10 @@
       font-size: 1.10em;
     }
   }
+
+  .actions {
+    padding-bottom: 5px; 
+  }
 }
 
 .inbox-header {
@@ -14,33 +18,20 @@
 }
 
 .media.inbox-line-item {
-  input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-  }
-
-  .inbox-line-summary{
+  .inbox-message {
     font-size: 1.30em;
-    .inbox-subject {
-    } 
-    .inbox-message {
-      color: rgb(50, 50, 50);
-    }
   }
 
   .help {
     font-style: italic; 
-    font-size: 1.1em;
+    font-size: 1.0em;
   }
 
-  .info {
-    color: rgb(130, 130, 130);
-    font-size: 1.1em;
+  div.inbox-actions {
+    padding-bottom: 5px;
   }
 
-  .inbox-timestamp {
-    width: 200px;
-    text-align: right;
-    color: rgb(130, 130, 130);
+  .date {
+    font-size: 1.30em;
   }
 }
