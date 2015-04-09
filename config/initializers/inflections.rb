@@ -8,6 +8,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.singular /^(ox)en/i, '\1'
   inflect.irregular 'person', 'people'
   inflect.irregular 'staff', 'staffers'
+  inflect.irregular 'campus', 'campuses'
   inflect.uncountable %w( fish sheep )
 end
 

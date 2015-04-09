@@ -24,6 +24,7 @@
 #  github_token    :string
 #  semester        :integer
 #  year            :integer
+#  campus_id       :integer
 #
 
 class Admin < User; end

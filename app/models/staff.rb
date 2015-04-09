@@ -24,6 +24,9 @@
 #  github_token    :string
 #  semester        :integer
 #  year            :integer
+#  campus_id       :integer
 #
 
-class Staff < User; end
+class Staff < User
+  belongs_to :school
+end

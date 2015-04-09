@@ -24,16 +24,12 @@
 #  github_token    :string
 #  semester        :integer
 #  year            :integer
+#  campus_id       :integer
 #
 
 class User < ActiveRecord::Base
-  belongs_to :school
-  belongs_to :company
-  has_many :applications
-  has_many :opportunities, through: :applications
   has_secure_password
 
-  validates :email, :avatar, :github_token, :first_name, :phone, :last_name, :address1, :city, :state, :zip, presence: true
   validates :email, uniqueness: true
 
   mount_uploader :avatar, AvatarUploader

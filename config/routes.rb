@@ -5,13 +5,12 @@ Rails.application.routes.draw do
     get 'login' => :new 
     post 'login' => :create
     delete 'logout' => :destroy
-
   end
 
   namespace :admin do
     root to: 'admin#index'
-    resources :schools do
-      resources :users
+    resources :schools
+    resources :campuses do
       resources :students, controller: 'users', type: 'Student'
       resources :staff, controller: 'users', type: 'Staff'
       resources :instructor, controller: 'users', type: 'Instructor'

@@ -1,31 +1,22 @@
 class Admin::SchoolsController < Admin::ApplicationController
 
-  before_action :ensure_admin, except: [:show, :edit, :update]
-  before_action :set_user_school, except: [:index, :new, :create]
+  before_action :ensure_admin
 
-  # GET /schools
-  # GET /schools.json
   def index
     @schools = School.order('name').all
   end
 
-  # GET /schools/1
-  # GET /schools/1.json
   def show
     @school = School.find(params[:id])
   end
 
-  # GET /schools/new
   def new
     @school = School.new
   end
 
-  # GET /schools/1/edit
   def edit
   end
 
-  # POST /schools
-  # POST /schools.json
   def create
     @school = School.new(school_params)
 
@@ -40,8 +31,6 @@ class Admin::SchoolsController < Admin::ApplicationController
     end
   end
 
-  # PATCH/PUT /schools/1
-  # PATCH/PUT /schools/1.json
   def update
     respond_to do |format|
       if @school.update(school_params)
@@ -54,8 +43,6 @@ class Admin::SchoolsController < Admin::ApplicationController
     end
   end
 
-  # DELETE /schools/1
-  # DELETE /schools/1.json
   def destroy
     @school.destroy
     respond_to do |format|
@@ -66,13 +53,6 @@ class Admin::SchoolsController < Admin::ApplicationController
 
   private
 
-  def set_user_school
-    @school = School.find(params[:id])
-    return if current_user.type == 'Admin'
-    redirect_to(admin_school_url(current_user.school)) unless @school == current_user.school
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
   def school_params
     params.require(:school).permit(:name, :phone, :custom_domain, :website, :address1, :address2, :city, :state, :zip)
   end

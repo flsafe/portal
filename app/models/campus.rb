@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: schools
+# Table name: campuses
 #
 #  id            :integer          not null, primary key
 #  name          :string
@@ -14,13 +14,10 @@
 #  zip           :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  campus_id     :integer
 #
 
-class School < ActiveRecord::Base
-  has_many :campuses
-  has_many :users
+class Campus < ActiveRecord::Base
+  belongs_to :school
   has_many :students
   has_many :employers
-  has_many :staff
 end

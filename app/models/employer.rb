@@ -24,6 +24,10 @@
 #  github_token    :string
 #  semester        :integer
 #  year            :integer
+#  campus_id       :integer
 #
 
-class Employer < User; end
+class Employer < User
+  belongs_to :company
+  belongs_to :campus
+end
