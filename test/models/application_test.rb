@@ -10,6 +10,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  resume         :text
+#  resume_file    :string
 #
 
 require 'test_helper'

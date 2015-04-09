@@ -22,6 +22,8 @@
 #  avatar          :string
 #  phone           :string
 #  github_token    :string
+#  semester        :integer
+#  year            :integer
 #
 
 class Student < User
