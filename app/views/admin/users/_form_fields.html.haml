@@ -1,6 +1,6 @@
-- user = @user || user
+- staff = @staff || staff
 .fieldset
-  %legend password
+  %legend Credentials
   .form-group
     = f.label :email, :class => ''
     = f.text_field :email, :class => 'form-control'
@@ -19,8 +19,8 @@
   %legend info 
 
   .form-group
-    - if user.avatar.medium_avatar.present?
-      = image_tag user.avatar.medium_avatar, class: 'img-rounded'
+    - if staff.avatar.medium_avatar.present?
+      = image_tag staff.avatar.medium_avatar, class: 'img-rounded'
 
   .form-group
     = f.label :avatar, "Avatar Picture"
@@ -61,8 +61,3 @@
   .form-group
     = f.label :zip, :class => ''
     = f.text_field :zip, :class => 'form-control'
-
-  - if current_user.admin_or_staff?
-    .form-group
-      = f.label :type, :class => ''
-      = f.select :type, options_for_select(['Student', 'Instructor', 'Staff'], user.type), {}, class: 'form-control'

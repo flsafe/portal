@@ -34,5 +34,5 @@ class Student < User
 
   enum semester: {spring: 0, summer: 1, fall: 2, winter: 3}
 
-  validates :email, :avatar, :github_token, :first_name, :phone, :last_name, :address1, :city, :state, :zip, presence: true
+  validates :avatar, :github_token, :first_name, :phone, :last_name, :address1, :city, :state, :zip, presence: true
 end

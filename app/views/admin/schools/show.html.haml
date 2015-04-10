@@ -2,6 +2,9 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
 
+%ul
+  %li= link_to "Staff", admin_school_staffers_path(@school)
+
 %p
   %strong= model_class.human_attribute_name(:name) + ':'
   %br

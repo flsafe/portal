@@ -9,15 +9,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'admin#index'
-    resources :schools
-    resources :campuses do
-      resources :students, controller: 'users', type: 'Student'
-      resources :staff, controller: 'users', type: 'Staff'
-      resources :instructor, controller: 'users', type: 'Instructor'
+    resources :schools do
+      resources :staffers, controller: 'users', type: 'Staff'
     end
-    resources :companies do
-      resources :employers
-    end
+    resources :campuses
   end
 
   scope 'oauth' do
