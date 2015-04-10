@@ -15,6 +15,7 @@ class Admin::CampusesController < Admin::ApplicationController
   end
 
   def edit
+    @campus = Campus.find(params[:id])
   end
 
   def create
@@ -32,28 +33,27 @@ class Admin::CampusesController < Admin::ApplicationController
   end
 
   def update
+    @campus = Campus.find(params[:id])
     respond_to do |format|
       if @campus.update(campus_params)
         format.html { redirect_to [:admin, @campus], notice: 'Campus was successfully updated.' }
-        format.json { render :show, status: :ok, location: @campus }
       else
         format.html { render :edit }
-        format.json { render json: @campus.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
+    @campus = Campus.find(params[:id])
     @campus.destroy
     respond_to do |format|
       format.html { redirect_to admin_campuss_url, notice: 'Campus was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
 
   def campus_params
-    params.require(:campus).permit(:name, :phone, :custom_domain, :website, :address1, :address2, :city, :state, :zip)
+    params.require(:campus).permit(:name, :phone, :custom_domain, :website, :address1, :address2, :city, :state, :zip, :school_id)
   end
 end

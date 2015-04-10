@@ -15,6 +15,7 @@ class Admin::SchoolsController < Admin::ApplicationController
   end
 
   def edit
+    @school = School.find(params[:id])
   end
 
   def create
@@ -23,27 +24,25 @@ class Admin::SchoolsController < Admin::ApplicationController
     respond_to do |format|
       if @school.save
         format.html { redirect_to [:admin, @school], notice: 'School was successfully created.' }
-        format.json { render :show, status: :created, location: @school }
       else
         format.html { render :new }
-        format.json { render json: @school.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
+    @school = School.find(params[:id])
     respond_to do |format|
       if @school.update(school_params)
         format.html { redirect_to [:admin, @school], notice: 'School was successfully updated.' }
-        format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
-        format.json { render json: @school.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
+    @school = School.find(params[:id])
     @school.destroy
     respond_to do |format|
       format.html { redirect_to admin_schools_url, notice: 'School was successfully destroyed.' }
