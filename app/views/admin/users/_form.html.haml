@@ -1,3 +1,4 @@
+- puts target_path
 = form_for target_path, :html => { multipart: true, :class => 'form-horizontal' } do |f|
   - if @staff.errors.any? 
     .errorExplaination.alert.alert-danger

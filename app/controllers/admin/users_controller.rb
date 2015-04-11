@@ -23,7 +23,7 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       if @staff.save()
-        format.html { redirect_to admin_school_staff_url(@school), notice: 'Staff was successfully created.' }
+        format.html { redirect_to admin_school_staffers_url(@school), notice: 'Staff was successfully created.' }
       else
         format.html { render :new }
       end
@@ -32,9 +32,9 @@ class Admin::UsersController < Admin::ApplicationController
 
   def update
     respond_to do |format|
-      @staff.attributes = user_params
+      @staff.attributes = staff_params
       if @staff.save(validate: false)
-        format.html { redirect_to admin_school_staff(@school), notice: 'Staff was successfully updated.' }
+        format.html { redirect_to admin_school_staffers_url(@school), notice: 'Staff was successfully updated.' }
         format.json { render :show, status: :ok, location: @staff }
       else
         format.html { render :edit }
@@ -46,7 +46,7 @@ class Admin::UsersController < Admin::ApplicationController
   def destroy
     @staff.destroy
     respond_to do |format|
-      format.html { redirect_to admin_school_staff(@school), notice: 'Staff was successfully destroyed.' }
+      format.html { redirect_to admin_school_staffers_url(@school), notice: 'Staff was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
