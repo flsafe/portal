@@ -1,0 +1,16 @@
+%nav.navbar.navbar-inverse
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{:type => 'button', 'data-toggle' => 'collapse', 'data-target' => '#navbar', 'aria-expanded' => 'false', 'aria-controls' => 'navbar'}
+        %span.sr-only
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to "SchoolSail", user_home_url(current_user), class: 'navbar-brand'
+    .collapse.navbar-collapse#navbar
+      %ul.nav.navbar-nav.navbar-right
+        - if current_user
+          %li= link_to "Profile", edit_student_profile_path
+          %li= link_to "Logout", logout_path, method: :delete
+        - else
+          %li= link_to "Login", login_path
