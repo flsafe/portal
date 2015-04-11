@@ -31,6 +31,12 @@ class StaffController < ApplicationController
   def opportunities
   end
 
+  def team
+  end
+
+  def campuses
+  end
+
   def students
     @students = Student
                   .joins(campus: :school)
