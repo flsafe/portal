@@ -1,7 +1,7 @@
 - model_class = User
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-= link_to t('.new', :default => t("helpers.links.new")), new_admin_school_staff_path, :class => 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_admin_school_staffer_path, :class => 'btn btn-primary'
 %table.table.table-striped
   %thead
     %tr
@@ -14,11 +14,11 @@
   %tbody
     - @staffers.each do |staff|
       %tr
-        %td= link_to staff.id, edit_admin_school_staff_path(staff.school, staff)
+        %td= link_to staff.id, edit_admin_school_staffer_path(staff.school, staff)
         %td= staff.email
         %td= staff.first_name
         %td= staff.last_name
         %td=l staff.created_at
         %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_school_staff_path(staff.school, staff), :class => 'btn btn-mini'
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_school_staffer_path(staff.school, staff), :class => 'btn btn-mini'
 

@@ -27,6 +27,6 @@
 #  campus_id       :integer
 #
 
-class Staff < User
+class Staffer < User
   belongs_to :school
 end

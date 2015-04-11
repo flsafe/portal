@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   ADMINS = %w[Admin]
-  STAFFERS = %w[Staff Instructor]
+  STAFFERS = %w[Staffer Instructor]
   EMPLOYERS = %w[Employer]
   STUDENTS = %w[Student]
 

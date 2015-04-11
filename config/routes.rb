@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'admin#index'
     resources :schools do
-      resources :staffers, controller: 'users', type: 'Staff'
+      resources :staff, controller: 'users', type: 'Staffer'
     end
     resources :campuses
   end
