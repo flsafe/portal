@@ -1,9 +1,12 @@
 class StaffController < ApplicationController
 
   before_action :ensure_staff
-  before_action :ensure_staff_student, except: [:home, :students, :inbox_profile, :new_auto_follow_up]
+  before_action :ensure_staff_student, only: [:student_applications] 
 
-  def home
+  def dashboard
+  end
+
+  def messages
   end
 
   # TODO: Actually set the current student profile and authorize the access.
@@ -16,11 +19,22 @@ class StaffController < ApplicationController
   def new_auto_follow_up
   end
 
+  def tasks
+  end
+
+  def activity
+  end
+
+  def recomendations
+  end
+
+  def opportunities
+  end
+
   def students
     @students = Student
-                  .joins(:school)
-                  .includes(:school)
-                  .where(school: current_user.school)
+                  .joins(campus: :school)
+                  .where(campuses: {school_id: current_user.school_id})
                   .paginate(page: params[:page], per_page: 20)
   end
 

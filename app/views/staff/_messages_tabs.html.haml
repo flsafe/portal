@@ -1,0 +1,4 @@
+%ul.nav.nav-tabs
+  %li{class: active == :messages ? 'active' : '', role: 'presentation'}= link_to "Messages", staff_messages_path
+  %li{class: active == :tasks ? 'active' : '', role: 'presentation'}= link_to "Tasks", staff_tasks_path
+  %li{class: active == :activity ? 'active' : '', role: 'presentation'}= link_to "Activity", staff_activity_path

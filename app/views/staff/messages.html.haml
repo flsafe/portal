@@ -1,15 +1,12 @@
 = content_for(:sidebar) do
-  = render 'sidebar', active: :dashboard
+  = render 'sidebar', active: :messages
 
 = content_for(:center_content) do
-  = render partial: 'tabs', locals: {active_tab: {inbox: true}}
-
-  %ol.breadcrumb
-    %li.active Inbox
+  = render 'messages_tabs', active: :messages
 
   %br
 
-  = render partial: 'sub_tabs', locals: {active_tab: {inbox: true}}
+  = render partial: 'messages_subtabs', locals: {active_tab: {inbox: true}}
 
   = render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Associate Implementation Engineer', help: 'Wish Frank luck!', todo_timestamp: 'Just Now'}
 

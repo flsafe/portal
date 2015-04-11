@@ -2,10 +2,10 @@
 
   - if active_tab[:inbox] 
     %li.active{:role => 'presentation'}
-      = link_to "Inbox (5)", staff_home_path
+      = link_to "Inbox (5)"
   - else
     %li{:role => 'presentation'}
-      = link_to "Inbox", staff_home_path
+      = link_to "Inbox"
 
   - if active_tab[:completed]
     %li.active{:role => 'presentation'}

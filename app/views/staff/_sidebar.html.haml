@@ -1,9 +1,9 @@
 %ul.nav.nav-pills.nav-stacked
-  %li{class: active == :dashboard ? 'active' : ''}= link_to "Dashboard"
-  %li{class: active == :messages ? 'active' : ''}= link_to "Messages"
-  %li{class: active == :recommendations ? 'active' : ''}= link_to "Recommendations"
-  %li{class: active == :jobs ? 'active' : ''}= link_to "Jobs"
+  %li{class: active == :dashboard ? 'active' : ''}= link_to "Dashboard", staff_dashboard_path
+  %li{class: active == :messages ? 'active' : ''}= link_to "Messages", staff_messages_path
+  %li{class: active == :recommendations ? 'active' : ''}= link_to "Recommendations", staff_recomendations_path
+  %li{class: active == :opportunities ? 'active' : ''}= link_to "Jobs", staff_opportunities_path
   %hr
   %li{class: active == :team ? 'active' : ''}= link_to "Team"
-  %li{class: active == :students ? 'active' : ''}= link_to "Students"
+  %li{class: active == :students ? 'active' : ''}= link_to "Students", staff_students_path
   %li= link_to "Campuses"

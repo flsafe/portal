@@ -1,0 +1,7 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :messages
+
+= content_for(:center_content) do
+  = render 'messages_tabs', active: :tasks
+
+  %br

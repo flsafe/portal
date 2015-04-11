@@ -22,9 +22,17 @@ Rails.application.routes.draw do
 
   # School staff
   scope 'staff' do
-    get '/' => 'staff#home', as: :staff_home
+    get '/' => 'staff#dashboard', as: :staff_dashboard
+
+    get '/messages/' => 'staff#messages', as: :staff_messages
+    get '/tasks/' => 'staff#tasks', as: :staff_tasks
+    get '/activity/' => 'staff#activity', as: :staff_activity
     get '/inbox/profile/:id' => 'staff#inbox_profile', as: :staff_inbox_profile
     get '/inbox/new_auto_follow_up/:id' => 'staff#new_auto_follow_up', as: :staff_new_auto_follow_up
+
+    get '/recommendations' => 'staff#recommendations', as: :staff_recomendations
+    get '/jobs' => 'staff#opportunities', as: :staff_opportunities
+
     get '/students' => 'staff#students', as: :staff_students
     get '/students/:id' => 'staff#show_student', as: :staff_student
     get 'students/:id/applications' => 'staff#student_applications', as: :staff_student_applications

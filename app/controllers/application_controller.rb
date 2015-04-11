@@ -33,7 +33,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    return @current_user if @current_user
+    if session[:user_id]
+      user = User.find(session[:user_id]) 
+      @current_user = user.becomes(user.type.constantize)
+    end
+    @current_user
   end
 
   def authorize

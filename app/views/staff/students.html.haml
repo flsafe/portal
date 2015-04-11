@@ -1,47 +1,46 @@
-= render partial: 'tabs', locals: {active_tab: {students: true}}
+= content_for(:sidebar) do
+  = render 'sidebar', active: :students
 
-%ol.breadcrumb
-  %li.active Students
-
-
-.staff_students
-  .row
-    .col-sm-4
-      = link_to "Create Student", '#', class: 'btn btn-primary'
-
+= content_for(:center_content) do
+  = render 'students_tabs', active: :students
   %br
-  %br
-  .row
-    .col-sm-4
-      %select.form-control
-        %option Spring 2015
-        %option Winter 2014
-        %option Fall 2014
-        %option Summer 2014
-        %option Spring 2014
-        %option Winter 2013
-    .col-sm-4
-      %select.form-control
-        %option Austin Campus
-        %option San Francisco Campus
-  .row
-    .col-sm-12
-      - @students.each do |student|
-        .media.person-box
-          %hr
-          .media-left
-            = image_tag student.avatar.medium_avatar, class: 'img-circle'
-          .media-body
-            %h1.media-heading
-              = link_to "#{student.first_name} #{student.last_name}"
-            .info
-              .email
-                = student.email
-              .phone
-                = student.phone
-            %br
-            .actions
-              = link_to "Applications", staff_student_applications_path(student), class: 'btn btn-default'
-              = link_to "Recommend", staff_new_student_recommendation_path(student), class: 'btn btn-default'
-      = will_paginate(@students, renderer: BootstrapPagination::Rails)
+  .staff_students
+    .row
+      .col-sm-4
+        = link_to "Create Student", '#', class: 'btn btn-primary'
+    %br
+    %br
+    .row
+      .col-sm-4
+        %select.form-control
+          %option Spring 2015
+          %option Winter 2014
+          %option Fall 2014
+          %option Summer 2014
+          %option Spring 2014
+          %option Winter 2013
+      .col-sm-4
+        %select.form-control
+          %option Austin Campus
+          %option San Francisco Campus
+    .row
+      .col-sm-12
+        - @students.each do |student|
+          .media.person-box
+            %hr
+            .media-left
+              = image_tag student.avatar.medium_avatar, class: 'img-circle'
+            .media-body
+              %h1.media-heading
+                = link_to "#{student.first_name} #{student.last_name}"
+              .info
+                .email
+                  = student.email
+                .phone
+                  = student.phone
+              %br
+              .actions
+                = link_to "Applications", staff_student_applications_path(student), class: 'btn btn-default'
+                = link_to "Recommend", staff_new_student_recommendation_path(student), class: 'btn btn-default'
+        = will_paginate(@students, renderer: BootstrapPagination::Rails)
 
