@@ -1,0 +1,16 @@
+!!! 5
+%html(lang="en")
+  %head
+    = render 'layouts/head'
+  %body
+    = render 'layouts/navbar'
+    = render 'layouts/flash'
+    .container
+      .inside-content
+        .row
+          .col-sm-3
+            .panel.panel-default
+              .panel-body
+                = yield :sidebar
+          .col-sm-9
+            = yield :center_content

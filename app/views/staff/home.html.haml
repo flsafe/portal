@@ -1,21 +1,25 @@
-= render partial: 'tabs', locals: {active_tab: {inbox: true}}
+= content_for(:sidebar) do
+  = render 'sidebar', active: :dashboard
 
-%ol.breadcrumb
-  %li.active Inbox
+= content_for(:center_content) do
+  = render partial: 'tabs', locals: {active_tab: {inbox: true}}
 
-%br
+  %ol.breadcrumb
+    %li.active Inbox
 
-= render partial: 'sub_tabs', locals: {active_tab: {inbox: true}}
+  %br
 
-= render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Associate Implementation Engineer', help: 'Wish Frank luck!', todo_timestamp: 'Just Now'}
+  = render partial: 'sub_tabs', locals: {active_tab: {inbox: true}}
+
+  = render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Associate Implementation Engineer', help: 'Wish Frank luck!', todo_timestamp: 'Just Now'}
 
 
-= render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Software Engineer at BazaarVoice', help: 'Wish Frank luck!', todo_timestamp: 'Tuesday, March 31'}
+  = render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Software Engineer at BazaarVoice', help: 'Wish Frank luck!', todo_timestamp: 'Tuesday, March 31'}
 
-= render partial: 'todo', locals: {subject: '', message: 'Amanda Ryan had a screen interview with Indeed Inc.', help: 'Has Amanda gotten an on site interview?', todo_timestamp: 'Tuesday, March 31'}
+  = render partial: 'todo', locals: {subject: '', message: 'Amanda Ryan had a screen interview with Indeed Inc.', help: 'Has Amanda gotten an on site interview?', todo_timestamp: 'Tuesday, March 31'}
 
-= render partial: 'todo', locals: {subject: '', message: 'Jon Chappel had an on site interview with Cab Forward', help: 'Did Jon get an offer?', todo_timestamp: 'Monday, March 20'}
+  = render partial: 'todo', locals: {subject: '', message: 'Jon Chappel had an on site interview with Cab Forward', help: 'Did Jon get an offer?', todo_timestamp: 'Monday, March 20'}
 
-= render partial: 'todo', locals: {subject: '', message: 'Nancy Ortega graduated 4 months ago', help: 'Has Nancy been placed yet?', todo_timestamp: '4 Months Ago'}
+  = render partial: 'todo', locals: {subject: '', message: 'Nancy Ortega graduated 4 months ago', help: 'Has Nancy been placed yet?', todo_timestamp: '4 Months Ago'}
 
-= render partial: 'todo', locals: {subject: 'Congrats', message: 'Ravi Parkih graduated a year ago', help: 'Congratulations! Where is Ravi now?', todo_timestamp: '1 Year Ago'}
+  = render partial: 'todo', locals: {subject: 'Congrats', message: 'Ravi Parkih graduated a year ago', help: 'Congratulations! Where is Ravi now?', todo_timestamp: '1 Year Ago'}
