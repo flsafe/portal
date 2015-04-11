@@ -14,6 +14,7 @@
 #  zip           :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  school_id     :integer
 #
 
 class Campus < ActiveRecord::Base
