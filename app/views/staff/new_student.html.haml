@@ -1,0 +1,15 @@
+= form_for @student, url: staff_create_student_path do |f|
+  - if @student.errors.any? 
+    .errorExplaination.alert.alert-danger
+      %p
+        = "#{pluralize(@student.errors.count, 'error')} prevented your profile from being saved."
+      %ul
+        - @student.errors.full_messages.each do |msg|
+          %li= msg
+  .fieldset
+    %legend Send Invite
+    .form-group
+      = f.label :email, :class => ''
+      = f.text_field :email, :class => 'form-control'
+    .form-actions
+      = f.submit "Save", :class => 'btn btn-primary'

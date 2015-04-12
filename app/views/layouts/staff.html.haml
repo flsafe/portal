@@ -8,9 +8,14 @@
     .container
       .inside-content
         .row
-          .col-sm-3
-            .panel.panel-default
-              .panel-body
-                = yield :sidebar
-          .col-sm-9
-            = yield :center_content
+          - if content_for?(:sidebar) || content_for?(:center_content)
+            - if content_for?(:sidebar)
+              .col-sm-3
+                .panel.panel-default
+                  .panel-body
+                    = yield :sidebar
+            - if content_for(:center_content)
+              .col-sm-9
+                = yield :center_content
+          - else
+            = yield

@@ -48,6 +48,15 @@ class StaffController < ApplicationController
                   .paginate(page: params[:page], per_page: 20)
   end
 
+  def new_student
+    @student = Student.new
+    @campuses = current_user.school.campuses
+  end
+
+  def create_student
+    redirect_to staff_students_url, notice: "We've sent out the student invite."
+  end
+
   def student_applications
   end
 
