@@ -1,6 +1,7 @@
 class Admin::CampusesController < Admin::ApplicationController
 
-  before_action :ensure_admin
+  skip_before_action :ensure_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_admin_or_staff, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @campuses = Campus.order('name').all
@@ -23,7 +24,7 @@ class Admin::CampusesController < Admin::ApplicationController
 
     respond_to do |format|
       if @campus.save
-        format.html { redirect_to [:admin, @campus], notice: 'Campus was successfully created.' }
+        format.html { redirect_to_session_or [:admin, @campus], notice: 'Campus was successfully created.' }
         format.json { render :show, status: :created, location: @campus }
       else
         format.html { render :new }
@@ -36,7 +37,7 @@ class Admin::CampusesController < Admin::ApplicationController
     @campus = Campus.find(params[:id])
     respond_to do |format|
       if @campus.update(campus_params)
-        format.html { redirect_to [:admin, @campus], notice: 'Campus was successfully updated.' }
+        format.html { redirect_to_session_or [:admin, @campus], notice: 'Campus was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -47,7 +48,7 @@ class Admin::CampusesController < Admin::ApplicationController
     @campus = Campus.find(params[:id])
     @campus.destroy
     respond_to do |format|
-      format.html { redirect_to admin_campuss_url, notice: 'Campus was successfully destroyed.' }
+      format.html { redirect_to_session_or admin_campus_url, notice: 'Campus was successfully destroyed.' }
     end
   end
 
@@ -55,5 +56,9 @@ class Admin::CampusesController < Admin::ApplicationController
 
   def campus_params
     params.require(:campus).permit(:name, :phone, :custom_domain, :website, :address1, :address2, :city, :state, :zip, :school_id)
+  end
+
+  def ensure_admin_or_staff
+    current_user.admin_or_staff?
   end
 end

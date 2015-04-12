@@ -1,24 +1,18 @@
 - model_class = Campus
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-= link_to t('.new', :default => t("helpers.links.new")), new_admin_campus_path, :class => 'btn btn-primary'
-%table.table.table-striped
+= link_to "New Campus", new_admin_campus_path, :class => 'btn btn-primary'
+%table.table
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:school)
       %th= model_class.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:custom_domain)
       %th= model_class.human_attribute_name(:city)
-      %th=t '.actions', :default => t("helpers.actions")
+      %th= model_class.human_attribute_name(:state)
+      %th
   %tbody
     - @campuses.each do |campus|
       %tr
-        %td= campus.id 
-        %td= campus.school.name
-        %td= link_to campus.name, admin_campus_path(campus)
-        %td= campus.custom_domain
+        %td= campus.name
         %td= campus.city
+        %td= campus.state
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_admin_campus_path(campus), :class => 'btn btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), admin_campus_path(campus), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'

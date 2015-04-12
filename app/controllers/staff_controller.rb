@@ -35,6 +35,10 @@ class StaffController < ApplicationController
   end
 
   def campuses
+    # Campus actions are handled by the admin/campus controller
+    # we want to redirect back here from that controller.
+    self.session_redirect = staff_campuses_url
+    @campuses = current_user.school.campuses
   end
 
   def students

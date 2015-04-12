@@ -2,5 +2,8 @@
   = render 'sidebar', active: :campuses
 
 = content_for(:center_content) do
-  Hello
+  %ul.nav.nav-tabs
+    %li.active{role: 'presentation'}
+      = link_to 'Campuses'
   %br
+  = render template: 'admin/campuses/index'

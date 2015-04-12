@@ -12,6 +12,22 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def session_redirect=(r)
+    session[:session_redirect] = r
+  end
+
+  def session_redirect
+    session[:session_redirect]
+  end
+
+  def session_redirect?
+    !!session_redirect
+  end
+
+  def redirect_to_session_or(target, opts)
+    redirect_to((session_redirect? ? session_redirect : target), opts)
+  end
+
   def ensure_admin
     redirect_home(current_user) unless current_user.admin?
   end
@@ -45,5 +61,5 @@ class ApplicationController < ActionController::Base
     unless User.find_by(id: session[:user_id])
       redirect_to login_url, notice: "Please log in"
     end
-  end  
+  end
 end
