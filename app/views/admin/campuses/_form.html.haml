@@ -1,4 +1,11 @@
 = form_for [:admin, @campus], :html => { :class => 'form-horizontal' } do |f|
+  - if @campus.errors.any? 
+    .errorExplaination.alert.alert-danger
+      %p
+        = "#{pluralize(@campus.errors.count, 'error')} prevented the campus from being saved."
+      %ul
+        - @campus.errors.full_messages.each do |msg|
+          %li= msg
   .control-group
     = f.label :name, :class => 'control-label'
     = f.text_field :name, :class => 'text_field form-control'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411022054) do
+ActiveRecord::Schema.define(version: 20150414042555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,20 @@ ActiveRecord::Schema.define(version: 20150411022054) do
     t.datetime "updated_at",  null: false
     t.string   "slug"
   end
+
+  create_table "invites", force: :cascade do |t|
+    t.string   "token"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "invite_type"
+    t.string   "email"
+    t.string   "semester"
+    t.integer  "year"
+    t.integer  "campus_id"
+  end
+
+  add_index "invites", ["email"], name: "index_invites_on_email", unique: true, using: :btree
+  add_index "invites", ["token"], name: "index_invites_on_token", unique: true, using: :btree
 
   create_table "opportunities", force: :cascade do |t|
     t.string   "title"

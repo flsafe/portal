@@ -49,12 +49,18 @@ class StaffController < ApplicationController
   end
 
   def new_student
-    @student = Student.new
+    @invite = Invite.new
     @campuses = current_user.school.campuses
   end
 
   def create_student
-    redirect_to staff_students_url, notice: "We've sent out the student invite."
+    @campuses = current_user.school.campuses
+    @invite = Invite.new(invite_params.merge(invite_type: 'Student'))
+    if @invite.save
+      redirect_to staff_students_url, notice: "We've sent out the student invite."
+    else
+      render :new_student 
+    end
   end
 
   def student_applications
@@ -72,4 +78,7 @@ class StaffController < ApplicationController
     end
   end
 
+  def invite_params
+    params.require(:invite).permit(:email, :semester, :year, :campus_id)
+  end
 end

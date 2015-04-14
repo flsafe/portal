@@ -25,6 +25,7 @@
 #  semester        :integer
 #  year            :integer
 #  campus_id       :integer
+#  grad_year       :integer
 #
 
 class Employer < User

@@ -1,10 +1,10 @@
-= form_for @student, url: staff_create_student_path do |f|
-  - if @student.errors.any? 
+= form_for @invite, url: staff_create_student_path do |f|
+  - if @invite.errors.any? 
     .errorExplaination.alert.alert-danger
       %p
-        = "#{pluralize(@student.errors.count, 'error')} prevented your profile from being saved."
+        = "#{pluralize(@invite.errors.count, 'error')} prevented your profile from being saved."
       %ul
-        - @student.errors.full_messages.each do |msg|
+        - @invite.errors.full_messages.each do |msg|
           %li= msg
   .fieldset
     %legend Send Invite
@@ -17,5 +17,8 @@
     .form-group
       = f.label :year
       = f.select(:year, [[Time.now.year] * 2, [Time.now.year + 1] * 2], {}, class: 'form-control')
+    .form-group
+      = f.label :campus_id, 'Campus'
+      = f.select(:campus_id, @campuses.map{|c| ["#{c.name} #{c.city}", c.id]}, {}, class: 'form-control')
     .form-actions
       = f.submit "Save", :class => 'btn btn-primary'

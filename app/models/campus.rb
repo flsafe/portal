@@ -23,5 +23,4 @@ class Campus < ActiveRecord::Base
   has_many :employers
 
   validates :name, :school_id, presence: true
-  validates :name, uniqueness: true
 end
