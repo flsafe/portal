@@ -11,5 +11,11 @@
     .form-group
       = f.label :email, :class => ''
       = f.text_field :email, :class => 'form-control'
+    .form-group
+      = f.label :semester
+      = f.select(:semester, Student.semesters.keys.map(&:titleize).zip(Student.semesters.keys), {}, class: 'form-control')
+    .form-group
+      = f.label :year
+      = f.select(:year, [[Time.now.year] * 2, [Time.now.year + 1] * 2], {}, class: 'form-control')
     .form-actions
       = f.submit "Save", :class => 'btn btn-primary'
