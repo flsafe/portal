@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
+  # Invites
+  get '/invite/:token' => 'invite#claim', as: :claim_invite
+
   namespace :admin do
     root to: 'admin#index'
     resources :schools do

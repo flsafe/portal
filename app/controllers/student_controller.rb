@@ -21,6 +21,9 @@ class StudentController < ApplicationController
 
   def update_profile
     if current_user.update(student_params)
+      if invite = Invite.find_by(email: current_user.email)
+        invite.destroy
+      end
       redirect_to student_home_url, flash: {success: 'Your profile has been updated.'}
     else
       render :edit_profile
