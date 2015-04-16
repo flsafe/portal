@@ -16,7 +16,7 @@
 class Invite < ActiveRecord::Base
   validates :token, :invite_type, :email, presence: true 
   validates :token, :email, uniqueness: true
-  validates :semster, :year, :campus_id, presence: true, if: "invite_type == 'Student'"
+  validates :semester, :year, :campus_id, presence: true, if: "invite_type == 'Student'"
 
   before_validation :create_token
 
