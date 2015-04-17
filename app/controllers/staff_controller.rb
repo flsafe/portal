@@ -1,7 +1,8 @@
 class StaffController < ApplicationController
 
   before_action :ensure_staff
-  before_action :ensure_staff_student, only: [:student_applications] 
+  before_action :set_staff_campuses
+  before_action :ensure_student_belongs_to_staff, only: [:student_applications, :new_recommendation] 
 
   def dashboard
   end
@@ -38,7 +39,6 @@ class StaffController < ApplicationController
     # Campus actions are handled by the admin/campus controller
     # we want to redirect back here from that controller.
     self.session_redirect = staff_campuses_url
-    @campuses = current_user.school.campuses
   end
 
   def students
@@ -50,11 +50,9 @@ class StaffController < ApplicationController
 
   def new_student
     @invite = Invite.new
-    @campuses = current_user.school.campuses
   end
 
   def create_student
-    @campuses = current_user.school.campuses
     @invite = Invite.new(invite_params.merge(invite_type: 'Student'))
     if @invite.save
       InviteMailer.send_invite(@invite).deliver
@@ -65,7 +63,7 @@ class StaffController < ApplicationController
   end
 
   def invites
-    @campus_ids = current_user.school.campuses.pluck(:id)
+    @campus_ids = @campuses.map(&:id)
     @invites = Invite.where(campus_id: @campus_ids)
   end
 
@@ -83,11 +81,15 @@ class StaffController < ApplicationController
 
   private
 
-  def ensure_staff_student
-    @student = Student.includes(:school).find(params[:id])
+  def ensure_student_belongs_to_staff
+    @student = Student.includes(:campus).find(params[:id])
     unless current_user.admin?
-      redirect_to(staff_home_url) unless @student.school == current_user.school
+      redirect_to(staff_home_url) unless @campuses.include?(@student.campus)
     end
+  end
+
+  def set_staff_campuses
+    @campuses = current_user.school.campuses.all()
   end
 
   def invite_params

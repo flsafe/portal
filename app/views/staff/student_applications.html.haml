@@ -1,9 +1,11 @@
-= render partial: 'tabs', locals: {active_tab: {students: true}}
+= content_for(:sidebar) do
+  = render 'sidebar', active: :students
+= content_for(:center_content) do
+  = render 'students_tabs', active: :students
+  %ol.breadcrumb
+    %li
+      = link_to "Students", staff_students_path
+    %li.active
+      = "#{@student.name}'s Applications"
 
-%ol.breadcrumb
-  %li
-    = link_to "Students", staff_students_path
-  %li.active
-    = "#{@student.name}'s Applications"
-
-= render partial: 'student_applications'
+  = render partial: 'student_applications'
