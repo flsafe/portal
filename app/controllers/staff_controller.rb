@@ -57,6 +57,7 @@ class StaffController < ApplicationController
     @campuses = current_user.school.campuses
     @invite = Invite.new(invite_params.merge(invite_type: 'Student'))
     if @invite.save
+      InviteMailer.send_invite(@invite).deliver
       redirect_to staff_students_url, notice: "We've sent out the student invite."
     else
       render :new_student 

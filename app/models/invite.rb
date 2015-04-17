@@ -21,6 +21,6 @@ class Invite < ActiveRecord::Base
   before_validation :create_token
 
   def create_token
-    self.token = SecureRandom.hex
+    self.token = self.token || SecureRandom.hex
   end
 end
