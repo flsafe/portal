@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@mg.schoolsail.com"
+  default from: "School Sail Invite <no-reply@mg.schoolsail.com>"
   layout 'mailer'
 end
