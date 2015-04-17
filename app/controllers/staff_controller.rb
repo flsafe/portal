@@ -42,10 +42,9 @@ class StaffController < ApplicationController
   end
 
   def students
-    @students = Student
-                  .joins(campus: :school)
-                  .where(campuses: {school_id: current_user.school_id})
-                  .paginate(page: params[:page], per_page: 20)
+    @campus = params[:campus_id] ? @campuses.find{|c| c.id.to_s == params[:campus_id]} : @campuses.first
+    @students = Student.where(campus_id: @campus.id)
+                       .paginate(page: params[:page], per_page: 20)
   end
 
   def new_student
@@ -89,7 +88,7 @@ class StaffController < ApplicationController
   end
 
   def set_staff_campuses
-    @campuses = current_user.school.campuses.all()
+    @campuses = current_user.school.campuses.order(:name).all()
   end
 
   def invite_params

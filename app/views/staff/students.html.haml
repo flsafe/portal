@@ -10,20 +10,14 @@
         = link_to "New Student", staff_new_student_path, class: 'btn btn-primary'
     %br
     %br
+    .row
+      .col-sm-12
+        = form_tag staff_students_path, class: 'form-inline' do
+          .form-group
+            = label_tag 'campus_id', 'Campus'
+            = select_tag(:campus_id, options_for_select(@campuses.map{|c| [c.full_name, c.id]}, @campus.id), class: 'form-control')
+          = submit_tag 'Filter', class: 'btn btn-default'
     - if @students.any?
-      .row
-        .col-sm-4
-          %select.form-control
-            %option Spring 2015
-            %option Winter 2014
-            %option Fall 2014
-            %option Summer 2014
-            %option Spring 2014
-            %option Winter 2013
-        .col-sm-4
-          %select.form-control
-            %option Austin Campus
-            %option San Francisco Campus
       .row
         .col-sm-12
           - @students.each do |student|

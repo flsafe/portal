@@ -39,8 +39,9 @@ Rails.application.routes.draw do
     get '/campuses' => 'staff#campuses', as: :staff_campuses
 
     get '/students' => 'staff#students', as: :staff_students
+    post '/students' => 'staff#students'
     get '/students/new' => 'staff#new_student', as: :staff_new_student
-    post '/students/' => 'staff#create_student', as: :staff_create_student
+    post '/students/invites' => 'staff#create_student', as: :staff_create_student
     get '/students/invites' => 'staff#invites', as: :staff_invites
     delete '/students/invites/:id' => 'staff#delete_invite', as: :staff_delete_invite
     get '/students/:id' => 'staff#show_student', as: :staff_student

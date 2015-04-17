@@ -23,4 +23,8 @@ class Campus < ActiveRecord::Base
   has_many :employers
 
   validates :name, :school_id, presence: true
+
+  def full_name
+    "#{name} #{city}"
+  end
 end
