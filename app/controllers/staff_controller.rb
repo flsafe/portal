@@ -44,6 +44,7 @@ class StaffController < ApplicationController
   def students
     @campus = params[:campus_id] ? @campuses.find{|c| c.id.to_s == params[:campus_id]} : @campuses.first
     @students = Student.where(campus_id: @campus.id)
+                       .order(:last_name, :first_name)
                        .paginate(page: params[:page], per_page: 20)
   end
 
