@@ -64,6 +64,17 @@ class StaffController < ApplicationController
     end
   end
 
+  def invites
+    @campus_ids = current_user.school.campuses.pluck(:id)
+    @invites = Invite.where(campus_id: @campus_ids)
+  end
+
+  def delete_invite
+    @invite = Invite.find(params[:id])
+    @invite.destroy
+    redirect_to staff_invites_path, notice: "Deleted #{@invite.email}"
+  end
+
   def student_applications
   end
 

@@ -1,0 +1,29 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :students
+
+= content_for(:center_content) do
+  = render 'students_tabs', active: :invites
+  - if @invites.any?
+    %table.table
+      %thead
+        %tr
+          %th Email
+          %th Type
+          %th Campus
+          %th Cohort
+          %th Year
+          %th Sent
+          %th
+      %tbody
+      - @invites.each do |inv|
+        %tr
+          %td= inv.email
+          %td= inv.invite_type
+          %td= inv.campus.name
+          %td= inv.semester.titleize
+          %td= inv.year
+          %td= inv.created_at.to_formatted_s(:long)
+          %td= link_to 'Delete', staff_delete_invite_path(inv), class: 'btn btn-default', method: :delete
+  - else
+    %br
+    %p Nothing here yet
