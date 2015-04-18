@@ -44,11 +44,16 @@ Rails.application.routes.draw do
     get '/students' => 'staff#students', as: :staff_students
     post '/students' => 'staff#students'
     get '/students/new' => 'staff#new_student', as: :staff_new_student
+
     post '/students/invites' => 'staff#create_student', as: :staff_create_student
     get '/students/invites' => 'staff#invites', as: :staff_invites
     delete '/students/invites/:id' => 'staff#delete_invite', as: :staff_delete_invite
+
     get '/students/:id' => 'staff#show_student', as: :staff_student
-    get 'students/:id/applications' => 'staff#student_applications', as: :staff_student_applications
+    get 'students/:id/profile' => 'staff#student_placement_profile', as: :staff_student_placement_profile
+    get 'students/:id/profile/edit' => 'staff#edit_student_placement_profile', as: :staff_edit_student_placement_profile
+    patch 'students/:id/profile' => 'staff#student_placement_profile', as: :staff_update_student_placement_profile
+    
     get 'students/:id/recommend' => 'staff#new_recommendation', as: :staff_new_student_recommendation
     post 'students/:id/recommend' => 'staff#create_recommendation', as: :staff_create_student_recommendation
   end

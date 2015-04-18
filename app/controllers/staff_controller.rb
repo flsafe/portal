@@ -2,7 +2,7 @@ class StaffController < ApplicationController
 
   before_action :ensure_staff
   before_action :set_staff_campuses
-  before_action :ensure_student_belongs_to_staff, only: [:student_applications, :new_recommendation] 
+  before_action :ensure_student_belongs_to_staff, only: [:student_placement_profile, :new_recommendation] 
 
   def edit_profile
   end
@@ -82,7 +82,13 @@ class StaffController < ApplicationController
     redirect_to staff_invites_path, notice: "Deleted #{@invite.email}"
   end
 
-  def student_applications
+  def student_placement_profile
+  end
+
+  def edit_student_placement_profile
+  end
+
+  def update_student_placement_profile
   end
 
   def new_recommendation

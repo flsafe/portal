@@ -35,7 +35,7 @@
                     = student.phone
                 %br
                 .actions
-                  = link_to "Applications", staff_student_applications_path(student), class: 'btn btn-default'
+                  = link_to "Profile", staff_student_placement_profile_path(student), class: 'btn btn-default'
                   = link_to "Recommend", staff_new_student_recommendation_path(student), class: 'btn btn-default'
           = will_paginate(@students, renderer: BootstrapPagination::Rails)
     - else

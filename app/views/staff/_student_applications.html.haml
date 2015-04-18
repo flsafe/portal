@@ -16,8 +16,7 @@
               .phone
                 = @student.phone
           .media-right
-            %button.btn.btn-lg.btn-primary{type: 'button'}
-              Edit
+            = link_to "Edit", staff_edit_student_placement_profile_path(@student), class: 'btn btn-primary'
 
       %table.table.table-striped
         %tr
