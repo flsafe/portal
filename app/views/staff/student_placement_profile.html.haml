@@ -6,6 +6,6 @@
     %li
       = link_to "Students", staff_students_path
     %li.active
-      = "#{@student.name}'s Applications"
+      = "#{@student.first_name}"
 
   = render partial: 'student_applications'

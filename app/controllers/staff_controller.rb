@@ -2,7 +2,7 @@ class StaffController < ApplicationController
 
   before_action :ensure_staff
   before_action :set_staff_campuses
-  before_action :ensure_student_belongs_to_staff, only: [:student_placement_profile, :new_recommendation] 
+  before_action :ensure_student_belongs_to_staff, only: [:edit_student_placement_profile, :student_placement_profile, :new_recommendation] 
 
   def edit_profile
   end
@@ -98,9 +98,7 @@ class StaffController < ApplicationController
 
   def ensure_student_belongs_to_staff
     @student = Student.includes(:campus).find(params[:id])
-    unless current_user.admin?
-      redirect_to(staff_home_url) unless @campuses.include?(@student.campus)
-    end
+    redirect_to(staff_home_url) unless @campuses.include?(@student.campus)
   end
 
   def set_staff_campuses

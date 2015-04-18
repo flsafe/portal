@@ -1,0 +1,23 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :students
+
+= content_for(:center_content) do
+  = render 'students_tabs', active: :students
+  %ol.breadcrumb
+    %li= link_to "Students", staff_students_path
+    %li= link_to "#{@student.first_name}", staff_student_placement_profile_path(@student)
+    %li.active Edit
+
+  .row
+    .col-sm-12
+      = render 'student_profile_header'
+  .row
+    .col-sm-12
+      .row
+        .col-sm-6
+          Screen Interview
+        .col-sm-6
+          On Site Interview
+      .row
+        .col-sm-6
+          Offer
