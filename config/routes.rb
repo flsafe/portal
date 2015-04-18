@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   scope 'staff' do
     get '/' => 'staff#dashboard', as: :staff_dashboard
 
+    get '/profile' => 'staff#edit_profile', as: :edit_staffer_profile
+    patch '/profile' => 'staff#update_profile'
+
     get '/messages/' => 'staff#messages', as: :staff_messages
     get '/tasks/' => 'staff#tasks', as: :staff_tasks
     get '/activity/' => 'staff#activity', as: :staff_activity

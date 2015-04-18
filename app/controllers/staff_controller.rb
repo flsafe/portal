@@ -4,6 +4,15 @@ class StaffController < ApplicationController
   before_action :set_staff_campuses
   before_action :ensure_student_belongs_to_staff, only: [:student_applications, :new_recommendation] 
 
+  def edit_profile
+  end
+
+  def update_profile
+    if current_user.update(staffer_params)
+      redirect_to user_home_url(current_user), notice: 'Updated profile.'
+    end
+  end
+
   def dashboard
   end
 
@@ -90,6 +99,10 @@ class StaffController < ApplicationController
 
   def set_staff_campuses
     @campuses = current_user.school.campuses.order(:name).all()
+  end
+
+  def staffer_params
+    params.require(:staffer).permit(:email, :password, :password_confrimation, :avatar, :city, :state)
   end
 
   def invite_params
