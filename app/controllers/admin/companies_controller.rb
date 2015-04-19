@@ -32,7 +32,7 @@ class Admin::CompaniesController <  Admin::ApplicationController
 
     respond_to do |format|
       if @company.save
-        format.html { redirect_to admin_companies_url, notice: 'Company was successfully created.' }
+        format.html { redirect_to_session_or(admin_companies_url, notice: 'New partner saved.') }
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class Admin::CompaniesController <  Admin::ApplicationController
   def update
     respond_to do |format|
       if @company.update(company_params)
-        format.html { redirect_to admin_companies_url, notice: 'Company was successfully updated.' }
+        format.html { redirect_to_session_or(admin_companies_url, notice: 'Partner Updated.') }
         format.json { render :show, status: :ok, location: @company }
       else
         format.html { render :edit }

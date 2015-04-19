@@ -96,6 +96,7 @@ class StaffController < ApplicationController
 
   def partners
     @companies = Company.order(:name).all
+    self.session_redirect = staff_partners_url
   end
 
   private
