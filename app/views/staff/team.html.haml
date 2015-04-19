@@ -2,4 +2,6 @@
   = render 'sidebar', active: :team
 
 = content_for(:center_content) do
-  Here
+  = render 'team_tabs', active: :recruiters
+  %br 
+  = link_to "New Recruiter", new_admin_employer_path, class: 'btn btn-primary'

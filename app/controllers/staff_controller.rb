@@ -73,7 +73,7 @@ class StaffController < ApplicationController
 
   def invites
     @campus_ids = @campuses.map(&:id)
-    @invites = Invite.where(campus_id: @campus_ids)
+    @invites = Invite.where(campus_id: @campus_ids).paginate(page: params[:page], per_page: 20)
   end
 
   def delete_invite
@@ -94,8 +94,8 @@ class StaffController < ApplicationController
   def new_recommendation
   end
 
-  def partners
-    @companies = Company.order(:name).all
+  def companies
+    @companies = Company.order(:name).paginate(page: params[:page], per_page: 20)
     self.session_redirect = staff_partners_url
   end
 

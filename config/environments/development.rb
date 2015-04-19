@@ -23,7 +23,6 @@ Rails.application.configure do
     password: ENV['MAILGUN_SMTP_PASSWORD'],
     domain: 'mg.schoolsail.com',
     authentication: :plain,
-    address: 'smtp.mailgun.org'
   }
 
   # Print deprecation notices to the Rails logger.

@@ -1,5 +1,4 @@
 class Admin::EmployersController < Admin::ApplicationController
-  before_action :set_company
   before_action :set_user
 
   # GET /users

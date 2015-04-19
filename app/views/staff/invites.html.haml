@@ -24,6 +24,7 @@
           %td= inv.year
           %td= inv.created_at.to_formatted_s(:long)
           %td= link_to 'Delete', staff_delete_invite_path(inv), class: 'btn btn-default', method: :delete
+    = will_paginate(@invites, renderer: BootstrapPagination::Rails)
   - else
     %br
     %p Nothing here yet

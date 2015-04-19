@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
     resources :campuses
     resources :companies
+    resources :employers
   end
 
   scope 'oauth' do
@@ -48,6 +49,10 @@ Rails.application.routes.draw do
     get '/partners' => 'staff#partners', as: :staff_partners
     post '/partners' => 'staff#create_partner'
     get '/partners/new' => 'staff#new_partner', as: :staff_new_partner
+
+    get '/companies' => 'staff#companies', as: :staff_companies
+    post '/companies' => 'staff#create_company'
+    get '/companies/new' => 'staff#new_company', as: :staff_new_company
 
     get '/students' => 'staff#students', as: :staff_students
     post '/students' => 'staff#students'
