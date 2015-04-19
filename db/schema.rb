@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414042555) do
+ActiveRecord::Schema.define(version: 20150418221402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,16 +20,25 @@ ActiveRecord::Schema.define(version: 20150414042555) do
     t.text     "cover_letter"
     t.boolean  "reviewed"
     t.integer  "opportunity_id"
-    t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "student_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.text     "resume"
     t.string   "resume_file"
+    t.date     "screen_interview_date"
+    t.text     "screen_interview_notes"
+    t.text     "screen_interview_outcome"
+    t.date     "on_site_interview"
+    t.text     "on_site_notes"
+    t.text     "on_site_outcome"
+    t.date     "offer_date"
+    t.text     "offer_notes"
+    t.text     "offer_outcome"
   end
 
   add_index "applications", ["opportunity_id"], name: "index_applications_on_opportunity_id", using: :btree
-  add_index "applications", ["user_id", "opportunity_id"], name: "index_applications_on_user_id_and_opportunity_id", unique: true, using: :btree
-  add_index "applications", ["user_id"], name: "index_applications_on_user_id", using: :btree
+  add_index "applications", ["student_id", "opportunity_id"], name: "index_applications_on_student_id_and_opportunity_id", unique: true, using: :btree
+  add_index "applications", ["student_id"], name: "index_applications_on_student_id", using: :btree
 
   create_table "campuses", force: :cascade do |t|
     t.string   "name"
@@ -142,7 +151,7 @@ ActiveRecord::Schema.define(version: 20150414042555) do
   add_index "users", ["school_id"], name: "index_users_on_school_id", using: :btree
 
   add_foreign_key "applications", "opportunities"
-  add_foreign_key "applications", "users"
+  add_foreign_key "applications", "users", column: "student_id"
   add_foreign_key "campuses", "schools"
   add_foreign_key "schools", "campuses"
   add_foreign_key "users", "campuses"

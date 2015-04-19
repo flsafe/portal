@@ -1,0 +1,8 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :partners
+= content_for(:center_content) do
+  %ul.nav.nav-tabs
+    %li.active{role: 'presentation'}
+      = link_to 'Partners'
+  %br
+  = render template: 'admin/companies/index'

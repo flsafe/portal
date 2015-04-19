@@ -94,6 +94,10 @@ class StaffController < ApplicationController
   def new_recommendation
   end
 
+  def partners
+    @companies = Company.order(:name).all
+  end
+
   private
 
   def ensure_student_belongs_to_staff

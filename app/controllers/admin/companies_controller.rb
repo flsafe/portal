@@ -1,4 +1,8 @@
 class Admin::CompaniesController <  Admin::ApplicationController
+
+  skip_before_action :ensure_admin, only: [:new, :create, :edit, :update]
+  before_action :ensure_admin_or_staff, only: [:new, :create, :edit, :update]
+
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies

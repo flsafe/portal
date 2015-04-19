@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :staff, controller: 'users', type: 'Staffer'
     end
     resources :campuses
+    resources :companies
   end
 
   scope 'oauth' do
@@ -38,8 +39,15 @@ Rails.application.routes.draw do
 
     get '/recommendations' => 'staff#recommendations', as: :staff_recomendations
     get '/jobs' => 'staff#opportunities', as: :staff_opportunities
-    get '/team' => 'staff#team', as: :staff_team
     get '/campuses' => 'staff#campuses', as: :staff_campuses
+
+    get '/team' => 'staff#team', as: :staff_team
+    post '/team' => 'staff#new_team_member'
+    get '/team/new' => 'staff#team', as: :staff_new_team_member
+
+    get '/partners' => 'staff#partners', as: :staff_partners
+    post '/partners' => 'staff#create_partner'
+    get '/partners/new' => 'staff#new_partner', as: :staff_new_partner
 
     get '/students' => 'staff#students', as: :staff_students
     post '/students' => 'staff#students'
