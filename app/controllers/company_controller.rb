@@ -1,6 +1,6 @@
 class CompanyController < ApplicationController
   before_action :ensure_employer
-  before_action :ensure_employer_profile_complete, except: [:edit_employer_profile]
+  before_action :ensure_employer_profile_complete, except: [:edit_employer_profile, :update_employer_profile]
 
   before_action :set_company
 
@@ -10,6 +10,14 @@ class CompanyController < ApplicationController
 
   def edit_employer_profile
     # TODO render profile form, update the employer password, delete invite
+  end
+
+  def update_employer_profile
+    if current_user.update(employer_profile_params)
+      redirect_to user_home_url(current_user), success: "You profile has been saved."
+    else
+      render :edit_employer_profile
+    end
   end
 
   def edit
@@ -40,5 +48,9 @@ class CompanyController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
     params.require(:company).permit(:name, :description, :website, :address1, :address2, :city, :state, :zip, :phone)
+  end
+
+  def employer_profile_params
+    params.require(:employer).permit(:email, :password, :password_confirmation, :avatar, :city, :state)
   end
 end

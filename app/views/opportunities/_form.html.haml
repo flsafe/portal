@@ -1,7 +1,7 @@
 
 - requirements_placeholder = "- Bachelor's degree in computer science or equivalent experience.\n- Solid grasp of distributed algorithms like RAFT, CHORD, etc.\n- Published work in distributed algorithms is a plus."
 
-- target_path = @opportunity.new_record? ? company_opportunities_url(@company.slug) : company_opportunity_url(@company.slug, @opportunity)
+- target_path = @opportunity.new_record? ? opportunities_url(@company.slug) : opportunity_url(@company.slug, @opportunity)
 = form_for [@company.slug, @opportunity], url: target_path, :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :title, :class => 'control-label'

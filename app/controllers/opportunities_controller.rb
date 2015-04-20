@@ -1,5 +1,4 @@
 class OpportunitiesController < ApplicationController
-  before_action :ensure_admin_staff_or_employer, except: [:show]
   before_action :set_company, except: [:show]
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy]
 

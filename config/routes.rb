@@ -96,10 +96,10 @@ Rails.application.routes.draw do
     get '/edit' => :edit, as: :company_edit
 
     get '/profile' => :edit_employer_profile, as: :edit_employer_profile
+    patch '/profile' => :update_employer_profile, as: :update_employer_profile
     resources :opportunities
   end
 
-  # Staff
   resources :opportunities, only: [:show] do
     resources :applications, shallow: :true
   end

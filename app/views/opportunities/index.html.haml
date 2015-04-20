@@ -27,6 +27,6 @@
         %td= opportunity.company_id
         %td=l opportunity.created_at
         %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_company_opportunity_path(@company.slug, opportunity), :class => 'btn btn-mini'
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_opportunity_path(@company.slug, opportunity), :class => 'btn btn-mini'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_company_opportunity_path(@company.slug), :class => 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_opportunity_path(@company.slug), :class => 'btn btn-primary'
