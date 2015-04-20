@@ -1,0 +1,18 @@
+= form_for @invite, url: staff_create_team_member_path do |f|
+  - if @invite.errors.any? 
+    .errorExplaination.alert.alert-danger
+      %p
+        = "#{pluralize(@invite.errors.count, 'error')} prevented your profile from being saved."
+      %ul
+        - @invite.errors.full_messages.each do |msg|
+          %li= msg
+  .fieldset
+    %legend Send Invite
+    .form-group
+      = f.label :email, :class => ''
+      = f.text_field :email, :class => 'form-control'
+    .form-group
+      = f.label :company, 'Company', :class => ''
+      = f.collection_select :company_id, @companies, :id, :name, {}, :class => 'form-control'
+    .form-actions
+      = f.submit "Send", :class => 'btn btn-primary'

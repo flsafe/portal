@@ -1,9 +1,15 @@
 class CompanyController < ApplicationController
-  before_action :ensure_admin_staff_or_employer
+  before_action :ensure_employer
+  before_action :ensure_employer_profile_complete, except: [:edit_employer_profile]
+
   before_action :set_company
 
   def show
     @opportunities = @company.opportunities.includes(:applications).all
+  end
+
+  def edit_employer_profile
+    # TODO render profile form, update the employer password, delete invite
   end
 
   def edit
@@ -20,6 +26,10 @@ class CompanyController < ApplicationController
   end
 
   private
+
+  def ensure_employer_profile_complete
+    redirect_to(edit_employer_profile_url, notice: 'Welcome! Please set your password.') unless current_user.valid?
+  end
 
   def set_company
     @company = Company.find_by!(slug: params[:companyslug])

@@ -93,7 +93,6 @@ class StudentController < ApplicationController
   end
 
   def ensure_student_profile_complete
-    return if current_user.admin_or_staff?
     redirect_to(edit_student_profile_url, flash: {notice: 'Welcome! Please complete your profile before continuing.'}) unless current_user.valid?
   end
 

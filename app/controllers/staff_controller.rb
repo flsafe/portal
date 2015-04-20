@@ -42,6 +42,24 @@ class StaffController < ApplicationController
   end
 
   def team
+    @employers = current_user.school.employers.includes(:company)
+  end
+
+  def new_team_member
+    @invite = Invite.new
+    @companies = Company.all
+  end
+
+  def create_team_member
+    @invite = Invite.new(invite_params.merge(invite_type: 'Employer',
+                                             school_id: current_user.school.id))
+    if @invite.save
+      InviteMailer.send_invite(@invite).deliver
+      redirect_to staff_team_path, notice: "Invite sent."
+    else
+      @companies = Company.all
+      render :new_team_member
+    end
   end
 
   def campuses
@@ -115,6 +133,6 @@ class StaffController < ApplicationController
   end
 
   def invite_params
-    params.require(:invite).permit(:email, :semester, :year, :campus_id)
+    params.require(:invite).permit(:email, :semester, :year, :campus_id, :company_id)
   end
 end

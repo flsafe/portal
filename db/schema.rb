@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418221402) do
+ActiveRecord::Schema.define(version: 20150419181811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 20150418221402) do
     t.string   "semester"
     t.integer  "year"
     t.integer  "campus_id"
+    t.integer  "company_id"
+    t.integer  "school_id"
   end
 
   add_index "invites", ["email"], name: "index_invites_on_email", unique: true, using: :btree
@@ -118,6 +120,14 @@ ActiveRecord::Schema.define(version: 20150418221402) do
   end
 
   add_index "schools", ["campus_id"], name: "index_schools_on_campus_id", using: :btree
+
+  create_table "schools_users", force: :cascade do |t|
+    t.integer "employer_id"
+    t.integer "school_id"
+  end
+
+  add_index "schools_users", ["employer_id"], name: "index_schools_users_on_employer_id", using: :btree
+  add_index "schools_users", ["school_id"], name: "index_schools_users_on_school_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

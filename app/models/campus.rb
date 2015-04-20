@@ -20,7 +20,6 @@
 class Campus < ActiveRecord::Base
   belongs_to :school
   has_many :students
-  has_many :employers
 
   validates :name, :school_id, presence: true
 

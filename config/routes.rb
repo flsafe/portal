@@ -43,8 +43,10 @@ Rails.application.routes.draw do
     get '/campuses' => 'staff#campuses', as: :staff_campuses
 
     get '/team' => 'staff#team', as: :staff_team
-    post '/team' => 'staff#new_team_member'
-    get '/team/new' => 'staff#team', as: :staff_new_team_member
+    delete '/team/:id' => 'staff#delete_team_member', as: :staff_delete_team_member
+    get '/team/new' => 'staff#new_team_member', as: :staff_new_team_member
+    get '/team/invites' => 'staff#staff_invites', as: :staff_team_invites
+    post '/team/invites' => 'staff#create_team_member', as: :staff_create_team_member
 
     get '/partners' => 'staff#partners', as: :staff_partners
     post '/partners' => 'staff#create_partner'
@@ -88,10 +90,12 @@ Rails.application.routes.draw do
   end
 
   # Employer 
-  scope '/:companyslug', controller: :company, as: :company do
-    get '/' => :show
-    get '/edit' => :edit
-    patch '/' => :update
+  scope '/:companyslug', controller: :company do
+    get '/' => :show, as: :company
+    patch '/' => :update, as: :company_update
+    get '/edit' => :edit, as: :company_edit
+
+    get '/profile' => :edit_employer_profile, as: :edit_employer_profile
     resources :opportunities
   end
 

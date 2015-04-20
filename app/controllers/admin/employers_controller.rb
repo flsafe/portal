@@ -1,5 +1,4 @@
 class Admin::EmployersController < Admin::ApplicationController
-  before_action :set_user
 
   # GET /users
   # GET /users.json
@@ -64,15 +63,6 @@ class Admin::EmployersController < Admin::ApplicationController
   end
 
   private
-
-  def set_company
-    @company = Company.find(params[:company_id])
-  end
-
-  def set_user
-    return if params[:id].nil?
-    @employer = Employer.find(params[:id])
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params

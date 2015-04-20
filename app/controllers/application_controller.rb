@@ -40,8 +40,8 @@ class ApplicationController < ActionController::Base
       redirect_home(current_user) unless current_user.admin_or_staff?
   end
 
-  def ensure_admin_staff_or_employer
-    redirect_home(current_user) unless current_user.admin_or_staff? || current_user.employer?
+  def ensure_employer
+    redirect_home(current_user) unless current_user.employer?
   end 
 
   def ensure_admin_staff_or_student

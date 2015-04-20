@@ -13,8 +13,16 @@ class InviteController < ApplicationController
         user.semester = invite.semester
         user.year = invite.year
         user.campus_id = invite.campus_id
+        # Students have to fill in their own profile,
+        # and it's enforced by the student controller. 
+        user.save(validate: false)
+      elsif invite.invite_type == 'Employer'
+        user.company_id = invite.company_id
+        user.schools << School.find(invite.school_id)
+        user.save!(validate: false)
+      else
+        raise "Unknown user type: #{user.type}"
       end
-      user.save(validate: false)
     end
     session[:user_id] = user.id
     redirect_home user
