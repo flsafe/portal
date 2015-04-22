@@ -8,7 +8,7 @@
 
 = render partial: 'opportunities/description'
 
-- if Application.exists?(opportunity: @opportunity, user: current_user)
+- if Application.exists?(opportunity: @opportunity, student_id: current_user)
   %em You have already applied to this opportunity.
 - else
   = link_to "Apply", new_application_path(@opportunity), role: 'button', class: 'btn btn-primary btn-lg'

@@ -11,6 +11,8 @@
 #  semester    :string
 #  year        :integer
 #  campus_id   :integer
+#  company_id  :integer
+#  school_id   :integer
 #
 
 require 'test_helper'

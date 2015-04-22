@@ -22,5 +22,6 @@ class School < ActiveRecord::Base
   has_many :users
   has_many :students
   has_many :staff
-  has_and_belongs_to_many :employers
+  has_many :partnerships
+  has_many :employers, through: :partnerships
 end

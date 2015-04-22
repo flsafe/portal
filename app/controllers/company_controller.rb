@@ -14,6 +14,8 @@ class CompanyController < ApplicationController
 
   def update_employer_profile
     if current_user.update(employer_profile_params)
+      invite = Invite.find_by(email: current_user.email)
+      invite.destroy if invite
       redirect_to user_home_url(current_user), success: "You profile has been saved."
     else
       render :edit_employer_profile

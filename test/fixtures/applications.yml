@@ -6,7 +6,7 @@
 #  cover_letter             :text
 #  reviewed                 :boolean
 #  opportunity_id           :integer
-#  user_id                  :integer
+#  student_id               :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  resume                   :text

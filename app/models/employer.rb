@@ -30,5 +30,6 @@
 
 class Employer < User
   belongs_to :company
-  has_and_belongs_to_many :schools
+  has_many :partnerships
+  has_many :schools, through: :partnerships
 end

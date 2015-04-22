@@ -11,6 +11,8 @@
 #  semester    :string
 #  year        :integer
 #  campus_id   :integer
+#  company_id  :integer
+#  school_id   :integer
 #
 
 # TODO The invite shouldn't be valid if the user already exist and doesn't match the invite type.

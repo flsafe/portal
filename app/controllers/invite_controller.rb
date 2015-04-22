@@ -18,7 +18,7 @@ class InviteController < ApplicationController
         user.save(validate: false)
       elsif invite.invite_type == 'Employer'
         user.company_id = invite.company_id
-        user.schools << School.find(invite.school_id)
+        user.partnerships.build(school_id: School.find(invite.school_id).id)
         user.save!(validate: false)
       else
         raise "Unknown user type: #{user.type}"

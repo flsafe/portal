@@ -11,6 +11,8 @@
 #  semester    :string
 #  year        :integer
 #  campus_id   :integer
+#  company_id  :integer
+#  school_id   :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

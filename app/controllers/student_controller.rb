@@ -48,7 +48,7 @@ class StudentController < ApplicationController
   def create_application
     @opportunity = Opportunity.find(params[:id])
     @application = @opportunity.applications.build(application_params) 
-    @application.user = current_user
+    @application.student = current_user
 
     respond_to do |format|
       if @application.save

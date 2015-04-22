@@ -42,7 +42,7 @@ class StaffController < ApplicationController
   end
 
   def team
-    @employers = current_user.school.employers.includes(:company)
+    @employers = current_user.school.partnerships.includes(:employer).map(&:employer)
   end
 
   def new_team_member
@@ -60,6 +60,12 @@ class StaffController < ApplicationController
       @companies = Company.all
       render :new_team_member
     end
+  end
+
+  def delete_team_member
+    partnership = current_user.school.partnerships.find_by!(employer_id: params[:id])
+    partnership.destroy
+    redirect_to staff_team_path, notice: 'The recruiter has been removed'
   end
 
   def campuses
@@ -104,6 +110,7 @@ class StaffController < ApplicationController
   end
 
   def edit_student_placement_profile
+    @applications = @student.applications
   end
 
   def update_student_placement_profile
