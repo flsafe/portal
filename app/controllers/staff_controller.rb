@@ -110,7 +110,7 @@ class StaffController < ApplicationController
   end
 
   def edit_student_placement_profile
-    @applications = @student.applications
+    @applications = @student.applications.joins(opportunity: :company)
   end
 
   def update_student_placement_profile
