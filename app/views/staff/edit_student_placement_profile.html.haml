@@ -22,21 +22,37 @@
             = form_for app, url: :staff_update_student_placement_profile do |f|
               .row
                 .col-sm-5
+                  %h1 Application
+                  %p
+                    = "Applied: #{app.created_at.to_s(:long)}"
+                  %p
+                    = "Recruiter: John J. johnj@squareroot.com"
+                  %p
+                    = "Phone: (512) 335-3418"
+                  .radio-line
+                    = f.radio_button :screen_interview_outcome, 'no-response'
+                    = f.label :screen_interview_outcome, 'No response'
+                    = f.radio_button :screen_interview_outcome, 'rejected'
+                    = f.label :screen_interview_outcome, 'Rejected'
+                    = f.radio_button :screen_interview_outcome, 'screen-interview'
+                    = f.label :screen_interview_outcome, 'Screen Interview'
+                .col-sm-5.col-sm-offset-1
                   %h1 Screen Interview
                   .form-group
-                    = f.label :screen_interview_date
+                    = f.label :screen_interview_date, "Date"
                     = f.date_select :screen_interview_date, class: 'form-control'
                   .form-group
                     = f.label :screen_interview_notes
                     = f.text_area :screen_interview_notes, rows: '5', class: 'form-control'
                   .radio-line
-                    = f.radio_button :screen_interview_outcome, 'no-response'
-                    = f.label :screen_interview_outcome, 'No response'
-                    = f.radio_button :screen_interview_outcome, 'no-offer'
-                    = f.label :screen_interview_outcome, 'No Offer'
-                    = f.radio_button :screen_interview_outcome, 'on-site-offer'
-                    = f.label :screen_interview_outcome, 'On Site Offer'
-                .col-sm-5.col-sm-offset-1
+                    = f.radio_button :screen_interview_outcome, 'rejected'
+                    = f.label :screen_interview_outcome, 'Rejected'
+                    = f.radio_button :screen_interview_outcome, 'on-site-interview'
+                    = f.label :screen_interview_outcome, 'On Site Interview'
+              %br
+              %br
+              .row
+                .col-sm-5
                   %h1 On Site Interview
                   .form-group
                     = f.label :on_site_interview
@@ -44,9 +60,7 @@
                   .form-group
                     = f.label :on_site_notes
                     = f.text_area :on_site_notes, rows: 5, class: 'form-control'
-              %br
-              .row
-                .col-sm-5
+                .col-sm-5.col-sm-offset-1
                   %h1 Offer
                   .form-group
                     = f.label :offer_date
