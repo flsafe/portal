@@ -4,23 +4,28 @@
 .row
   .col-sm-12
     - @student.applications.each do |app|
-      .panel.panel-default
-        .panel-heading
-          %span.title= "#{app.opportunity.title}"
-          %span.company= "#{app.opportunity.company.name}"
-          %span.city= "#{app.opportunity.city}"
-          %span.state= "#{app.opportunity.state}"
-        .panel-body
-          - event = app.application_events.first
-          .application-date
-            = event.title.titleize
-          .application-recruiter
-            Recruiter: Jan J Lance
-          .application-recruiter-email
-            Email: jan@mail.com
-          .application-recruiter-phone
-            Phone: jan@mail.com
-          %br
-          .event-description
-            %p= event.notes
-          = link_to "Edit", staff_edit_student_placement_profile_path(@student, app), class: 'btn btn-primary'
+      .student-application-panel
+        .panel.panel-default
+          .panel-heading
+            .application-heading 
+              %span.title= "#{app.opportunity.title}"
+              %span.company= "#{app.opportunity.company.name}"
+              %span.city= "#{app.opportunity.city}"
+              %span.state= "#{app.opportunity.state}"
+          .panel-body.application-info
+            - if app.application_events.any?
+              - event = app.application_events.first
+              .application-title
+                = event.title.titleize
+              .event-description
+                = event.notes
+              %br
+              .application-recruiter
+                .name
+                  Recruiter: Jan J Lance
+                .email
+                  Email: jan@mail.com
+                .phone
+                  Phone: jan@mail.com
+              %br
+              = link_to "Edit", staff_edit_student_placement_profile_path(@student, app), class: 'btn btn-default'

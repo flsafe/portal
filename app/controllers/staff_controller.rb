@@ -129,8 +129,13 @@ class StaffController < ApplicationController
     @event = ApplicationEvent.includes(application: :student).find(params[:event_id])
     @application = @event.application
     @student = @application.student
-    @event.destroy
-    redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Deleted"}
+    if @application.application_events.count > 1 && @event.destroy
+      @event.destroy
+      redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Deleted"}
+    else 
+      @events = @application.application_events
+      redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {alert: "Can't delete the 'Applied' event"}
+    end
   end
 
   def update_student_placement_profile

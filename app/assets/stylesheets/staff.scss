@@ -35,3 +35,47 @@
     font-size: 1.30em;
   }
 }
+
+.student-application-panel {
+  .application-heading{
+    color: rgb(130, 130, 130);
+    font-size: 1.25em; 
+  }
+  .application-info {
+    .application-title {
+      font-size: 1.25em; 
+    } 
+    .event-description {
+      font-style: bold;
+    }
+    .application-recruiter {
+        color: rgb(150, 150, 150); 
+        font-style: italic;
+    }
+  }
+}
+
+.application-events-title {
+  .title {
+    font-size: 1.65em;
+    font-style: bold; 
+  }
+  .company {
+    color: rgb(150, 150, 150);
+    font-size: 1.65em;
+  } 
+  .location {
+    color: rgb(150, 150, 150);
+    font-size: 1.30;
+    font-style: italic;
+  }
+}
+
+.application-event {
+  .event-date {
+    font-size: 1.30em;
+  } 
+  .event-title {
+    font-size: 1.30em;
+  }
+}

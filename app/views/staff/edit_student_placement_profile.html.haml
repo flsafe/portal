@@ -7,10 +7,12 @@
     %li= link_to "Students", staff_students_path
     %li= link_to "#{@student.first_name}", staff_student_placement_profile_path(@student)
     %li.active Edit
-  %h1
-    %span.title= @application.opportunity.title
-    %span.company= @application.opportunity.company.name
-    %span.location= "#{@application.opportunity.city} #{@application.opportunity.state}"
+  .application-events-title 
+    %p
+      %span.title= @application.opportunity.title
+      %span.company= @application.opportunity.company.name
+      %span.location= "#{@application.opportunity.city} #{@application.opportunity.state}"
+  %br
   .row
     .col-sm-12
       .panel.panel-default
@@ -22,16 +24,16 @@
         .media
           %hr
           .media-body
-            .row
-              .col-sm-3
-                = e.event_date.to_formatted_s(:long) if e.event_date
-              .col-sm-8
-                .event-title
-                  = e.title.to_s.titleize
-                .event-description
-                  %p= e.notes
-                  %p= e.description
-                  %p Event description
+            .application-event
+              .row
+                .col-sm-3.event-date
+                  = e.event_date.to_formatted_s(:long) if e.event_date
+                .col-sm-8
+                  .event-title
+                    = e.title.to_s.titleize
+                  .event-description
+                    %p= e.notes
+                    %p= e.description
           .media-right
             - if e.id.present?
               = link_to "Delete", staff_destroy_student_placement_event_path(e), method: :delete, class: 'btn btn-danger'
