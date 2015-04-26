@@ -1,5 +1,7 @@
 class RenameApplicationsId < ActiveRecord::Migration
   def change
-    rename_column :application_events, :applications_id, :application_id
+    if column_exists?(:application_events, :applications_id)
+      rename_column :application_events, :applications_id, :application_id
+    end
   end
 end
