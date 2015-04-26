@@ -14,9 +14,13 @@
 #  company_id   :integer
 #  skills       :text
 #  requirements :text
+#  employer_id  :integer
 #
 
 class Opportunity < ActiveRecord::Base
   belongs_to :company
+  belongs_to :employer
   has_many :applications
+
+  validates :company, :employer, presence: true
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150424041306) do
+ActiveRecord::Schema.define(version: 20150426211949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,19 +33,10 @@ ActiveRecord::Schema.define(version: 20150424041306) do
     t.boolean  "reviewed"
     t.integer  "opportunity_id"
     t.integer  "student_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.text     "resume"
     t.string   "resume_file"
-    t.date     "screen_interview_date"
-    t.text     "screen_interview_notes"
-    t.text     "screen_interview_outcome"
-    t.date     "on_site_interview"
-    t.text     "on_site_notes"
-    t.text     "on_site_outcome"
-    t.date     "offer_date"
-    t.text     "offer_notes"
-    t.text     "offer_outcome"
   end
 
   add_index "applications", ["opportunity_id"], name: "index_applications_on_opportunity_id", using: :btree
@@ -112,6 +103,7 @@ ActiveRecord::Schema.define(version: 20150424041306) do
     t.integer  "company_id"
     t.text     "skills"
     t.text     "requirements"
+    t.integer  "employer_id"
   end
 
   add_index "opportunities", ["company_id"], name: "index_opportunities_on_company_id", using: :btree

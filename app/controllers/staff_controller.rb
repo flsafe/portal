@@ -107,11 +107,11 @@ class StaffController < ApplicationController
   end
 
   def student_placement_profile
-    @student.applications.joins(opportunity: :company)
+    @applications = @student.applications.includes(:application_events, opportunity: [:company, :employer])
   end
 
   def edit_student_placement_profile
-    @application = @student.applications.find(params[:application_id])
+    @application = @student.applications.includes(:application_events, opportunity: :company).find(params[:application_id])
     @events = @application.application_events
   end
 

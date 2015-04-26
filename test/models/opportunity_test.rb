@@ -14,6 +14,7 @@
 #  company_id   :integer
 #  skills       :text
 #  requirements :text
+#  employer_id  :integer
 #
 
 require 'test_helper'

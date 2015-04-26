@@ -3,7 +3,7 @@
     = render 'student_profile_header'
 .row
   .col-sm-12
-    - @student.applications.each do |app|
+    - @applications.each do |app|
       .student-application-panel
         .panel.panel-default
           .panel-heading
@@ -20,12 +20,13 @@
               .event-description
                 = event.notes
               %br
+              Recruiter:
               .application-recruiter
                 .name
-                  Recruiter: Jan J Lance
+                  = app.opportunity.employer.name
                 .email
-                  Email: jan@mail.com
+                  = app.opportunity.employer.email
                 .phone
-                  Phone: jan@mail.com
+                  = app.opportunity.employer.phone
               %br
               = link_to "Edit", staff_edit_student_placement_profile_path(@student, app), class: 'btn btn-default'

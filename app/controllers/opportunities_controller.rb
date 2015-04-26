@@ -27,7 +27,7 @@ class OpportunitiesController < ApplicationController
   # POST /opportunities.json
   def create
     @opportunity = @company.opportunities.build(opportunity_params)
-
+    @opportunity.employer = current_user
     respond_to do |format|
       if @opportunity.save
         format.html { redirect_to company_url(@company.slug), notice: 'Opportunity was successfully created.' }
