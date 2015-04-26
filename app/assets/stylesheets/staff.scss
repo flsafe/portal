@@ -39,7 +39,19 @@
 .student-application-panel {
   .application-heading{
     color: rgb(130, 130, 130);
-    font-size: 1.25em; 
+    font-size: 1.30em; 
+    .title {
+      font-weight: bold; 
+      color: rgb(100, 100, 100);
+    }
+    .city {
+      font-size: 0.7em; 
+      font-style: italic;
+    }
+    .state {
+      font-size: 0.7em;
+      font-style: italic;
+    }
   }
   .application-info {
     .application-title {
