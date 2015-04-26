@@ -1,0 +1,12 @@
+= form_for ApplicationEvent.new(application: @application), url: staff_create_student_placement_event_path(@application), class: 'form' do |f|
+  .form-group
+    = f.label :title
+    = f.collection_select :title, ApplicationEvent::APP_EVENTS, :to_s, :titleize, {},  class: 'form-control'
+  .form-group
+    = f.label :event_date
+    = f.date_select :event_date, class: 'form-control'
+  .form-group
+    = f.label :notes
+    = f.text_area :notes, rows: '6', class: 'form-control'
+  .form-group
+    = f.submit("Add Event", class: 'btn btn-primary')

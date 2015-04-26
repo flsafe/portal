@@ -1,68 +1,26 @@
-- @student = @student || student
+.panel.panel-default
+  .panel-body
+    = render 'student_profile_header'
 .row
   .col-sm-12
-    = link_to "Edit", staff_edit_student_placement_profile_path(@student), class: 'btn btn-lg btn-primary'
-%br
-.row
-  .col-sm-12
-    .panel.panel-default
-      .panel-body
-        = render 'student_profile_header'
-      %table.table.table-striped
-        %tr
-          %th Application
-          %th Status
-          %th Applied
-          %th Screening Interview
-          %th Onsite Interview
-          %th Offer
-          %th Accepted
-        %tr
-          %td
-            %div Software Engineer
-            %div Bazaarvoice - Austin, TX
-          %td Next Interview April 15, 2015
-          %td
-            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
-          %td - 
-          %td -
-          %td -
-          %td -
-        %tr
-          %td
-            %div Javascript Developer
-            %div Indeed Inc. - Austin, TX
-          %td No Offer
-          %td
-            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
-          %td
-            %span.glyphicon.glyphicon-remove{:aria_hidden => 'true'}
-          %td -
-          %td -
-          %td -
-        %tr
-          %td
-            %div Javascript Developer
-            %div Indeed Inc. - Austin, TX
-          %td Next Interview April 20, 2015
-          %td
-            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
-          %td
-            %span.glyphicon.glyphicon-ok{aria_hidden: 'true'}
-          %td
-            %span.glyphicon.glyphicon-remove{aria_hidden: 'true'}
-          %td -
-          %td -
-        %tr
-          %td
-            %div Front-End Engineer
-            %div SailSoft - Dallas, TX 
-          %td Waiting For Offer 
-          %td
-            %span.glyphicon.glyphicon-ok{:aria_hidden => 'true'}
-          %td
-            %span.glyphicon.glyphicon-ok{aria_hidden: 'true'}
-          %td
-            %span.glyphicon.glyphicon-ok{aria_hidden: 'true'}
-          %td -
-          %td -
+    - @student.applications.each do |app|
+      .panel.panel-default
+        .panel-heading
+          %span.title= "#{app.opportunity.title}"
+          %span.company= "#{app.opportunity.company.name}"
+          %span.city= "#{app.opportunity.city}"
+          %span.state= "#{app.opportunity.state}"
+        .panel-body
+          - event = app.application_events.first
+          .application-date
+            = event.title.titleize
+          .application-recruiter
+            Recruiter: Jan J Lance
+          .application-recruiter-email
+            Email: jan@mail.com
+          .application-recruiter-phone
+            Phone: jan@mail.com
+          %br
+          .event-description
+            %p= event.notes
+          = link_to "Edit", staff_edit_student_placement_profile_path(@student, app), class: 'btn btn-primary'

@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422010828) do
+ActiveRecord::Schema.define(version: 20150424041306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "application_events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "notes"
+    t.date     "event_date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "application_id"
+    t.text     "description"
+  end
+
+  add_index "application_events", ["application_id"], name: "index_application_events_on_application_id", using: :btree
 
   create_table "applications", force: :cascade do |t|
     t.text     "cover_letter"

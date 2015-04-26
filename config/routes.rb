@@ -66,8 +66,10 @@ Rails.application.routes.draw do
 
     get '/students/:id' => 'staff#show_student', as: :staff_student
     get 'students/:id/profile' => 'staff#student_placement_profile', as: :staff_student_placement_profile
-    get 'students/:id/profile/edit' => 'staff#edit_student_placement_profile', as: :staff_edit_student_placement_profile
-    patch 'students/:id/profile' => 'staff#student_placement_profile', as: :staff_update_student_placement_profile
+    get 'students/:id/profile/:application_id/edit' => 'staff#edit_student_placement_profile', as: :staff_edit_student_placement_profile
+    get 'students/profile/:application_id' => 'staff#new_student_placement_event', as: :staff_new_student_placement_event
+    post 'students/profile/:application_id' => 'staff#create_student_placement_event', as: :staff_create_student_placement_event
+    delete 'students/event/:event_id' => 'staff#destroy_student_placement_event', as: :staff_destroy_student_placement_event
     
     get 'students/:id/recommend' => 'staff#new_recommendation', as: :staff_new_student_recommendation
     post 'students/:id/recommend' => 'staff#create_recommendation', as: :staff_create_student_recommendation

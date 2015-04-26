@@ -1,77 +1,38 @@
-/ = content_for(:sidebar) do
-/   = render 'sidebar', active: :students
+= content_for(:sidebar) do
+  = render 'sidebar', active: :students
 
-/ = content_for(:center_content) do
-/   = render 'students_tabs', active: :students
-/   %ol.breadcrumb
-/     %li= link_to "Students", staff_students_path
-/     %li= link_to "#{@student.first_name}", staff_student_placement_profile_path(@student)
-/     %li.active Edit
+= content_for(:center_content) do
+  = render 'students_tabs', active: :students
+  %ol.breadcrumb
+    %li= link_to "Students", staff_students_path
+    %li= link_to "#{@student.first_name}", staff_student_placement_profile_path(@student)
+    %li.active Edit
+  %h1
+    %span.title= @application.opportunity.title
+    %span.company= @application.opportunity.company.name
+    %span.location= "#{@application.opportunity.city} #{@application.opportunity.state}"
+  .row
+    .col-sm-12
+      .panel.panel-default
+        .panel-body
+          = render 'new_student_placement_event_form'
+  .row
+    .col-sm-12
+      - @events.each do |e|
+        .media
+          %hr
+          .media-body
+            .row
+              .col-sm-3
+                = e.event_date.to_formatted_s(:long) if e.event_date
+              .col-sm-8
+                .event-title
+                  = e.title.to_s.titleize
+                .event-description
+                  %p= e.notes
+                  %p= e.description
+                  %p Event description
+          .media-right
+            - if e.id.present?
+              = link_to "Delete", staff_destroy_student_placement_event_path(e), method: :delete, class: 'btn btn-danger'
 
-.row
-  .col-sm-12.panel.panel-default
-    .panel-body
-      = render 'student_profile_header'
-  - @applications.each do |app|
-    .row
-      .col-sm-12
-        .panel.panel-default
-          .panel-heading
-            %h1= "#{app.opportunity.title} #{app.opportunity.company.name}"
-          .panel-body
-            = form_for app, url: :staff_update_student_placement_profile do |f|
-              .row
-                .col-sm-5
-                  %h1 Application
-                  %p
-                    = "Applied: #{app.created_at.to_s(:long)}"
-                  %p
-                    = "Recruiter: John J. johnj@squareroot.com"
-                  %p
-                    = "Phone: (512) 335-3418"
-                  .radio-line
-                    = f.radio_button :screen_interview_outcome, 'no-response'
-                    = f.label :screen_interview_outcome, 'No response'
-                    = f.radio_button :screen_interview_outcome, 'rejected'
-                    = f.label :screen_interview_outcome, 'Rejected'
-                    = f.radio_button :screen_interview_outcome, 'screen-interview'
-                    = f.label :screen_interview_outcome, 'Screen Interview'
-                .col-sm-5.col-sm-offset-1
-                  %h1 Screen Interview
-                  .form-group
-                    = f.label :screen_interview_date, "Date"
-                    = f.date_select :screen_interview_date, class: 'form-control'
-                  .form-group
-                    = f.label :screen_interview_notes
-                    = f.text_area :screen_interview_notes, rows: '5', class: 'form-control'
-                  .radio-line
-                    = f.radio_button :screen_interview_outcome, 'rejected'
-                    = f.label :screen_interview_outcome, 'Rejected'
-                    = f.radio_button :screen_interview_outcome, 'on-site-interview'
-                    = f.label :screen_interview_outcome, 'On Site Interview'
-              %br
-              %br
-              .row
-                .col-sm-5
-                  %h1 On Site Interview
-                  .form-group
-                    = f.label :on_site_interview
-                    = f.date_select :on_site_interview, class: 'form-control'
-                  .form-group
-                    = f.label :on_site_notes
-                    = f.text_area :on_site_notes, rows: 5, class: 'form-control'
-                .col-sm-5.col-sm-offset-1
-                  %h1 Offer
-                  .form-group
-                    = f.label :offer_date
-                    = f.date_select :offer_date, class: 'from-control'
-                  .form-group
-                    = f.label :offer_notes
-                    = f.text_area :offer_notes, rows: 5, class: 'form-control'
-                  .radio-line
-                    = f.radio_button :offer_outcome, 'no-offer'
-                    = f.label :offer_outcome, 'No Offer'
-                    = f.radio_button :offer_outcome, 'accepted-offer'
-                    = f.label :offer_outcome, 'On Site Offer'
-                    = f.radio_button :offer_outcome, 'rejected-offer'
-                    = f.label :offer_outcome, 'Rejected Offer'

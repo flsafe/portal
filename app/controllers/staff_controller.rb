@@ -107,10 +107,30 @@ class StaffController < ApplicationController
   end
 
   def student_placement_profile
+    @student.applications.joins(opportunity: :company)
   end
 
   def edit_student_placement_profile
-    @applications = @student.applications.joins(opportunity: :company)
+    @application = @student.applications.find(params[:application_id])
+    @events = @application.application_events
+  end
+
+  def create_student_placement_event
+    @application = Application.includes(:student).find(params[:application_id])
+    @student = @application.student
+    if @event = @application.application_events.create(event_params)
+      redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Added"}
+    else
+      render 'edit_student_placement_profile'
+    end
+  end
+
+  def destroy_student_placement_event
+    @event = ApplicationEvent.includes(application: :student).find(params[:event_id])
+    @application = @event.application
+    @student = @application.student
+    @event.destroy
+    redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Deleted"}
   end
 
   def update_student_placement_profile
@@ -141,5 +161,9 @@ class StaffController < ApplicationController
 
   def invite_params
     params.require(:invite).permit(:email, :semester, :year, :campus_id, :company_id)
+  end
+
+  def event_params
+    params.require(:application_event).permit(:title, :event_date, :notes, :description)
   end
 end

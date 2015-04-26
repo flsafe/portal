@@ -25,6 +25,9 @@
 class Application < ActiveRecord::Base
   belongs_to :opportunity
   belongs_to :student
+  has_many :application_events, -> { order('event_date DESC') }
+
+  after_create :ensure_application_event
 
   validates :cover_letter, presence: true
   validates :cover_letter, uniqueness: true
@@ -33,4 +36,8 @@ class Application < ActiveRecord::Base
   validates_uniqueness_of :student_id, scope: [:opportunity_id], message: "The user has already applied to that opportunity."
 
   mount_uploader :resume_file, ResumeFileUploader
+
+  def ensure_application_event
+    application_events.create!(title: ApplicationEvent::INITIAL_APP_EVENT) if application_events.count == 0
+  end
 end
