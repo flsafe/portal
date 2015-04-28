@@ -2,4 +2,5 @@
   = render 'sidebar', active: :opportunities
 
 = content_for(:center_content) do
-  Here
+  - @opportunities.each do |opp|
+    = render 'opportunity_box', {opp: opp}

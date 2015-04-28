@@ -19,6 +19,7 @@
 
 class Company < ActiveRecord::Base
   has_many :opportunities
+  has_many :employers
 
   validates :name, :slug, :website, :city, :state, presence: true
 

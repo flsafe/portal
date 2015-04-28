@@ -39,6 +39,10 @@ class StaffController < ApplicationController
   end
 
   def opportunities
+    @ids = Opportunity.joins(company: {employers: :partnerships})
+                                .select('DISTINCT opportunities.id')
+                                .where('partnerships.school_id = ?', current_user.school.id).pluck(:id)
+    @opportunities = Opportunity.includes(:company).where(id: @ids).order('created_at DESC')
   end
 
   def team

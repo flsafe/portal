@@ -1,0 +1,23 @@
+.row
+  .col-sm-12
+    - company = opp.company
+    .opportunity-box
+      %hr
+      .row
+        .col-sm-12
+          .media
+            .media-left
+              = ""
+            .media-body
+              .title
+                = opp.title
+              .company-name
+                %strong= company.name
+                = " - #{opp.city}, #{opp.state}"
+              .description
+                = truncate(opp.description, length: 150)
+              .skills
+                %span.label.label-default= opp.skills
+            .media-right
+              .time-stamp
+                = "#{time_ago_in_words(opp.created_at)} ago"
