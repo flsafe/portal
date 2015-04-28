@@ -54,6 +54,9 @@ class StaffController < ApplicationController
     @companies = Company.all
   end
 
+  def team_invites
+  end
+
   def create_team_member
     @invite = Invite.new(invite_params.merge(invite_type: 'Employer',
                                              school_id: current_user.school.id))

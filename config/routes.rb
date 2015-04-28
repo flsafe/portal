@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     get '/team' => 'staff#team', as: :staff_team
     delete '/team/:id' => 'staff#delete_team_member', as: :staff_delete_team_member
     get '/team/new' => 'staff#new_team_member', as: :staff_new_team_member
-    get '/team/invites' => 'staff#staff_invites', as: :staff_team_invites
+    get '/team/invites' => 'staff#team_invites', as: :staff_team_invites
     post '/team/invites' => 'staff#create_team_member', as: :staff_create_team_member
 
     get '/companies' => 'staff#companies', as: :staff_companies
