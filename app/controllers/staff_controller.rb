@@ -150,7 +150,7 @@ class StaffController < ApplicationController
 
   def companies
     @companies = Company.order(:name).paginate(page: params[:page], per_page: 20)
-    self.session_redirect = staff_partners_url
+    self.session_redirect = staff_companies_url
   end
 
   private

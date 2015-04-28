@@ -48,10 +48,6 @@ Rails.application.routes.draw do
     get '/team/invites' => 'staff#staff_invites', as: :staff_team_invites
     post '/team/invites' => 'staff#create_team_member', as: :staff_create_team_member
 
-    get '/partners' => 'staff#partners', as: :staff_partners
-    post '/partners' => 'staff#create_partner'
-    get '/partners/new' => 'staff#new_partner', as: :staff_new_partner
-
     get '/companies' => 'staff#companies', as: :staff_companies
     post '/companies' => 'staff#create_company'
     get '/companies/new' => 'staff#new_company', as: :staff_new_company
