@@ -10,6 +10,6 @@
   %tbody
     - @applications.each do |application|
       %tr
-        %td= link_to "#{application.user.first_name} #{application.user.last_name}"
-        %td= application.user.email
+        %td= link_to "#{application.student.first_name} #{application.student.last_name}"
+        %td= application.student.email
         %td= link_to "View Application", application

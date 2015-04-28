@@ -61,7 +61,7 @@ class ApplicationsController < ApplicationController
   def set_application
     @application = Application.find(params[:id])
     if current_user.student?
-      redirect_home current_user unless @application.user == current_user
+      redirect_home current_user unless @application.student == current_user
     end
   end
 
