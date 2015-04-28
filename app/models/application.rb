@@ -30,6 +30,6 @@ class Application < ActiveRecord::Base
   mount_uploader :resume_file, ResumeFileUploader
 
   def ensure_application_event
-    application_events.build(title: ApplicationEvent::INITIAL_APP_EVENT) if application_events.count == 0
+    application_events.build(application: self, title: ApplicationEvent::INITIAL_APP_EVENT) if application_events.count == 0
   end
 end
