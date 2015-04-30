@@ -5,8 +5,15 @@
 .opportunity-box {
   font-size: 1.20em;
 
-  a {
-    font-size: 1.50em;
+  .recruiter {
+    color: rgb(150, 150, 150);
+    font-style: italic;
+  }
+
+  .title{
+    a {
+      font-size: 1.50em;
+    }
   }
 
   .description {

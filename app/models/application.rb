@@ -14,9 +14,10 @@
 #
 
 class Application < ActiveRecord::Base
-  belongs_to :opportunity
+  belongs_to :opportunity, counter_cache: true
   belongs_to :student
   has_many :application_events, -> { order('event_date DESC') }
+
 
   before_validation :ensure_application_event, on: [:create]
 

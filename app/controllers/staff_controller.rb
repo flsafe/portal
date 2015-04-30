@@ -1,3 +1,5 @@
+require 'redcarpet'
+
 class StaffController < ApplicationController
 
   before_action :ensure_staff
@@ -39,10 +41,14 @@ class StaffController < ApplicationController
   end
 
   def opportunities
-    @ids = Opportunity.joins(company: {employers: :partnerships})
-                                .select('DISTINCT opportunities.id')
-                                .where('partnerships.school_id = ?', current_user.school.id).pluck(:id)
-    @opportunities = Opportunity.includes(:company).where(id: @ids).order('created_at DESC')
+    @opportunities = Opportunity.partnered(current_user.school)
+                                .includes(:applications)
+                                .paginate(page: params[:page], per_page: 10)
+  end
+
+  def opportunity
+    @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML) 
+    @opportunity = Opportunity.partnered(current_user.school).where(id: params[:id]).first()
   end
 
   def team

@@ -10,14 +10,20 @@
               = ""
             .media-body
               .title
-                = opp.title
+                = link_to opp.title, staff_opportunity_path(opp)
               .company-name
                 %strong= company.name
                 = " - #{opp.city}, #{opp.state}"
+              .recruiter
+                = "Recruiter: #{opp.employer.email}"
+              %br
               .description
                 = truncate(opp.description, length: 150)
               .skills
                 %span.label.label-default= opp.skills
+              %br
+              .actions
+                = link_to "Applications (#{opp.applications_count || 0})", '#', class: 'btn btn-default'
             .media-right
               .time-stamp
                 = "#{time_ago_in_words(opp.created_at)} ago"
