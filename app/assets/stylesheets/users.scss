@@ -10,9 +10,15 @@
     margin-right: auto;
   }
   .name {
-
+    font-size: 1.35em;
   } 
   .info {
+    .semester {
+      font-weight: bold; 
+    }
 
+    .email, .phone {
+      color: rgb(125, 125, 125);
+    }
   }
 }

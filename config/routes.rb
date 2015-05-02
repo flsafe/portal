@@ -70,6 +70,8 @@ Rails.application.routes.draw do
     
     get 'students/:id/recommend' => 'staff#new_recommendation', as: :staff_new_student_recommendation
     post 'students/:id/recommend' => 'staff#create_recommendation', as: :staff_create_student_recommendation
+
+    get 'students/:id/resume' => 'staff#student_resume', as: :staff_student_resume
   end
 
   # Students
