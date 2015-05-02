@@ -1,15 +1,7 @@
 %ul.nav.nav-pills
-
-  - if active_tab[:inbox] 
-    %li.active{:role => 'presentation'}
-      = link_to "Inbox (5)"
-  - else
-    %li{:role => 'presentation'}
-      = link_to "Inbox"
-
-  - if active_tab[:completed]
-    %li.active{:role => 'presentation'}
-      = link_to "Completed", staff_students_path
-  - else 
-    %li{:role => 'presentation'}
-      = link_to "Completed", staff_students_path
+  %li{class: active.eql?(:inbox) ? 'active' : '', :role => 'presentation'}
+    = link_to "Pending Approval (5)"
+  %li{class: active.eql?(:archived) ? 'active' : '', :role => 'presentation'}
+    = link_to "Archived (1)", '#'
+  %li{class: active.eql?(:rejected) ? 'active' : '', :role => 'presentation'}
+    = link_to "Rejected (1)", '#' 

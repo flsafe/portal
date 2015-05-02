@@ -6,7 +6,7 @@
 
   %br
 
-  = render partial: 'messages_subtabs', locals: {active_tab: {inbox: true}}
+  = render partial: 'messages_subtabs', locals: {active: :inbox} 
 
   = render partial: 'todo', locals: {subject: 'Application', message: 'Frank Licea applied for Associate Implementation Engineer', help: 'Wish Frank luck!', todo_timestamp: 'Just Now'}
 

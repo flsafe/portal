@@ -5,20 +5,21 @@
       %hr
       .media-body
         .row
-          .col-sm-4
+          .col-sm-3
             %span.date
               = todo_timestamp
-          .col-sm-8
+          .col-sm-6
             %span.inbox-message
               = message 
             .help
               = help 
             %br
             .inbox-actions
-              = link_to "Notes", staff_inbox_profile_path(1), class: 'btn btn-default'
-              = link_to "Application", '', class: 'btn btn-default'
-              = link_to "Send Message", staff_new_auto_follow_up_path(1), class: 'btn btn-default'
-      .media-left
-        = link_to "OK", "#", class: 'inbox-item-ok btn btn-success', line_item_id: @id
+              = link_to "Add Notes", staff_inbox_profile_path(1), class: 'btn btn-default'
+              = link_to "View Application", '', class: 'btn btn-default'
+          .col-sm-3
+            .approve-reject-buttons
+              = link_to "√ Approve", "#", class: 'btn btn-success', line_item_id: @id
+              = link_to "Reject", "#", class: 'btn btn-danger', line_item_id: @id
 
 
