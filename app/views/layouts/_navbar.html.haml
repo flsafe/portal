@@ -9,11 +9,19 @@
       = link_to "SchoolSail", user_home_url(current_user), class: 'navbar-brand'
     .collapse.navbar-collapse#navbar
       %ul.nav.navbar-nav.navbar-right
-        - if current_user
-          - if current_user.employer?
-            %li= link_to("Profile", eval("edit_#{current_user.type.parameterize.underscore}_profile_path(current_user.company.slug)")) unless current_user.admin?
-          - else
-            %li= link_to("Profile", eval("edit_#{current_user.type.parameterize.underscore}_profile_path")) unless current_user.admin?
+        %li.dropdown
+          =link_to 'Admin', '#', class: 'drop-down-toggle', 'data-toggle' => 'dropdown', role: 'button', 'aria-expanded' => 'false'
+          %ul{class: 'dropdown-menu', role: 'menu'}
+            - if current_user && !current_user.admin?  # There is no profile page for the admin yet.
+              - if current_user.employer?
+                %li= link_to("Profile", eval("edit_#{current_user.type.parameterize.underscore}_profile_path(current_user.company.slug)"))
+              - else
+                %li= link_to("Profile", eval("edit_#{current_user.type.parameterize.underscore}_profile_path"))
+              - if current_user.staff?
+                %li= link_to 'Campuses', '#'
+                %li= link_to 'Companies', '#'
+                %li= link_to 'Team', '#'
+        - if current_user 
           %li= link_to "Logout", logout_path, method: :delete
         - else
           %li= link_to "Login", login_path
