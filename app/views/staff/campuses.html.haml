@@ -1,9 +1,6 @@
-= content_for(:sidebar) do
-  = render 'sidebar', active: :campuses
-
-= content_for(:center_content) do
-  %ul.nav.nav-tabs
-    %li.active{role: 'presentation'}
-      = link_to 'Campuses'
-  %br
-  = render template: 'admin/campuses/index'
+%ul.nav.nav-tabs
+  %li.active{role: 'presentation'}
+    = link_to 'Campuses'
+%br
+= render template: 'admin/campuses/index'
+= will_paginate(@campuses, renderer: BootstrapPagination::Rails)

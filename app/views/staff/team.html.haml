@@ -1,33 +1,26 @@
-= content_for(:sidebar) do
-  = render 'sidebar', active: :team
-
-= content_for(:center_content) do
-  = render 'team_tabs', active: :recruiters
-  %br 
-  = link_to "New Recruiter", staff_new_team_member_path, class: 'btn btn-primary'
-  %br
-  %br
-  %table.table
-    %thead
+= render 'team_tabs', active: :recruiters
+%br 
+= link_to "New Recruiter", staff_new_team_member_path, class: 'btn btn-primary'
+%br
+%br
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Phone
+      %th Company
+      %th City
+      %th State
+      %th 
+  %tbody
+    - @employers.each do |e|
       %tr
-        %th Name
-        %th Email
-        %th Phone
-        %th Company
-        %th City
-        %th State
-        %th 
-    %tbody
-      - @employers.each do |e|
-        %tr
-          %td= e.name
-          %td= e.email
-          %td= e.phone
-          %td= e.company.name
-          %td= e.city
-          %td= e.state
-          %td= link_to "Delete", staff_delete_team_member_path(e), method: :delete, class: 'btn btn-default'
-
-
-           
+        %td= e.name
+        %td= e.email
+        %td= e.phone
+        %td= e.company.name
+        %td= e.city
+        %td= e.state
+        %td= link_to "Delete", staff_delete_team_member_path(e), method: :delete, class: 'btn btn-default'
 

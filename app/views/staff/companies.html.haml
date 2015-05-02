@@ -1,9 +1,6 @@
-= content_for(:sidebar) do
-  = render 'sidebar', active: :companies
-= content_for(:center_content) do
-  %ul.nav.nav-tabs
-    %li.active{role: 'presentation'}
-      = link_to 'Companies'
-  %br
-  = render template: 'admin/companies/index'
-  = will_paginate(@companies, renderer: BootstrapPagination::Rails)
+%ul.nav.nav-tabs
+  %li.active{role: 'presentation'}
+    = link_to 'Companies'
+%br
+= render template: 'admin/companies/index'
+= will_paginate(@companies, renderer: BootstrapPagination::Rails)
