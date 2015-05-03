@@ -28,11 +28,11 @@ class StaffController < ApplicationController
     @active_button = params[:type] || 'pending'
 
     @applications = if @active_button.eql? 'archived'
-                      Application.through_partners(current_user.school).includes(:student, :opportunity).approved
+                      Application.through_partners(current_user.school).includes(:student, opportunity: :company).approved
                     elsif @active_button.eql? 'rejected'
-                      Application.through_partners(current_user.school).includes(:student, :opportunity).rejected
+                      Application.through_partners(current_user.school).includes(:student, opportunity: :company).rejected
                     else
-                      Application.through_partners(current_user.school).includes(:student, :opportunity).pending
+                      Application.through_partners(current_user.school).includes(:student, opportunity: :company).pending
                     end
   end
 

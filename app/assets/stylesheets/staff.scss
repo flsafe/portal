@@ -19,20 +19,14 @@
 
 .media.inbox-line-item {
   .inbox-message {
-    font-size: 1.30em;
-  }
-
-  .help {
-    font-style: italic; 
     font-size: 1.0em;
+    .title, .student-name{
+      font-weight: bold; 
+    }
   }
-
-  div.inbox-actions {
-    padding-bottom: 5px;
-  }
-
   .date {
-    font-size: 1.30em;
+    font-size: 1.0em;
+    color: rgb(150, 150, 150);
   }
 }
 

@@ -9,8 +9,12 @@
             %span.date
               = application.created_at.to_s(:long)
           .col-sm-6
-            %span.inbox-message
-              = "#{application.student.name} applied for #{application.opportunity.title}"
+            .inbox-message
+              %span.student-name= "#{application.student.name}"
+              %span.description applied for
+              %span.title= "#{application.opportunity.title}"
+              %span.description at
+              %span.company= "#{application.opportunity.company.name}"
             %br
             .inbox-actions
               = link_to "Add Notes", staff_inbox_edit_student_placement_profile_path(application.student, application), class: 'btn btn-xs btn-default'
