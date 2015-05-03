@@ -4,7 +4,7 @@
 = content_for(:center_content) do
   = render 'messages_tabs', active: :applications
   %br
-  = render 'messages_subtabs', active: :pending
-  - @applications.each do |app|
-    = render 'application_box', application: app 
-
+  = render 'messages_subtabs', active: @active_button
+  - if @applications.any?
+    - @applications.each do |app|
+      = render 'application_box', application: app

@@ -1,7 +1,7 @@
 %ul.nav.nav-pills
-  %li{class: active.eql?(:pending) ? 'active' : '', :role => 'presentation'}
-    = link_to "Pending Approval (#{@pending_count})"
-  %li{class: active.eql?(:archived) ? 'active' : '', :role => 'presentation'}
-    = link_to "Archived (#{@archived_count})", '#'
-  %li{class: active.eql?(:rejected) ? 'active' : '', :role => 'presentation'}
-    = link_to "Rejected (#{@rejected_count})", '#' 
+  %li{class: active.to_sym.eql?(:pending) ? 'active' : '', :role => 'presentation'}
+    = link_to "Pending Approval (#{@pending_count})", staff_home_path
+  %li{class: active.to_sym.eql?(:archived) ? 'active' : '', :role => 'presentation'}
+    = link_to "Archived (#{@archived_count})", staff_applications_path(:archived)
+  %li{class: active.to_sym.eql?(:rejected) ? 'active' : '', :role => 'presentation'}
+    = link_to "Rejected (#{@rejected_count})", staff_applications_path(:rejected)

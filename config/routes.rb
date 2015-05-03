@@ -32,7 +32,9 @@ Rails.application.routes.draw do
     get '/profile' => 'staff#edit_profile', as: :edit_staffer_profile
     patch '/profile' => 'staff#update_profile'
 
-    get '/home/' => 'staff#events', as: :staff_home
+    get '/applications/pending' => 'staff#events', as: :staff_home
+    get '/applications/:type' => 'staff#events', as: :staff_applications
+
     get '/activity/' => 'staff#activity', as: :staff_activity
     get '/inbox/profile/:id' => 'staff#inbox_profile', as: :staff_inbox_profile
     get '/inbox/new_auto_follow_up/:id' => 'staff#new_auto_follow_up', as: :staff_new_auto_follow_up
