@@ -1,0 +1,15 @@
+Staff Portal
+Messages- Change to “add notes” and “view applications”
+Simplify post login page (home) to “applications” or “home"
+Change home view “inbox" to “pending approval”
+add javascript flash boxes home view
+change “ok” to “approve" or “reject"
+Add “pin” to home view and add “pinned” view for all pinned applications
+Rename “completed” to “archived”
+Move “team” and “campuses” tabs to “admin” under profile
+Students tab- change to tiles view like pinterest: picture, name, gihub, & resume, remove profile button
+Recommendations tab
+remove tab and place under each job listing (“recommend students”), emails to employer telling which students have been recommended. Each recommendation should go to a sidebar, with each student’s name, and a button for final approval (“send recommendations”)
+s
+
+notes from yesterday

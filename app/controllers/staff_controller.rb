@@ -89,14 +89,14 @@ class StaffController < ApplicationController
   end
 
   def students
-    @campus = @campuses.find_by(id: params[:campus_id]) || @campuses.first{|c| c.city =~ /#{current_user.city}/i} || @campuses.first
+    @campus = @campuses.find_by(id: params[:campus_id]) || @campuses.find{|c| c.city =~ /#{current_user.city}/i} || @campuses.first
     @year = (params[:year] || Date.today.year).to_i
     @semester = params[:semester] || Student.current_semester
     @students = Student.where(campus_id: @campus,
                               year: @year,
                               semester: Student.semesters[@semester])
                        .order(:last_name, :first_name)
-                       .paginate(page: params[:page], per_page: 1)
+                       .paginate(page: params[:page], per_page: 10)
   end
 
   def new_student
