@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get '/profile' => 'staff#edit_profile', as: :edit_staffer_profile
     patch '/profile' => 'staff#update_profile'
 
-    get '/messages/' => 'staff#messages', as: :staff_messages
+    get '/home/' => 'staff#messages', as: :staff_home
     get '/tasks/' => 'staff#tasks', as: :staff_tasks
     get '/activity/' => 'staff#activity', as: :staff_activity
     get '/inbox/profile/:id' => 'staff#inbox_profile', as: :staff_inbox_profile
@@ -54,7 +54,6 @@ Rails.application.routes.draw do
     get '/companies/new' => 'staff#new_company', as: :staff_new_company
 
     get '/students' => 'staff#students', as: :staff_students
-    post '/students' => 'staff#students'
     get '/students/new' => 'staff#new_student', as: :staff_new_student
 
     post '/students/invites' => 'staff#create_student', as: :staff_create_student

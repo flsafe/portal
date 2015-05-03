@@ -4,6 +4,7 @@ class StaffController < ApplicationController
 
   before_action :ensure_staff
   before_action :set_staff_campuses
+  before_action :ensure_campus_belongs_to_staff, only: [:students]
   before_action :ensure_student_belongs_to_staff, only: [:edit_student_placement_profile, :student_placement_profile, :new_recommendation, :student_resume]
 
   def edit_profile
@@ -88,10 +89,14 @@ class StaffController < ApplicationController
   end
 
   def students
-    @campus = params[:campus_id] ? @campuses.find{|c| c.id.to_s == params[:campus_id]} : @campuses.first
-    @students = Student.where(campus_id: @campus.id)
+    @campus = @campuses.find_by(id: params[:campus_id]) || @campuses.first{|c| c.city =~ /#{current_user.city}/i} || @campuses.first
+    @year = (params[:year] || Date.today.year).to_i
+    @semester = params[:semester] || Student.current_semester
+    @students = Student.where(campus_id: @campus,
+                              year: @year,
+                              semester: Student.semesters[@semester])
                        .order(:last_name, :first_name)
-                       .paginate(page: params[:page], per_page: 20)
+                       .paginate(page: params[:page], per_page: 10)
   end
 
   def new_student
@@ -170,6 +175,12 @@ class StaffController < ApplicationController
   def ensure_student_belongs_to_staff
     @student = Student.includes(:campus).find(params[:id])
     redirect_to(staff_home_url) unless @campuses.include?(@student.campus)
+  end
+
+  def ensure_campus_belongs_to_staff
+    if params[:campus_id]
+      redirect_to(staff_home_url) unless @campuses.find_by(id: params[:campus_id])
+    end
   end
 
   def set_staff_campuses

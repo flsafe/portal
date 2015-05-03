@@ -48,4 +48,8 @@ class Student < User
             :year,
             :campus_id,
             presence: true
+
+  def self.current_semester
+    Student.semesters.invert[(Date.today.month - 1) / 3]
+  end
 end

@@ -12,10 +12,16 @@
     %br
     .row
       .col-sm-12
-        = form_tag staff_students_path, class: 'form-inline' do
+        = form_tag staff_students_path, method: :get, class: 'form-inline' do
+          .form-group
+            = label_tag 'semester', 'Chohort'
+            = select_tag(:semester, options_for_select(Student.semesters.map{|k, v| [k.titleize, k]}, @semester), class: 'form-control')
+          .form-group
+            = label_tag 'year', 'Year'
+            = select_tag(:year, options_for_select((@year-10..@year+ 1).to_a.map{|y| [y, y]}, @year), class: 'form-control')
           .form-group
             = label_tag 'campus_id', 'Campus'
-            = select_tag(:campus_id, options_for_select(@campuses.map{|c| [c.full_name, c.id]}, @campus.id), class: 'form-control')
+            = select_tag(:campus_id, options_for_select(@campuses.map{|c| [c.full_name, c.id]}, (@campus ? @campus.id : nil)), class: 'form-control')
           = submit_tag 'Filter', class: 'btn btn-default'
     %br
     %br
@@ -47,5 +53,4 @@
                           = link_to "Recommend", staff_new_student_recommendation_path(student), class: 'btn btn-xs btn-default'
       = will_paginate(@students, renderer: BootstrapPagination::Rails)
     - else
-      Nothing here yet.
-
+      %h1 Select A Filter
