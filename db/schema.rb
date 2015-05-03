@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430041558) do
+ActiveRecord::Schema.define(version: 20150503050104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(version: 20150430041558) do
     t.datetime "updated_at",     null: false
     t.text     "resume"
     t.string   "resume_file"
+    t.boolean  "approved"
+    t.datetime "approved_date"
+    t.integer  "approved_by"
   end
 
   add_index "applications", ["opportunity_id"], name: "index_applications_on_opportunity_id", using: :btree

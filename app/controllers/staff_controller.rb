@@ -19,7 +19,18 @@ class StaffController < ApplicationController
   def dashboard
   end
 
-  def messages
+  def events
+    @pending_count = Application.through_partners(current_user.school).count
+    @archived_count = Application.through_partners(current_user.school).approved.count
+    @rejected_count = Application.through_partners(current_user.school).rejected.count
+
+    @applications = if params[:archived]
+                      Application.through_partners(current_user.school).approved
+                    elsif params[:rejected]
+                      Application.through_partners(current_user.school).rejected
+                    else
+                      Application.through_partners(current_user.school).pending
+                    end
   end
 
   # TODO: Actually set the current student profile and authorize the access.

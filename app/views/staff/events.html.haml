@@ -1,0 +1,10 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :home
+
+= content_for(:center_content) do
+  = render 'messages_tabs', active: :applications
+  %br
+  = render 'messages_subtabs', active: :pending
+  - @applications.each do |app|
+    = render 'application_box', application: app 
+

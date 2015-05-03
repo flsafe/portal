@@ -11,6 +11,9 @@
 #  updated_at     :datetime         not null
 #  resume         :text
 #  resume_file    :string
+#  approved       :boolean
+#  approved_date  :datetime
+#  approved_by    :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

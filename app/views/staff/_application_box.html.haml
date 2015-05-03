@@ -7,16 +7,14 @@
         .row
           .col-sm-3
             %span.date
-              = todo_timestamp
+              = application.created_at.to_s(:long)
           .col-sm-6
             %span.inbox-message
-              = message 
-            .help
-              = help 
+              = "#{application.student.name} applied for #{application.opportunity.title}"
             %br
             .inbox-actions
-              = link_to "Add Notes", staff_inbox_profile_path(1), class: 'btn btn-default'
-              = link_to "View Application", '', class: 'btn btn-default'
+              = link_to "Add Notes", staff_inbox_profile_path(1), class: 'btn btn-xs btn-default'
+              = link_to "View Application", '', class: 'btn btn-xs btn-default'
           .col-sm-3
             .approve-reject-buttons
               = link_to "√ Approve", "#", class: 'btn btn-xs btn-success', line_item_id: @id
