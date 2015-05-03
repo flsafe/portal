@@ -69,25 +69,29 @@
 
 .application-events-title {
   .title {
-    font-size: 1.65em;
-    font-style: bold; 
+    font-size: 1.10em;
+    font-weight: bold; 
   }
   .company {
-    color: rgb(150, 150, 150);
-    font-size: 1.65em;
+    font-size: 1.10em;
   } 
   .location {
-    color: rgb(150, 150, 150);
-    font-size: 1.30;
+    color: rgb(120, 120, 120);
+    font-size: 0.90em;
     font-style: italic;
   }
 }
 
 .application-event {
   .event-date {
-    font-size: 1.30em;
+    font-size: 0.80em;
+    color: rgb(150, 150, 150);
   } 
   .event-title {
-    font-size: 1.30em;
+    font-weight: bold;
+    font-size: 1.0em;
+  }
+  .event-description {
+    color: rgb(150, 150, 150); 
   }
 }

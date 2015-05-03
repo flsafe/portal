@@ -7,19 +7,20 @@
     %li= link_to "Students", staff_students_path
     %li= link_to "#{@student.first_name}", staff_student_placement_profile_path(@student)
     %li.active Edit
-  .application-events-title 
-    %p
-      %span.title= @application.opportunity.title
-      %span.company= @application.opportunity.company.name
-      %span.location= "#{@application.opportunity.city} #{@application.opportunity.state}"
   %br
   .row
     .col-sm-12
       .panel.panel-default
         .panel-body
-          = render 'new_student_placement_event_form'
+          = render 'student_profile_header'
   .row
     .col-sm-12
+      .application-events-title 
+        %span.title= @application.opportunity.title
+        %span.company= @application.opportunity.company.name
+        %span.location= "#{@application.opportunity.city} #{@application.opportunity.state}"
+  .row
+    .col-sm-7
       - @events.each do |e|
         .media
           %hr
@@ -36,5 +37,9 @@
                     %p= e.description
           .media-right
             - if e.id.present?
-              = link_to "Delete", staff_destroy_student_placement_event_path(e), method: :delete, class: 'btn btn-danger'
+              = link_to "Delete", staff_destroy_student_placement_event_path(e), method: :delete, class: 'btn btn-xs btn-danger'
+    .col-sm-5
+      .panel.panel-default
+        .panel-body
+          = render 'new_student_placement_event_form'
 

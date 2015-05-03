@@ -13,7 +13,7 @@
               = "#{application.student.name} applied for #{application.opportunity.title}"
             %br
             .inbox-actions
-              = link_to "Add Notes", staff_inbox_profile_path(1), class: 'btn btn-xs btn-default'
+              = link_to "Add Notes", staff_edit_student_placement_profile_path(application.student, application), class: 'btn btn-xs btn-default'
               = link_to "View Application", '', class: 'btn btn-xs btn-default'
           .col-sm-3
             .approve-reject-buttons
