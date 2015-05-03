@@ -5,7 +5,11 @@ class StaffController < ApplicationController
   before_action :ensure_staff
   before_action :set_staff_campuses
   before_action :ensure_campus_belongs_to_staff, only: [:students]
-  before_action :ensure_student_belongs_to_staff, only: [:edit_student_placement_profile, :student_placement_profile, :new_recommendation, :student_resume]
+  before_action :ensure_student_belongs_to_staff, only: [:inbox_edit_student_placement_profile,
+                                                         :edit_student_placement_profile,
+                                                         :student_placement_profile,
+                                                         :new_recommendation,
+                                                         :student_resume]
 
   def edit_profile
   end
@@ -20,9 +24,7 @@ class StaffController < ApplicationController
   end
 
   def events
-    @pending_count = Application.through_partners(current_user.school).count
-    @archived_count = Application.through_partners(current_user.school).approved.count
-    @rejected_count = Application.through_partners(current_user.school).rejected.count
+    set_staff_inbox_counts
     @active_button = params[:type] || 'pending'
 
     @applications = if @active_button.eql? 'archived'
@@ -36,7 +38,11 @@ class StaffController < ApplicationController
 
   # TODO: Actually set the current student profile and authorize the access.
   # this is currently ignored for prototyping.
-  def inbox_profile
+  def inbox_edit_student_placement_profile
+    set_staff_inbox_counts
+    @application = @student.applications.includes(opportunity: :company).find(params[:application_id])
+    @events = @application.application_events
+    self.session_redirect = staff_inbox_edit_student_placement_profile_url(@student, @application)
   end
 
   # TODO: Actually set the current student profile and authorize the access.
@@ -159,7 +165,7 @@ class StaffController < ApplicationController
     @application = Application.includes(:student).find(params[:application_id])
     @student = @application.student
     if @event = @application.application_events.create(event_params)
-      redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Added"}
+      redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Added"})
     else
       render 'edit_student_placement_profile'
     end
@@ -171,10 +177,10 @@ class StaffController < ApplicationController
     @student = @application.student
     if @application.application_events.count > 1 && @event.destroy
       @event.destroy
-      redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Deleted"}
+      redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Deleted"})
     else 
       @events = @application.application_events
-      redirect_to staff_edit_student_placement_profile_url(@student, @application), flash: {alert: "Can't delete the 'Applied' event"}
+      redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {alert: "Can't delete the 'Applied' event"})
     end
   end
 
@@ -190,6 +196,12 @@ class StaffController < ApplicationController
   end
 
   private
+
+  def set_staff_inbox_counts
+    @pending_count = Application.through_partners(current_user.school).count
+    @archived_count = Application.through_partners(current_user.school).approved.count
+    @rejected_count = Application.through_partners(current_user.school).rejected.count
+  end
 
   def ensure_student_belongs_to_staff
     @student = Student.includes(:campus).find(params[:id])

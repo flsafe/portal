@@ -3,7 +3,8 @@
 
 = content_for(:center_content) do
   = render 'messages_tabs', active: :applications
-  %br
+  %ol.breadcrumb
+    %li.active Applications
   = render 'messages_subtabs', active: @active_button
   - if @applications.any?
     - @applications.each do |app|
