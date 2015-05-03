@@ -2,8 +2,7 @@
   = render 'sidebar', active: :opportunities
 
 = content_for(:center_content) do
-  %ul.nav.nav-tabs
-    %li{class: 'active', role: 'presentation'}= link_to "Jobs", '#'
+  = render 'opportunities_tabs', active: :opportunities
   - @opportunities.each do |opp|
-    = render 'opportunity_box', {opp: opp}
+    = render 'opportunity_box', opp: opp, actions: true
   = will_paginate(@opportunities, renderer: BootstrapPagination::Rails)

@@ -41,15 +41,22 @@ class StaffController < ApplicationController
   def recomendations
   end
 
+  def opportunity
+    @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML) 
+    @opportunity = Opportunity.partnered(current_user.school).where(id: params[:id]).first()
+  end
+
   def opportunities
     @opportunities = Opportunity.partnered(current_user.school)
                                 .includes(:applications)
                                 .paginate(page: params[:page], per_page: 10)
   end
 
-  def opportunity
-    @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML) 
-    @opportunity = Opportunity.partnered(current_user.school).where(id: params[:id]).first()
+  def opportunity_applications
+    @opportunity = Opportunity.partnered(current_user.school)
+                              .find(params[:id])
+    @applications = @opportunity.applications.includes(:student)
+    @students = @applications.map(&:student)
   end
 
   def team

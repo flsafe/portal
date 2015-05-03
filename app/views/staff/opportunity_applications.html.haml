@@ -1,0 +1,14 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :opportunities
+
+= content_for(:center_content) do
+  = render 'opportunities_tabs', active: :opportunities
+  %ol.breadcrumb
+    %li= link_to "Jobs", staff_opportunities_path
+    %li= link_to "Applications"
+  = render 'opportunity_box', opp: @opportunity, actions: false
+  %hr
+  - if @students.any?
+    = render 'student_boxes', students: @students
+  - else
+    %h1 There are no applications yet.

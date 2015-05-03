@@ -1,0 +1,25 @@
+.row
+  .col-sm-12
+    .row
+      - students.in_groups_of(4) do |group|
+        - group.select(&:present?).each do |student|
+          .col-sm-4
+            .panel.panel-default
+              .person-box
+                .panel-body
+                  = image_tag student.avatar.medium_avatar, class: 'img-circle'
+                .panel-footer
+                  .name
+                    = link_to "#{student.first_name} #{student.last_name}", staff_student_placement_profile_path(student)
+                  .info
+                    .semester
+                      = "#{student.semester} #{student.year}".titleize
+                    .email
+                      = student.email
+                    .phone
+                      = student.phone
+                  %br
+                  .actions
+                    = link_to "Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
+                    = link_to "Github", '#', class: 'btn btn-xs btn-default'
+                    = link_to "Recommend", staff_new_student_recommendation_path(student), class: 'btn btn-xs btn-default'
