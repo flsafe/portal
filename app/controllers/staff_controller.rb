@@ -96,7 +96,7 @@ class StaffController < ApplicationController
                               year: @year,
                               semester: Student.semesters[@semester])
                        .order(:last_name, :first_name)
-                       .paginate(page: params[:page], per_page: 10)
+                       .paginate(page: params[:page], per_page: 1)
   end
 
   def new_student
