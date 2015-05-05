@@ -28,16 +28,41 @@ class StaffController < ApplicationController
     @active_button = params[:type] || 'pending'
 
     @applications = if @active_button.eql? 'archived'
-                      Application.through_partners(current_user.school).includes(:student, opportunity: :company).approved
+                      Application.through_partners(current_user.school)
+                                 .includes(:student, opportunity: :company)
+                                 .approved
+                                 .paginate(page: params[:page], per_page: 12)
                     elsif @active_button.eql? 'rejected'
-                      Application.through_partners(current_user.school).includes(:student, opportunity: :company).rejected
+                      Application.through_partners(current_user.school)
+                                 .includes(:student, opportunity: :company)
+                                 .rejected
+                                 .paginate(page: params[:page], per_page: 12)
                     else
-                      Application.through_partners(current_user.school).includes(:student, opportunity: :company).pending
+                      Application.through_partners(current_user.school)
+                                 .includes(:student, opportunity: :company)
+                                 .pending
+                                 .paginate(page: params[:page], per_page: 12)
                     end
   end
 
-  # TODO: Actually set the current student profile and authorize the access.
-  # this is currently ignored for prototyping.
+  def application_action
+    @application = Application.through_partners(current_user.school).find(params[:id])
+    if params[:application_action].eql? :approve
+      @application.approve(current_user)
+    elsif params[:application_action].eql? :reject
+      @application.reject(current_user)
+    end
+    respond_to do |format| 
+      if @application.save
+        format.html { redirect_to staff_home_url }
+        format.json { render json: {id: @application.id, approved: @application.approved?} }
+      else
+        format.html { redirect_to staff_home_url }
+        format.json { render status: 400 } 
+      end
+    end
+  end
+
   def inbox_edit_student_placement_profile
     set_staff_inbox_counts
     @application = @student.applications.includes(opportunity: :company).find(params[:application_id])
@@ -73,7 +98,7 @@ class StaffController < ApplicationController
   def opportunity_applications
     @opportunity = Opportunity.partnered(current_user.school)
                               .find(params[:id])
-    @applications = @opportunity.applications.includes(:student)
+    @applications = @opportunity.applications.paginate(page: params[:page], per_page: 12).includes(:student)
     @students = @applications.map(&:student)
   end
 
@@ -198,7 +223,7 @@ class StaffController < ApplicationController
   private
 
   def set_staff_inbox_counts
-    @pending_count = Application.through_partners(current_user.school).count
+    @pending_count = Application.through_partners(current_user.school).pending.count
     @archived_count = Application.through_partners(current_user.school).approved.count
     @rejected_count = Application.through_partners(current_user.school).rejected.count
   end

@@ -1,5 +1,4 @@
-- @id = (@id && @id + 1) || 1
-.row.inbox-item{id: @id}
+.row.inbox-item{id: application.id}
   .col-sm-12
     .media.inbox-line-item
       %hr
@@ -21,7 +20,8 @@
               = link_to "View Application", '', class: 'btn btn-xs btn-default'
           .col-sm-3
             .approve-reject-buttons
-              = link_to "√ Approve", "#", class: 'btn btn-xs btn-success', line_item_id: @id
-              = link_to "Reject", "#", class: 'btn btn-xs btn-danger', line_item_id: @id
-
-
+              - if application.pending?
+                = link_to "√ Approve", staff_application_approve_path(application), class: 'btn btn-xs btn-success', line_item_id: application.id, method: :post
+                = link_to "Reject", staff_application_reject_path(application), class: 'btn btn-xs btn-danger', line_item_id: application.id, method: :post
+              - if application.rejected?
+                = link_to "√ Approve", staff_application_approve_path(application), class: 'btn btn-xs btn-success', line_item_id: application.id, method: :post

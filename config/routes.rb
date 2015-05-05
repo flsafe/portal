@@ -34,6 +34,9 @@ Rails.application.routes.draw do
 
     get '/applications/pending' => 'staff#events', as: :staff_home
     get '/applications/:type' => 'staff#events', as: :staff_applications
+    post '/applications/:id/approve' => 'staff#application_action', as: :staff_application_approve, application_action: :approve
+    post '/applications/:id/reject' => 'staff#application_action', as: :staff_application_reject, application_action: :reject
+
     get '/student-notes/:id/application/:application_id' => 'staff#inbox_edit_student_placement_profile', as: :staff_inbox_edit_student_placement_profile
 
     get '/activity/' => 'staff#activity', as: :staff_activity

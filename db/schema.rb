@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503050104) do
+ActiveRecord::Schema.define(version: 20150505020651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,15 +33,16 @@ ActiveRecord::Schema.define(version: 20150503050104) do
     t.boolean  "reviewed"
     t.integer  "opportunity_id"
     t.integer  "student_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.text     "resume"
     t.string   "resume_file"
-    t.boolean  "approved"
-    t.datetime "approved_date"
-    t.integer  "approved_by"
+    t.string   "application_state",              default: "pending"
+    t.integer  "application_state_changed_by"
+    t.datetime "application_state_changed_date"
   end
 
+  add_index "applications", ["application_state"], name: "index_applications_on_application_state", using: :btree
   add_index "applications", ["opportunity_id"], name: "index_applications_on_opportunity_id", using: :btree
   add_index "applications", ["student_id", "opportunity_id"], name: "index_applications_on_student_id_and_opportunity_id", unique: true, using: :btree
   add_index "applications", ["student_id"], name: "index_applications_on_student_id", using: :btree

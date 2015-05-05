@@ -12,3 +12,4 @@
     = render 'student_boxes', students: @students
   - else
     %h1 There are no applications yet.
+  = will_paginate @applications, renderer: BootstrapPagination::Rails

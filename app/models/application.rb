@@ -2,24 +2,24 @@
 #
 # Table name: applications
 #
-#  id             :integer          not null, primary key
-#  cover_letter   :text
-#  reviewed       :boolean
-#  opportunity_id :integer
-#  student_id     :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  resume         :text
-#  resume_file    :string
-#  approved       :boolean
-#  approved_date  :datetime
-#  approved_by    :integer
+#  id                             :integer          not null, primary key
+#  cover_letter                   :text
+#  reviewed                       :boolean
+#  opportunity_id                 :integer
+#  student_id                     :integer
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
+#  resume                         :text
+#  resume_file                    :string
+#  application_state              :string           default("pending")
+#  application_state_changed_by   :integer
+#  application_state_changed_date :datetime
 #
 
 class Application < ActiveRecord::Base
   belongs_to :opportunity, counter_cache: true
   belongs_to :student
-  belongs_to :approved_by, foreign_key: :approved_by, class_name: 'Staff'
+  belongs_to :application_state_changed_by, foreign_key: :application_state_changed_by, class_name: 'Staffer'
   has_many :application_events, -> { order('event_date DESC') }
 
   default_scope { order('created_at DESC') }
@@ -29,7 +29,7 @@ class Application < ActiveRecord::Base
   after_create :email_new_application, :pub_new_application
   after_update :email_updated_application, :pub_updated_application
 
-  validates :approved_date, :approved_by, presence: true, if: 'approved?'
+  validates :application_state_changed_date, :application_state_changed_by, presence: true, if: 'application_state.present?'
   validates :cover_letter, presence: true
   validates :cover_letter, uniqueness: true
   validates :resume, presence: true, if: 'resume_file.blank?'
@@ -44,21 +44,42 @@ class Application < ActiveRecord::Base
   end
 
   def self.pending
-    self.where(approved: nil)
+    self.where(application_state: 'pending')
   end
 
   def self.approved
-    self.where(approved: true)
+    self.where(application_state: 'approved')
   end
 
   def self.rejected
-    self.where(approved: false)
+    self.where(application_state: 'rejected')
   end
 
   def approve(staff)
-    self.approved = true
-    self.approved_date = DateTime.now
-    self.approved_by = staff
+    set_application_state(staff, 'approved')
+  end
+
+  def reject(staff)
+    set_application_state(staff, 'rejected')
+  end
+
+  def set_application_state(staff, state)
+    raise TypeError.new('Application state must be pending, approved, or rejected') unless %w[pending approved rejected].include? state
+    self.application_state = state
+    self.application_state_changed_by = staff
+    self.application_state_changed_date = DateTime.now
+  end
+
+  def pending?
+    application_state.eql? 'pending'
+  end
+
+  def approved?
+    application_state.eql? 'approved'
+  end
+
+  def rejected?
+    application_state.eql? 'rejected'
   end
 
   def email_new_application

@@ -9,3 +9,4 @@
   - if @applications.any?
     - @applications.each do |app|
       = render 'application_box', application: app
+  = will_paginate(@applications, renderer: BootstrapPagination::Rails)

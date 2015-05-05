@@ -2,18 +2,18 @@
 #
 # Table name: applications
 #
-#  id             :integer          not null, primary key
-#  cover_letter   :text
-#  reviewed       :boolean
-#  opportunity_id :integer
-#  student_id     :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  resume         :text
-#  resume_file    :string
-#  approved       :boolean
-#  approved_date  :datetime
-#  approved_by    :integer
+#  id                             :integer          not null, primary key
+#  cover_letter                   :text
+#  reviewed                       :boolean
+#  opportunity_id                 :integer
+#  student_id                     :integer
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
+#  resume                         :text
+#  resume_file                    :string
+#  application_state              :string           default("pending")
+#  application_state_changed_by   :integer
+#  application_state_changed_date :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
