@@ -23,4 +23,5 @@
         %p!= @md.render(@application.resume || '')
         = link_to "Resume File", @application.resume_file.url
     .col-sm-6
-      = render 'opportunities/description' 
+      .well.well-lg
+        = render 'opportunities/description' 
