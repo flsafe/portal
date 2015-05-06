@@ -45,6 +45,13 @@ class StaffController < ApplicationController
                     end
   end
 
+  def application
+    @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML) 
+    @application = Application.through_partners(current_user.school).includes(:opportunity, :student).find(params[:id])
+    @student = @application.student
+    @opportunity = @application.opportunity
+  end
+
   def application_action
     @application = Application.through_partners(current_user.school).find(params[:id])
     if params[:application_action].eql? :approve

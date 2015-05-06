@@ -89,3 +89,38 @@
     color: rgb(150, 150, 150); 
   }
 }
+
+.opportunity-container {
+  p.lead {
+    font-size: 1.10em; 
+  }
+  h1 {
+    font-size: 1.20em;   
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 1.05em; 
+    font-weight: bold;
+  }
+
+  li, p {
+    color: rgb(110, 110, 110); 
+    font-size: 0.95em;
+  }
+
+  p.skills {
+    font-style: italic; 
+  }
+}
+
+.cover-letter-container {
+  h1 {
+    font-size: 1.20em; 
+    font-weight: bold;
+  } 
+
+  p {
+    color: rgb(110, 110, 110); 
+  }
+}

@@ -1,0 +1,26 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :home
+= content_for(:center_content) do
+  = render 'messages_tabs', active: :applications
+  %ol.breadcrumb
+    %li= link_to 'Applications', staff_home_path
+    %li.active= @student.name
+  %br
+  .row
+    .col-sm-12
+      .panel.panel-default
+        .panel-body
+          = render 'student_profile_header'
+  .row
+    .col-sm-6
+      .cover-letter-container
+        %h1
+          Cover Letter
+        .cover-letter
+          %p!= @md.render(@application.cover_letter || '')
+        %h1
+          Resume
+        %p!= @md.render(@application.resume || '')
+        = link_to "Resume File", @application.resume_file.url
+    .col-sm-6
+      = render 'opportunities/description' 

@@ -32,8 +32,9 @@ Rails.application.routes.draw do
     get '/profile' => 'staff#edit_profile', as: :edit_staffer_profile
     patch '/profile' => 'staff#update_profile'
 
-    get '/applications/pending' => 'staff#events', as: :staff_home
-    get '/applications/:type' => 'staff#events', as: :staff_applications
+    get '/applications/:id' => 'staff#application', as: :staff_application
+    get '/applications/inbox/pending' => 'staff#events', as: :staff_home
+    get '/applications/inbox/:type' => 'staff#events', as: :staff_applications
     post '/applications/:id/approve' => 'staff#application_action', as: :staff_application_approve, application_action: :approve
     post '/applications/:id/reject' => 'staff#application_action', as: :staff_application_reject, application_action: :reject
 
