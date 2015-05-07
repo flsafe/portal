@@ -17,6 +17,8 @@ class StaffController < ApplicationController
   def update_profile
     if current_user.update(staffer_params)
       redirect_to user_home_url(current_user), notice: 'Updated profile.'
+    else
+      render :edit_profile
     end
   end
 
@@ -61,6 +63,7 @@ class StaffController < ApplicationController
     end
     respond_to do |format| 
       if @application.save
+        ApplicationMessage.create!(school: current_user.school, application: @application)
         format.html { redirect_to staff_home_url }
         format.json { render json: {id: @application.id, approved: @application.approved?} }
       else
@@ -86,6 +89,7 @@ class StaffController < ApplicationController
   end
 
   def activity
+    @activity_messages = current_user.school.activity_messages 
   end
 
   def recomendations
@@ -251,7 +255,7 @@ class StaffController < ApplicationController
   end
 
   def staffer_params
-    params.require(:staffer).permit(:email, :password, :password_confrimation, :avatar, :city, :state)
+    params.require(:staffer).permit(:email, :password, :password_confrimation, :first_name, :last_name, :avatar, :city, :state)
   end
 
   def invite_params

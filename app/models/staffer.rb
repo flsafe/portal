@@ -30,4 +30,6 @@
 
 class Staffer < User
   belongs_to :school
+
+  validates :first_name, :last_name, :city, :state, presence: true
 end

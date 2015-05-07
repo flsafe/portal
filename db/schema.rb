@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505020651) do
+ActiveRecord::Schema.define(version: 20150507025547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activity_messages", force: :cascade do |t|
+    t.string   "type"
+    t.integer  "school_id"
+    t.integer  "application_id"
+    t.integer  "student_id"
+    t.integer  "employer_id"
+    t.integer  "staff_id"
+    t.integer  "opportunity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "application_events", force: :cascade do |t|
     t.string   "title"

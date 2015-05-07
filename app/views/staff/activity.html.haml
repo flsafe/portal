@@ -5,3 +5,12 @@
   = render 'messages_tabs', active: :activity
 
   %br
+  - @activity_messages.each do |msg| 
+    .row
+      .col-sm-3
+        %span.when= msg.created_at
+      .col-sm-9
+        - if msg.application.approved?
+          Approved
+        - else
+          Rejected
