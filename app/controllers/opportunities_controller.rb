@@ -30,6 +30,12 @@ class OpportunitiesController < ApplicationController
     @opportunity.employer = current_user
     respond_to do |format|
       if @opportunity.save
+        msgs = current_user.schools.map do |school|
+          {employer: current_user,
+           school: school,
+           opportunity: @opportunity}
+        end
+        OpportunityMessage.create!(msgs)
         format.html { redirect_to company_url(@company.slug), notice: 'Opportunity was successfully created.' }
         format.json { render :show, status: :created, location: @opportunity }
       else

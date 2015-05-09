@@ -16,6 +16,6 @@
 #  staffer_id           :integer
 #
 
-class ApplicationMessage < ActivityMessage
-  validates :application, presence: true
+class OpportunityMessage < ActivityMessage
+  validates :opportunity, :employer, presence: true
 end
