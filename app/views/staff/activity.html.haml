@@ -6,11 +6,8 @@
 
   %br
   - @activity_messages.each do |msg| 
-    .row
-      .col-sm-3
-        %span.when= msg.created_at
-      .col-sm-9
-        - if msg.application.approved?
-          Approved
-        - else
-          Rejected
+    - if msg.type.eql? 'ApplicationMessage'
+      = render 'application_message_box', msg: msg
+    - else
+      - raise "Unknown message type: #{msg.type}"
+  = will_paginate(@activity_messages, renderer: BootstrapPagination::Rails)

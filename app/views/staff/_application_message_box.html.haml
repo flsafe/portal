@@ -1,0 +1,13 @@
+.row
+  .activity-message-box
+    .col-sm-3
+      %span.timestamp= msg.created_at.to_s(:long)
+    .col-sm-9
+      %span.staff_name= msg.application.application_state_changed_by.name
+      %span.message= msg.application.application_state
+      %span.message= link_to "#{msg.application.student.name}'s application", staff_application_path(msg.application)
+      %span.message to 
+      %span.opportunity= msg.application.opportunity.title
+      %span.message at
+      #span.company= msg.application.opportunity.company.name
+      %hr

@@ -124,3 +124,15 @@
     color: rgb(110, 110, 110); 
   }
 }
+
+.activity-message-box {
+  .timestamp {
+    font-size: 0.90em;
+    color: rgb(150, 150, 150);
+  } 
+
+  .staff_name, .student_name, .opportunity {
+    font-weight: bold;
+  }
+
+}
