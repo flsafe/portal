@@ -10,6 +10,7 @@
 #  updated_at     :datetime         not null
 #  application_id :integer
 #  description    :text
+#  staffer_id     :integer
 #
 
 class ApplicationEvent < ActiveRecord::Base
@@ -28,6 +29,8 @@ class ApplicationEvent < ActiveRecord::Base
   ]
 
   belongs_to :application
+  belongs_to :staffer
 
-  validates :title, :application, presence: true
+  validates :title, :application, :staffer, presence: true
+  validates :title, inclusion: {in: APP_EVENTS}
 end

@@ -204,7 +204,11 @@ class StaffController < ApplicationController
   def create_student_placement_event
     @application = Application.includes(:student).find(params[:application_id])
     @student = @application.student
-    if @event = @application.application_events.create(event_params)
+    if @event = @application.application_events.create(event_params.merge(staffer: current_user))
+      ApplicationEventMessage.create!(school: current_user.school,
+                                      application: @application,
+                                      staffer: current_user,
+                                      application_event: @event)
       redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Added"})
     else
       render 'edit_student_placement_profile'

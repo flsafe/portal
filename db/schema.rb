@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507025547) do
+ActiveRecord::Schema.define(version: 20150509044818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20150507025547) do
     t.integer  "opportunity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "application_event_id"
+    t.integer  "staffer_id"
   end
 
   create_table "application_events", force: :cascade do |t|
@@ -36,9 +38,11 @@ ActiveRecord::Schema.define(version: 20150507025547) do
     t.datetime "updated_at",     null: false
     t.integer  "application_id"
     t.text     "description"
+    t.integer  "staffer_id"
   end
 
   add_index "application_events", ["application_id"], name: "index_application_events_on_application_id", using: :btree
+  add_index "application_events", ["staffer_id"], name: "index_application_events_on_staffer_id", using: :btree
 
   create_table "applications", force: :cascade do |t|
     t.text     "cover_letter"

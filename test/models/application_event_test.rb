@@ -10,6 +10,7 @@
 #  updated_at     :datetime         not null
 #  application_id :integer
 #  description    :text
+#  staffer_id     :integer
 #
 
 require 'test_helper'

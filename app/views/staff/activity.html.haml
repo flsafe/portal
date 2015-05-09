@@ -8,6 +8,8 @@
   - @activity_messages.each do |msg| 
     - if msg.type.eql? 'ApplicationMessage'
       = render 'application_message_box', msg: msg
+    - elsif msg.type.eql? 'ApplicationEventMessage'
+      = render 'application_event_message_box', msg: msg
     - else
       - raise "Unknown message type: #{msg.type}"
   = will_paginate(@activity_messages, renderer: BootstrapPagination::Rails)
