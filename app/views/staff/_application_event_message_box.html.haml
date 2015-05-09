@@ -7,5 +7,9 @@
       %span.message added
       %span.message= link_to "'#{msg.application_event.title.titleize}'", staff_edit_student_placement_profile_path(msg.application.student, msg.application)
       %span.message to 
-      %span.message= link_to "#{msg.application.student.name}'s application", staff_application_path(msg.application)
+      %span.student_name= "#{msg.application.student.name}'s"
+      %span.opportunity= msg.application.opportunity.title
+      %span.message= link_to 'application', staff_application_path(msg.application)
+      %span.message at
+      %span.company= msg.application.opportunity.company.name
       %hr

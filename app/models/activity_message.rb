@@ -16,6 +16,9 @@
 
 class ActivityMessage < ActiveRecord::Base
   default_scope { order('created_at DESC') }
+  belongs_to :application
+  belongs_to :application_event
+  belongs_to :staffer
   belongs_to :school 
 
   validates :school, presence: true

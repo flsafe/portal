@@ -15,6 +15,5 @@
 #
 
 class ApplicationMessage < ActivityMessage
-  belongs_to :application 
   validates :application, presence: true
 end

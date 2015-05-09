@@ -15,8 +15,5 @@
 #
 
 class ApplicationEventMessage < ActivityMessage
-  belongs_to :application
-  belongs_to :application_event
-  belongs_to :staffer
   validates :application, :application_event, :staffer, presence: true
 end

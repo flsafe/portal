@@ -93,6 +93,7 @@ class StaffController < ApplicationController
                                     .includes(application: {opportunity: :company})
                                     .includes(application: :student)
                                     .includes(application: :application_state_changed_by)
+                                    .includes(:application_event)
                                     .paginate(page: params[:page], per_page: 25)
   end
 
