@@ -108,6 +108,7 @@ class StaffController < ApplicationController
   def opportunities
     @opportunities = Opportunity.partnered(current_user.school)
                                 .includes(:applications)
+                                .includes(:employer)
                                 .paginate(page: params[:page], per_page: 10)
   end
 
@@ -116,6 +117,8 @@ class StaffController < ApplicationController
                               .find(params[:id])
     @applications = @opportunity.applications.paginate(page: params[:page], per_page: 12).includes(:student)
     @recommended_applications = Application.includes(:student)
+                                           .joins(:opportunity)
+                                           .where(opportunity_id: @opportunity)
                                            .where(id: current_user.application_recommendations.pluck(:application_id))
                                            .limit(30)
   end
