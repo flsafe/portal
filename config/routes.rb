@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     get '/inbox/new_auto_follow_up/:id' => 'staff#new_auto_follow_up', as: :staff_new_auto_follow_up
 
     get '/recommendations' => 'staff#recommendations', as: :staff_recomendations
+    post '/application_recommendations/:id' => 'staff#create_application_recommendation', as: :staff_create_application_recommendation
+
     get '/jobs' => 'staff#opportunities', as: :staff_opportunities
     get '/jobs/:id' => 'staff#opportunity', as: :staff_opportunity
     get '/jobs/:id/applications' => 'staff#opportunity_applications', as: :staff_opportunity_applications

@@ -1,0 +1,8 @@
+.recommended-students{id: 'recommended-students'}
+  .panel.panel-default
+    .panel-body
+      %span.title
+        Recommended
+        %hr
+        - @recommended_applications.each do |application|
+          = application.student.name

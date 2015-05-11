@@ -1,13 +1,14 @@
 .row
   .col-sm-9
     .row
-      - students.in_groups_of(3) do |group|
-        - group.select(&:present?).each do |student|
+      - applications.in_groups_of(2) do |group|
+        - group.select(&:present?).each do |application|
+          - student = application.student
           .col-sm-6
             .panel.panel-default
               .person-box{'data-student-id': student.id}
                 .panel-body
-                  = image_tag student.avatar.medium_avatar, class: 'img-circle'
+                  = image_tag student.avatar.medium_avatar, class: 'img-circle', 'data-student-id' => student.id
                 .panel-footer
                   .name
                     = link_to "#{student.first_name} #{student.last_name}", staff_student_placement_profile_path(student)
@@ -20,5 +21,7 @@
                       = student.phone
                   %br
                   .actions
-                    = link_to "Recommend", '#', class: 'btn btn-xs btn-primary', 'data-recommend-button' => student.id
+                    = link_to "Recommend", staff_create_application_recommendation_path(application), remote: true, method: :post, class: 'btn btn-xs btn-primary'
                     = link_to "Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
+  .col-sm-3
+    = render 'recommended_applications'

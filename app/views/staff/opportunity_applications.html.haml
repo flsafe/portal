@@ -7,9 +7,10 @@
     %li= link_to "Jobs", staff_opportunities_path
     %li= link_to "Applications"
   = render 'opportunity_box', opp: @opportunity, actions: false
+  %h1 Applicants
   %hr
-  - if @students.any?
-    = render 'student_boxes', students: @students
+  - if @applications.any?
+    = render 'application_boxes', applications: @applications
   - else
     %h1 There are no applications yet.
   = will_paginate @applications, renderer: BootstrapPagination::Rails

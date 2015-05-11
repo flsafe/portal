@@ -115,7 +115,16 @@ class StaffController < ApplicationController
     @opportunity = Opportunity.partnered(current_user.school)
                               .find(params[:id])
     @applications = @opportunity.applications.paginate(page: params[:page], per_page: 12).includes(:student)
-    @students = @applications.map(&:student)
+    @recommended_applications = @applications # TODO: filter recommended applications
+  end
+
+  def create_application_recommendation
+    @application = Application.through_partners(current_user.school).includes(:opportunity).find(params[:id])
+    @opportunity = @application.opportunity
+    @recommended_applications = Application.through_partners(current_user.school) # TODO: create a new recommended application
+    respond_to do |format|
+      format.js
+    end
   end
 
   def team
