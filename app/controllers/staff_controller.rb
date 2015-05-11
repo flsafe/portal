@@ -115,13 +115,17 @@ class StaffController < ApplicationController
     @opportunity = Opportunity.partnered(current_user.school)
                               .find(params[:id])
     @applications = @opportunity.applications.paginate(page: params[:page], per_page: 12).includes(:student)
-    @recommended_applications = @applications # TODO: filter recommended applications
+    @recommended_applications = Application.includes(:student)
+                                           .where(id: current_user.application_recommendations.pluck(:application_id))
+                                           .limit(30)
   end
 
   def create_application_recommendation
     @application = Application.through_partners(current_user.school).includes(:opportunity).find(params[:id])
     @opportunity = @application.opportunity
-    @recommended_applications = Application.through_partners(current_user.school) # TODO: create a new recommended application
+    current_user.application_recommendations.create!(application: @application)
+    @recommended_applications = Application.includes(:student)
+                                           .where(id: current_user.application_recommendations.pluck(:application_id))
     respond_to do |format|
       format.js
     end

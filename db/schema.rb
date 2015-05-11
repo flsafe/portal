@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509044818) do
+ActiveRecord::Schema.define(version: 20150511033421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 20150509044818) do
 
   add_index "application_events", ["application_id"], name: "index_application_events_on_application_id", using: :btree
   add_index "application_events", ["staffer_id"], name: "index_application_events_on_staffer_id", using: :btree
+
+  create_table "application_recommendations", force: :cascade do |t|
+    t.text     "recommendation_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "staffer_id"
+    t.integer  "application_id"
+  end
+
+  add_index "application_recommendations", ["application_id"], name: "index_application_recommendations_on_application_id", using: :btree
+  add_index "application_recommendations", ["staffer_id", "application_id"], name: "app_recs_uniq_staffer_id_application_id", unique: true, using: :btree
+  add_index "application_recommendations", ["staffer_id"], name: "index_application_recommendations_on_staffer_id", using: :btree
 
   create_table "applications", force: :cascade do |t|
     t.text     "cover_letter"
