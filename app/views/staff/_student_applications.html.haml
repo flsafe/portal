@@ -16,17 +16,20 @@
             - if app.application_events.any?
               - event = app.application_events.first
               .application-title
-                = event.title.titleize
+                = "#{event.title.titleize} #{event.created_at.to_s(:long)}"
               .event-description
                 = event.notes
-              %br
-              Recruiter:
-              .application-recruiter
-                .name
-                  = app.opportunity.employer.name
-                .email
-                  = app.opportunity.employer.email
-                .phone
-                  = app.opportunity.employer.phone
+            - else
+              .application-title= "Applied #{app.created_at.to_s(:long)}"
+
+            %br
+            Recruiter:
+            .application-recruiter
+              .name
+                = app.opportunity.employer.name
+              .email
+                = app.opportunity.employer.email
+              .phone
+                = app.opportunity.employer.phone
               %br
               = link_to "Edit", staff_edit_student_placement_profile_path(@student, app), class: 'btn btn-default'

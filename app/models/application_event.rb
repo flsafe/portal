@@ -14,10 +14,7 @@
 #
 
 class ApplicationEvent < ActiveRecord::Base
-  INITIAL_APP_EVENT = 'applied'
-
   APP_EVENTS = %w[
-    applied
     application_rejected
     application_no_response
     screen_interview
@@ -32,6 +29,6 @@ class ApplicationEvent < ActiveRecord::Base
   belongs_to :staffer
 
   validates :title, :application, presence: true
-  validates :staffer, presence: true, unless: "title.eql? '#{ApplicationEvent::INITIAL_APP_EVENT}'"
+  validates :staffer, presence: true
   validates :title, inclusion: {in: APP_EVENTS}
 end
