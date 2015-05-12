@@ -17,7 +17,15 @@
 #
 
 class ActivityMessage < ActiveRecord::Base
-  default_scope { order('created_at DESC') }
+  default_scope { 
+    order('created_at DESC')
+    .includes(application: {opportunity: :company})
+    .includes(application: :student)
+    .includes(application: :application_state_changed_by)
+    .includes(:application_event, :staffer, :employer)
+    .includes(opportunity: :company)
+  }
+
   belongs_to :application
   belongs_to :application_event
   belongs_to :employer

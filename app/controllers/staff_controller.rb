@@ -89,11 +89,7 @@ class StaffController < ApplicationController
 
   def activity
     @activity_messages = current_user.school.activity_messages
-                                    .includes(application: {opportunity: :company})
-                                    .includes(application: :student)
-                                    .includes(application: :application_state_changed_by)
-                                    .includes(:application_event)
-                                    .paginate(page: params[:page], per_page: 25)
+                                            .paginate(page: params[:page], per_page: 25)
   end
 
   def recomendations

@@ -3,7 +3,7 @@
     .col-sm-3
       %span.timestamp= msg.created_at.to_s(:long)
     .col-sm-9
-      %span.staff_name= msg.application.application_state_changed_by.name
+      %span.staff_name= msg.staffer.name
       %span.message recommended
       %span.message= link_to "#{msg.application.student.name}'s application", staff_application_path(msg.application)
       %span.message to 
