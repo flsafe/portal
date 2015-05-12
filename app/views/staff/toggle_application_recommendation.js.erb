@@ -1,0 +1,10 @@
+$('#recommended-applications').html("<%= escape_javascript render('recommended_applications')%>");
+<% if @recommendation %>
+  $('#star-<%= @application.id %>').addClass('glyphicon glyphicon-star');
+  $('#button-<%= @application.id %>').removeClass('btn-primary');
+  $('#button-<%= @application.id %>').addClass('btn-warning');
+<% else %>
+  $('#star-<%= @application.id %>').removeClass('glyphicon glyphicon-star');
+  $('#button-<%= @application.id %>').removeClass('btn-warning');
+  $('#button-<%= @application.id %>').addClass('btn-primary');
+<% end %>

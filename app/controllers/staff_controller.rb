@@ -123,12 +123,19 @@ class StaffController < ApplicationController
                                            .limit(30)
   end
 
-  def create_application_recommendation
+  def toggle_application_recommendation
     @application = Application.through_partners(current_user.school).includes(:opportunity).find(params[:id])
     @opportunity = @application.opportunity
-    current_user.application_recommendations.create!(application: @application)
+    @recommendation = current_user.application_recommendations.find_by(application_id: @application.id)
+    if @recommendation
+      @recommendation.destroy
+      @recommendation = nil
+    else
+      @recommendation = current_user.application_recommendations.create!(application: @application)
+    end
     @recommended_applications = Application.includes(:student)
-                                           .where(id: current_user.application_recommendations.pluck(:application_id))
+                                           .where(id: current_user.application_recommendations.pluck(:application_id),
+                                                  opportunity: @opportunity)
     respond_to do |format|
       format.js
     end

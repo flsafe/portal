@@ -6,8 +6,9 @@
           - student = application.student
           .col-sm-6
             .panel.panel-default
-              .person-box{'data-student-id': student.id}
+              .person-box
                 .panel-body
+                  %span{id: "star-#{application.id}", class: (@recommended_applications.include?(application) ? 'glyphicon glyphicon-star' : '')}
                   = image_tag student.avatar.medium_avatar, class: 'img-circle', 'data-student-id' => student.id
                 .panel-footer
                   .name
@@ -21,7 +22,7 @@
                       = student.phone
                   %br
                   .actions
-                    = link_to "Recommend", staff_create_application_recommendation_path(application), remote: true, method: :post, class: 'btn btn-xs btn-primary'
+                    = link_to "Recommend", staff_create_application_recommendation_path(application), remote: true, method: :post, id: "button-#{application.id}", class: (@recommended_applications.include?(application) ? 'btn btn-xs btn-warning' : 'btn btn-xs btn-primary')
                     = link_to "Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
   .col-sm-3
     = render 'recommended_applications'
