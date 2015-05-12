@@ -29,7 +29,7 @@ class Application < ActiveRecord::Base
   after_create :email_new_application, :pub_new_application
   after_update :email_updated_application, :pub_updated_application
 
-  validates :application_state_changed_date, :application_state_changed_by, presence: true, if: 'application_state.present?'
+  validates :application_state_changed_date, :application_state_changed_by, presence: true, unless: "application_state.eql? 'pending'"
   validates :application_state, inclusion: { in: %w[pending approved rejected] }, if: 'application_state.present?'
   validates :cover_letter, presence: true
   validates :cover_letter, uniqueness: true
