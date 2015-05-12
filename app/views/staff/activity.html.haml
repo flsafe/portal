@@ -12,6 +12,8 @@
       = render 'application_event_message_box', msg: msg
     - elsif msg.type.eql? 'OpportunityMessage'
       = render 'opportunity_message_box', msg: msg
+    - elsif msg.type.eql? 'ApplicationRecommendationMessage'
+      = render 'application_recommendation_message_box', msg: msg
     - else
       - raise "Unknown message type: #{msg.type}"
   = will_paginate(@activity_messages, renderer: BootstrapPagination::Rails)

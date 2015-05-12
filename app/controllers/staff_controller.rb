@@ -28,7 +28,6 @@ class StaffController < ApplicationController
   def events
     set_staff_inbox_counts
     @active_button = params[:type] || 'pending'
-
     @applications = if @active_button.eql? 'archived'
                       Application.through_partners(current_user.school)
                                  .includes(:student, opportunity: :company)
@@ -132,6 +131,9 @@ class StaffController < ApplicationController
       @recommendation = nil
     else
       @recommendation = current_user.application_recommendations.create!(application: @application)
+      ApplicationRecommendationMessage.create!(school: current_user.school,
+                                               staffer: current_user,
+                                               application: @application)
     end
     @recommended_applications = Application.includes(:student)
                                            .where(id: current_user.application_recommendations.pluck(:application_id),
