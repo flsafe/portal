@@ -31,6 +31,7 @@ class ApplicationEvent < ActiveRecord::Base
   belongs_to :application
   belongs_to :staffer
 
-  validates :title, :application, :staffer, presence: true
+  validates :title, :application, presence: true
+  validates :staffer, presence: true, unless: "title.eql? #{ApplicationEvent::INITIAL_APP_EVENT}"
   validates :title, inclusion: {in: APP_EVENTS}
 end
