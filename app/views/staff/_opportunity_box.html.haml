@@ -13,7 +13,7 @@
                 = link_to opp.title, staff_opportunity_path(opp)
               .company-name
                 %strong= company.name
-                = " - #{opp.city}, #{opp.state}"
+                = "#{opp.city}, #{opp.state}"
               .recruiter
                 = "Recruiter: #{opp.employer.email}"
               %br
