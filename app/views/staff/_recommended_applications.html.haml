@@ -3,6 +3,8 @@
     .panel-body
       %span.title
         Recommended
-        %hr
-        - @recommended_applications.each do |application|
+      %hr
+      %ol
+      - @recommended_applications.each do |application|
+        %li{id: "student-id-#{application.student.id}"}
           = application.student.name

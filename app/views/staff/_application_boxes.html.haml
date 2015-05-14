@@ -23,6 +23,7 @@
                   %br
                   .actions
                     = link_to "Recommend", staff_create_application_recommendation_path(application), remote: true, method: :post, id: "button-#{application.id}", class: (@recommended_applications.include?(application) ? 'btn btn-xs btn-warning' : 'btn btn-xs btn-primary')
-                    = link_to "Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
+                    = link_to "Portfolio", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
+                    = link_to "Application", staff_application_path(application), class: 'btn btn-xs btn-default'
   .col-sm-3
     = render 'recommended_applications'

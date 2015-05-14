@@ -10,7 +10,7 @@
                   = image_tag student.avatar.medium_avatar, class: 'img-circle'
                 .panel-footer
                   .name
-                    = link_to "#{student.first_name} #{student.last_name}", staff_student_placement_profile_path(student)
+                    = student.name
                   .info
                     .semester
                       = "#{student.semester} #{student.year}".titleize
@@ -22,3 +22,4 @@
                   .actions
                     = link_to "Recommend", '#', class: 'btn btn-xs btn-primary', 'data-recommend-button' => student.id
                     = link_to "Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
+                    = link_to "View Applications", staff_student_placement_profile_path(student), class: 'btn btn-xs btn-default'

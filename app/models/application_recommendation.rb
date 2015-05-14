@@ -11,6 +11,8 @@
 #
 
 class ApplicationRecommendation < ActiveRecord::Base
+  default_scope { joins(application: :student).order('users.last_name ASC') }
+
   belongs_to :staffer
   belongs_to :application
 
