@@ -20,6 +20,5 @@
                       = student.phone
                   %br
                   .actions
-                    = link_to "Recommend", '#', class: 'btn btn-xs btn-primary', 'data-recommend-button' => student.id
-                    = link_to "Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
+                    = link_to "View Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
                     = link_to "View Applications", staff_student_placement_profile_path(student), class: 'btn btn-xs btn-default'
