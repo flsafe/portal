@@ -22,7 +22,7 @@ class Application < ActiveRecord::Base
   belongs_to :opportunity, counter_cache: true
   belongs_to :student
   belongs_to :application_state_changed_by, foreign_key: :application_state_changed_by, class_name: 'Staffer'
-  has_many :application_events, -> { order('event_date DESC') }
+  has_many :application_events, -> { order(event_date: :desc, created_at: :desc) }
 
   after_create :email_new_application, :pub_new_application
   after_update :email_updated_application, :pub_updated_application

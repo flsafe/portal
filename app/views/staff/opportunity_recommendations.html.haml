@@ -1,0 +1,6 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :opportunities
+
+= content_for(:center_content) do
+  = render 'opportunity_box', opp: @opportunity, actions: false
+  %hr

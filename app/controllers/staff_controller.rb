@@ -118,6 +118,12 @@ class StaffController < ApplicationController
                                            .limit(30)
   end
 
+  def opportunity_recommendations
+    @opportunity = Opportunity.partnered(current_user.school)
+                              .find(params[:id])
+    set_filtered_students
+  end
+
   def toggle_application_recommendation
     @application = Application.through_partners(current_user.school).includes(:opportunity).find(params[:id])
     @opportunity = @application.opportunity
@@ -176,14 +182,7 @@ class StaffController < ApplicationController
   end
 
   def students
-    @campus = @campuses.find_by(id: params[:campus_id]) || @campuses.find{|c| c.city =~ /#{current_user.city}/i} || @campuses.first
-    @year = (params[:year] || Date.today.year).to_i
-    @semester = params[:semester] || Student.current_semester
-    @students = Student.where(campus_id: @campus,
-                              year: @year,
-                              semester: Student.semesters[@semester])
-                       .order(:last_name, :first_name)
-                       .paginate(page: params[:page], per_page: 10)
+    set_filtered_students  
   end
 
   def new_student
@@ -221,6 +220,7 @@ class StaffController < ApplicationController
   def edit_student_placement_profile
     @application = @student.applications.includes(:application_events, opportunity: :company).find(params[:application_id])
     @events = @application.application_events
+    self.session_redirect = staff_edit_student_placement_profile_url(@student, @application)
   end
 
   def create_student_placement_event
@@ -231,7 +231,7 @@ class StaffController < ApplicationController
                                       application: @application,
                                       staffer: current_user,
                                       application_event: @event)
-      redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Added"})
+      redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Note Added"})
     else
       render 'edit_student_placement_profile'
     end
@@ -241,13 +241,8 @@ class StaffController < ApplicationController
     @event = ApplicationEvent.includes(application: :student).find(params[:event_id])
     @application = @event.application
     @student = @application.student
-    if @application.application_events.count > 1 && @event.destroy
-      @event.destroy
-      redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Event Deleted"})
-    else 
-      @events = @application.application_events
-      redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {alert: "Can't delete the 'Applied' event"})
-    end
+    @event.destroy
+    redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Note Deleted"})
   end
 
   def update_student_placement_profile
@@ -267,6 +262,17 @@ class StaffController < ApplicationController
     @pending_count = Application.through_partners(current_user.school).pending.count
     @archived_count = Application.through_partners(current_user.school).approved.count
     @rejected_count = Application.through_partners(current_user.school).rejected.count
+  end
+
+  def set_filtered_students
+    @campus = @campuses.find_by(id: params[:campus_id]) || @campuses.find{|c| c.city =~ /#{current_user.city}/i} || @campuses.first
+    @year = (params[:year] || Date.today.year).to_i
+    @semester = params[:semester] || Student.current_semester
+    @students = Student.where(campus_id: @campus,
+                              year: @year,
+                              semester: Student.semesters[@semester])
+                       .order(:last_name, :first_name)
+                       .paginate(page: params[:page], per_page: 10)
   end
 
   def ensure_student_belongs_to_staff

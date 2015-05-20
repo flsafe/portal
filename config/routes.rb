@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
     get '/jobs' => 'staff#opportunities', as: :staff_opportunities
     get '/jobs/:id' => 'staff#opportunity', as: :staff_opportunity
+    get 'jobs/:id/recommendation' => 'staff#opportunity_recommendations', as: :staff_opportunity_recommendations
     get '/jobs/:id/applications' => 'staff#opportunity_applications', as: :staff_opportunity_applications
     get '/campuses' => 'staff#campuses', as: :staff_campuses
 
