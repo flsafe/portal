@@ -1,0 +1,9 @@
+<% if @recommendation %>
+  $('#star-<%= @student.id %>').removeClass('hide-star');
+  $('#button-<%= @student.id %>').removeClass('btn-primary');
+  $('#button-<%= @student.id %>').addClass('btn-warning');
+<% else %>
+  $('#star-<%= @student.id %>').addClass('hide-star');
+  $('#button-<%= @student.id %>').removeClass('btn-warning');
+  $('#button-<%= @student.id %>').addClass('btn-primary');
+<% end %>

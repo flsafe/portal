@@ -7,6 +7,8 @@
             .panel.panel-default
               .person-box{'data-student-id': student.id}
                 .panel-body
+                  - if render_recommendation_button
+                    %span{id: "star-#{student.id}", class: "glyphicon glyphicon-star #{@opportunity_recommendations.none?{|rec| rec.opportunity == @opportunity && rec.student == student} ? 'hide-star' : ''}"}
                   = image_tag student.avatar.medium_avatar, class: 'img-circle'
                 .panel-footer
                   .name
@@ -20,6 +22,7 @@
                       = student.phone
                   %br
                   .actions
-                    = link_to "Recommend", staff_toggle_opportunity_recommendation_path(@opportunity, student), class: 'btn btn-xs btn-primary', remote: true, method: :post
+                    - if render_recommendation_button
+                      = link_to "Recommend", staff_toggle_opportunity_recommendation_path(@opportunity, student), id: "button-#{student.id}", class: 'btn btn-xs btn-primary', remote: true, method: :post
                     = link_to "View Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
                     = link_to "View Applications", staff_student_placement_profile_path(student), class: 'btn btn-xs btn-default'

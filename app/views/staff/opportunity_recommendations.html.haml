@@ -7,5 +7,5 @@
   %h1 Student Recommendations 
   = render 'student_filter_form', target_path: staff_opportunity_recommendations_path
   %br
-  = render 'student_boxes', students: @students
+  = render 'student_boxes', students: @students, render_recommendation_button: true
   = will_paginate @students, renderer: BootstrapPagination::Rails

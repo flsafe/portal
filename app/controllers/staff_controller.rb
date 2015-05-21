@@ -122,6 +122,7 @@ class StaffController < ApplicationController
   def opportunity_recommendations
     @opportunity = Opportunity.through_partners(current_user.school)
                               .find(params[:id])
+    @opportunity_recommendations = current_user.opportunity_recommendations
     set_filtered_students
   end
 
@@ -136,6 +137,7 @@ class StaffController < ApplicationController
                                                                          opportunity: @opportunity,
                                                                          student: @student)
     end
+    @opportunity_recommendations = current_user.opportunity_recommendations
     respond_to do |format|
       format.js
     end
@@ -155,8 +157,8 @@ class StaffController < ApplicationController
                                                application: @application)
     end
     @recommended_applications = Application.includes(:student)
-                                                     .where(id: current_user.application_recommendations.pluck(:application_id),
-                                                     opportunity: @opportunity)
+                                            .where(id: current_user.application_recommendations.pluck(:application_id),
+                                                   opportunity: @opportunity)
     respond_to do |format|
       format.js
     end
