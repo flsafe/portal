@@ -3,15 +3,15 @@
     .panel.panel-default
       .panel-body
         = render 'student_profile_header'
-  .row
-    .col-sm-12
-      .application-events-title 
-        %span.title= @application.opportunity.title
-        %span.company= @application.opportunity.company.name
-        %span.location= "#{@application.opportunity.city} #{@application.opportunity.state}"
-        %br
-        %span.applied 
-          = "Applied #{@application.created_at.to_s(:long)}"
+.row
+  .col-sm-12
+    .application-events-title 
+      %span.title= @application.opportunity.title
+      %span.company= @application.opportunity.company.name
+      %span.location= "#{@application.opportunity.city} #{@application.opportunity.state}"
+      %br
+      %span.applied 
+        = "Applied #{@application.created_at.to_s(:long)}"
 .row
   .col-sm-7
     - @events.each do |e|
