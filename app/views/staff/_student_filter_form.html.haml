@@ -1,0 +1,11 @@
+= form_tag target_path, method: :get, class: 'form-inline' do
+  .form-group
+    = label_tag 'semester', 'Chohort'
+    = select_tag(:semester, options_for_select(Student.semesters.map{|k, v| [k.titleize, k]}, @semester), class: 'form-control')
+  .form-group
+    = label_tag 'year', 'Year'
+    = select_tag(:year, options_for_select((@year-10..@year+ 1).to_a.map{|y| [y, y]}, @year), class: 'form-control')
+  .form-group
+    = label_tag 'campus_id', 'Campus'
+    = select_tag(:campus_id, options_for_select(@campuses.map{|c| [c.full_name, c.id]}, (@campus ? @campus.id : nil)), class: 'form-control')
+  = submit_tag 'Filter', class: 'btn btn-default'
