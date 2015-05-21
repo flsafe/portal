@@ -38,7 +38,7 @@ class Application < ActiveRecord::Base
   mount_uploader :resume_file, ResumeFileUploader
 
   def self.through_partners(school)
-    self.where(opportunity: Opportunity.partnered(school))
+    self.where(opportunity: Opportunity.through_partners(school))
   end
 
   def self.pending

@@ -25,10 +25,10 @@ class Opportunity < ActiveRecord::Base
 
   validates :company, :employer, presence: true
 
-  def self.partnered(school)
+  def self.through_partners(school)
     ids = Opportunity.joins(company: {employers: :partnerships})
-                            .select('DISTINCT opportunities.id')
-                            .where('partnerships.school_id = ?', school.id)
+                                .select('DISTINCT opportunities.id')
+                                .where('partnerships.school_id = ?', school.id)
     Opportunity.includes(:company).where(id: ids).order('created_at DESC')
   end
 end

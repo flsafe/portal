@@ -20,5 +20,6 @@
                       = student.phone
                   %br
                   .actions
+                    = link_to "Recommend", staff_toggle_opportunity_recommendation_path(@opportunity, student), class: 'btn btn-xs btn-primary', remote: true, method: :post
                     = link_to "View Resume", staff_student_resume_path(student), class: 'btn btn-xs btn-default'
                     = link_to "View Applications", staff_student_placement_profile_path(student), class: 'btn btn-xs btn-default'

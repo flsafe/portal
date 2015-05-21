@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511033421) do
+ActiveRecord::Schema.define(version: 20150521023727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,20 @@ ActiveRecord::Schema.define(version: 20150511033421) do
   end
 
   add_index "opportunities", ["company_id"], name: "index_opportunities_on_company_id", using: :btree
+
+  create_table "opportunity_recommendations", force: :cascade do |t|
+    t.integer  "staffer_id"
+    t.integer  "student_id"
+    t.integer  "opportunity_id"
+    t.text     "recommendation_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "opportunity_recommendations", ["opportunity_id"], name: "index_opportunity_recommendations_on_opportunity_id", using: :btree
+  add_index "opportunity_recommendations", ["staffer_id", "student_id", "opportunity_id"], name: "unique_staffer_student_opportunity", unique: true, using: :btree
+  add_index "opportunity_recommendations", ["staffer_id"], name: "index_opportunity_recommendations_on_staffer_id", using: :btree
+  add_index "opportunity_recommendations", ["student_id"], name: "index_opportunity_recommendations_on_student_id", using: :btree
 
   create_table "partnerships", force: :cascade do |t|
     t.integer  "employer_id"

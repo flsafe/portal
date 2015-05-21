@@ -31,6 +31,7 @@
 class Staffer < User
   belongs_to :school
   has_many :application_recommendations
+  has_many :opportunity_recommendations
 
   validates :first_name, :last_name, :city, :state, presence: true
 end
