@@ -6,11 +6,11 @@ class StaffController < ApplicationController
   before_action :set_staff_campuses
   before_action :ensure_campus_belongs_to_staff, only: [:students]
   before_action :ensure_student_belongs_to_staff, only: [:inbox_edit_student_placement_profile,
-                                                                                         :edit_student_placement_profile,
-                                                                                         :student_placement_profile,
-                                                                                         :new_recommendation,
-                                                                                         :student_resume,
-                                                                                         :toggle_opportunity_recommendation]
+                                                         :edit_student_placement_profile,
+                                                         :student_placement_profile,
+                                                         :new_recommendation,
+                                                         :student_resume,
+                                                         :toggle_opportunity_recommendation]
 
   def edit_profile
   end
@@ -31,14 +31,14 @@ class StaffController < ApplicationController
     @active_button = params[:type] || 'pending'
     @applications = if @active_button.eql? 'archived'
                       Application.through_partners(current_user.school)
-                                        .includes(:student, opportunity: :company)
-                                        .approved
-                                        .paginate(page: params[:page], per_page: 12)
+                                 .includes(:student, opportunity: :company)
+                                 .approved
+                                 .paginate(page: params[:page], per_page: 12)
                     elsif @active_button.eql? 'rejected'
                       Application.through_partners(current_user.school)
-                                        .includes(:student, opportunity: :company)
-                                        .rejected
-                                        .paginate(page: params[:page], per_page: 12)
+                                 .includes(:student, opportunity: :company)
+                                 .rejected
+                                 .paginate(page: params[:page], per_page: 12)
                     else
                       Application.through_partners(current_user.school)
                                  .includes(:student, opportunity: :company)
@@ -133,8 +133,8 @@ class StaffController < ApplicationController
       @recommendation = nil
     else
       @recommendation = current_user.opportunity_recommendations.create!(staffer: current_user,
-                                                                                                                        opportunity: @opportunity,
-                                                                                                                        student: @student)
+                                                                         opportunity: @opportunity,
+                                                                         student: @student)
     end
     respond_to do |format|
       format.js
@@ -151,12 +151,12 @@ class StaffController < ApplicationController
     else
       @recommendation = current_user.application_recommendations.create!(application: @application)
       ApplicationRecommendationMessage.create!(school: current_user.school,
-                                                                             staffer: current_user,
-                                                                             application: @application)
+                                               staffer: current_user,
+                                               application: @application)
     end
     @recommended_applications = Application.includes(:student)
-                                                                         .where(id: current_user.application_recommendations.pluck(:application_id),
-                                                                         opportunity: @opportunity)
+                                                     .where(id: current_user.application_recommendations.pluck(:application_id),
+                                                     opportunity: @opportunity)
     respond_to do |format|
       format.js
     end
