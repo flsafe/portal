@@ -258,7 +258,14 @@ class StaffController < ApplicationController
     @application = @event.application
     @student = @application.student
     @event.destroy
-    redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Note Deleted"})
+    @events = @application.application_events
+
+    respond_to do |format|
+      format.html {
+        redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Note Deleted"})
+      }
+      format.js
+    end
   end
 
   def update_student_placement_profile

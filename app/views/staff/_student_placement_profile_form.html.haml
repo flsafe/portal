@@ -14,23 +14,7 @@
         = "Applied #{@application.created_at.to_s(:long)}"
 .row
   .col-sm-7
-    - @events.each do |e|
-      .media
-        %hr
-        .media-body
-          .application-event
-            .row
-              .col-sm-3.event-date
-                = e.event_date.to_formatted_s(:long) if e.event_date
-              .col-sm-8
-                .event-title
-                  = e.title.to_s.titleize
-                .event-description
-                  %p= e.notes
-                  %p= e.description
-        .media-right
-          - if e.id.present?
-            = link_to "Delete", staff_destroy_student_placement_event_path(e), method: :delete, class: 'btn btn-xs btn-danger'
+    = render 'application_event_boxes'
   .col-sm-5
     .panel.panel-default
       .panel-body
