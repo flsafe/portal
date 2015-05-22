@@ -1,3 +1,4 @@
+$('#recommended-students').html("<%=escape_javascript render('recommended_students')%>")
 <% if @recommendation %>
   $('#star-<%= @student.id %>').removeClass('hide-star');
   $('#button-<%= @student.id %>').removeClass('btn-primary');

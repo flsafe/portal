@@ -1,0 +1,10 @@
+.recommended-students{id: 'recommended-students'}
+  .panel.panel-default
+    .panel-body
+      %span.title
+        Recommended
+      %hr
+      %ol
+      - @recommended_students.each do |student|
+        %li{id: "student-id-#{student.id}"}
+          = student.name

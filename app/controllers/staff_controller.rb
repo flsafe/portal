@@ -123,12 +123,16 @@ class StaffController < ApplicationController
     @opportunity = Opportunity.through_partners(current_user.school)
                               .find(params[:id])
     @opportunity_recommendations = current_user.opportunity_recommendations
+                                               .where(opportunity: @opportunity)
+                                               .includes(:student, :opportunity)
+    @recommended_students = @opportunity_recommendations.map(&:student)
     set_filtered_students
   end
 
   def toggle_opportunity_recommendation
     @opportunity = Opportunity.through_partners(current_user.school).find(params[:opportunity_id])
-    @recommendation = current_user.opportunity_recommendations.find_by(opportunity: @opportunity, student: @student)
+    @recommendation = current_user.opportunity_recommendations.includes(:student, :opportunity)
+                                                              .find_by(opportunity: @opportunity, student: @student)
     if @recommendation
       @recommendation.destroy
       @recommendation = nil
@@ -138,6 +142,9 @@ class StaffController < ApplicationController
                                                                          student: @student)
     end
     @opportunity_recommendations = current_user.opportunity_recommendations
+                                               .includes(:student)
+                                               .where(opportunity: @opportunity)
+    @recommended_students = @opportunity_recommendations.map(&:student)
     respond_to do |format|
       format.js
     end
