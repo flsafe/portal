@@ -22,7 +22,7 @@
           .col-sm-3
             .approve-reject-buttons
               - if application.pending?
-                = link_to "√ Approve", staff_application_approve_path(application), class: 'btn btn-xs btn-success', line_item_id: application.id, method: :post
-                = link_to "Reject", staff_application_reject_path(application), class: 'btn btn-xs btn-danger', line_item_id: application.id, method: :post
+                = link_to "√ Approve", staff_application_approve_path(application), class: 'btn btn-xs btn-success', line_item_id: application.id, method: :post, remote: true
+                = link_to "Reject", staff_application_reject_path(application), class: 'btn btn-xs btn-danger', line_item_id: application.id, method: :post, remote: true
               - if application.rejected?
-                = link_to "√ Approve", staff_application_approve_path(application), class: 'btn btn-xs btn-success', line_item_id: application.id, method: :post
+                = link_to "√ Approve", staff_application_approve_path(application, type: 'rejected'), class: 'btn btn-xs btn-success', line_item_id: application.id, method: :post, remote: true

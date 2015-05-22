@@ -1,0 +1,6 @@
+%div{id: 'applications-inbox'}
+  = render 'messages_subtabs', active: @active_button
+  - if @applications.any?
+    - @applications.each do |app|
+      = render 'application_box', application: app
+  = will_paginate(@applications, renderer: BootstrapPagination::Rails)

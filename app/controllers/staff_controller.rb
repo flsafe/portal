@@ -28,23 +28,7 @@ class StaffController < ApplicationController
 
   def events
     set_staff_inbox_counts
-    @active_button = params[:type] || 'pending'
-    @applications = if @active_button.eql? 'archived'
-                      Application.through_partners(current_user.school)
-                                 .includes(:student, opportunity: :company)
-                                 .approved
-                                 .paginate(page: params[:page], per_page: 12)
-                    elsif @active_button.eql? 'rejected'
-                      Application.through_partners(current_user.school)
-                                 .includes(:student, opportunity: :company)
-                                 .rejected
-                                 .paginate(page: params[:page], per_page: 12)
-                    else
-                      Application.through_partners(current_user.school)
-                                 .includes(:student, opportunity: :company)
-                                 .pending
-                                 .paginate(page: params[:page], per_page: 12)
-                    end
+    set_inbox_applications
   end
 
   def application
@@ -64,11 +48,13 @@ class StaffController < ApplicationController
     respond_to do |format| 
       if @application.save
         ApplicationMessage.create!(school: current_user.school, application: @application)
+        set_staff_inbox_counts
+        set_inbox_applications
         format.html { redirect_to staff_home_url }
-        format.json { render json: {id: @application.id, approved: @application.approved?} }
+        format.js
       else
         format.html { redirect_to staff_home_url }
-        format.json { render status: 400 } 
+        format.js{ render status: 400 } 
       end
     end
   end
@@ -303,6 +289,26 @@ class StaffController < ApplicationController
                               semester: Student.semesters[@semester])
                        .order(:last_name, :first_name)
                        .paginate(page: params[:page], per_page: 10)
+  end
+
+  def set_inbox_applications
+    @active_button = params[:type] || 'pending'
+    @applications = if @active_button.eql? 'archived'  # Approved applications are archived
+                      Application.through_partners(current_user.school)
+                                 .includes(:student, opportunity: :company)
+                                 .approved
+                                 .paginate(page: params[:page], per_page: 12)
+                    elsif @active_button.eql? 'rejected'
+                      Application.through_partners(current_user.school)
+                                 .includes(:student, opportunity: :company)
+                                 .rejected
+                                 .paginate(page: params[:page], per_page: 12)
+                    else
+                      Application.through_partners(current_user.school)
+                                 .includes(:student, opportunity: :company)
+                                 .pending
+                                 .paginate(page: params[:page], per_page: 12)
+                    end
   end
 
   def ensure_student_belongs_to_staff
