@@ -14,8 +14,6 @@
                   .name
                     = link_to student.name, staff_student_resume_path(student)
                   .info
-                    .semester
-                      = "#{student.semester} #{student.year}".titleize
                     .email
                       = student.email
                     .phone
@@ -24,7 +22,8 @@
                   .actions
                     - if render_recommendation_button
                       = link_to "Recommend", staff_toggle_opportunity_recommendation_path(@opportunity, student), id: "button-#{student.id}", class: "btn btn-xs #{@opportunity_recommendations.none?{|rec| rec.opportunity == @opportunity && rec.student == student} ? 'btn-primary' : 'btn-warning'}", remote: true, method: :post
-                    = link_to "View Applications", staff_student_placement_profile_path(student), class: 'btn btn-xs btn-default'
+                    - unless render_recommendation_button
+                      = link_to "View Applications", staff_student_placement_profile_path(student), class: 'btn btn-xs btn-default'
   - if render_recommendation_button
     .col-sm-3 
       .row
