@@ -137,6 +137,10 @@ class StaffController < ApplicationController
       @recommendation.destroy
       @recommendation = nil
     else
+      OpportunityRecommendationMessage.create!(school: current_user.school,
+                                               staffer: current_user,
+                                               opportunity: @opportunity,
+                                               student: @student) 
       @recommendation = current_user.opportunity_recommendations.create!(staffer: current_user,
                                                                          opportunity: @opportunity,
                                                                          student: @student)

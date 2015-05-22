@@ -7,7 +7,7 @@
       %span.message recommended
       %span.message= link_to "#{msg.application.student.name}'s application", staff_application_path(msg.application)
       %span.message to 
-      %span.opportunity= msg.application.opportunity.title
+      %span.opportunity= link_to msg.application.opportunity.title, staff_opportunity_applications_path(msg.application.opportunity)
       %span.message at
       %span.company= msg.application.opportunity.company.name
       %hr

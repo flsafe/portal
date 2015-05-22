@@ -29,6 +29,7 @@ class ActivityMessage < ActiveRecord::Base
   belongs_to :application
   belongs_to :application_event
   belongs_to :employer
+  belongs_to :student
   belongs_to :staffer
   belongs_to :opportunity
   belongs_to :school 
