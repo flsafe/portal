@@ -1,0 +1,21 @@
+!!! 5
+%html(lang="en")
+  %head
+    = render 'layouts/head'
+  %body
+    = render 'layouts/navbar'
+    = render 'layouts/flash'
+    .container
+      .inside-content
+        .row
+          - if content_for?(:sidebar) || content_for?(:center_content)
+            - if content_for?(:sidebar)
+              .col-sm-3
+                .panel.panel-default
+                  .panel-body
+                    = yield :sidebar
+            - if content_for(:center_content)
+              .col-sm-9
+                = yield :center_content
+          - else
+            = yield

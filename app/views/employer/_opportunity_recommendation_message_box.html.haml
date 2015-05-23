@@ -1,0 +1,11 @@
+.row
+  .activity-message-box
+    .col-sm-3
+      %span.timestamp= msg.created_at.to_s(:long)
+    .col-sm-9
+      %span.staff_name= msg.staffer.name
+      %span.message recommended
+      %span.message= link_to "#{msg.student.name}"
+      %span.message to 
+      %span.opportunity= link_to msg.opportunity.title
+      %hr

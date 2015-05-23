@@ -1,0 +1,18 @@
+= content_for(:sidebar) do
+  = render 'sidebar', active: :home
+= content_for(:center_content) do
+  %ul.nav.nav-tabs
+    %li.active{role: 'presentation'}= link_to 'Activity'
+  %br
+  = render 'activity_message_inbox'
+
+  / %ul
+  /   %li= link_to "Edit My Company", company_edit_path(@company.slug)
+  /   %li= link_to "Create A New Career Opportunity", new_opportunity_url(@company.slug)
+
+  / %h2 Career Opportunities
+  / %table.table.table-bordered
+  /   - @opportunities.each do |o|
+  /     %tr
+  /       %td= link_to o.title, edit_opportunity_url(@company.slug, o) 
+  /       %td= link_to "#{o.applications.count} Applications", opportunity_applications_path(o) 

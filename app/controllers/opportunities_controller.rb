@@ -36,7 +36,7 @@ class OpportunitiesController < ApplicationController
            opportunity: @opportunity}
         end
         OpportunityMessage.create!(msgs)
-        format.html { redirect_to company_url(@company.slug), notice: 'Opportunity was successfully created.' }
+        format.html { redirect_to employer_home_url(@company.slug), notice: 'Opportunity was successfully created.' }
         format.json { render :show, status: :created, location: @opportunity }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class OpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @opportunity.update(opportunity_params)
-        format.html { redirect_to company_url(@company.slug), notice: 'Opportunity was successfully updated.' }
+        format.html { redirect_to employer_home_url(@company.slug), notice: 'Opportunity was successfully updated.' }
         format.json { render :show, status: :ok, location: @opportunity }
       else
         format.html { render :edit }

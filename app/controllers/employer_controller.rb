@@ -1,11 +1,11 @@
-class CompanyController < ApplicationController
+class EmployerController < ApplicationController
   before_action :ensure_employer
   before_action :ensure_employer_profile_complete, except: [:edit_employer_profile, :update_employer_profile]
 
   before_action :set_company
 
-  def show
-    @opportunities = @company.opportunities.includes(:applications).all
+  def activity
+    @activity_messages = current_user.activity_feed
   end
 
   def edit_employer_profile
@@ -28,7 +28,7 @@ class CompanyController < ApplicationController
   def update
     respond_to do |format|
       if @company.update(company_params)
-        format.html{ redirect_to company_url(@company.slug) }
+        format.html{ redirect_to employer_home_url(@company.slug) }
       else
         format.html {render action: 'edit'}
       end
@@ -44,7 +44,7 @@ class CompanyController < ApplicationController
   def set_company
     @company = Company.find_by!(slug: params[:companyslug])
     return if current_user.admin_or_staff?
-    redirect_to(company_url(current_user.company.slug)) unless current_user.company.id == @company.id
+    redirect_to(employer_home_url(current_user.company.slug)) unless current_user.company.id == @company.id
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
