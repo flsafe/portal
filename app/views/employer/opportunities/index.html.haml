@@ -2,5 +2,9 @@
   = render 'employer/sidebar', active: :opportunities
 
 = content_for(:center_content) do
+  %ul.nav.nav-tabs
+    %li{class: 'active', role: 'presentation'}= link_to 'Jobs'
+  %br
+  = link_to "Post A New Job", new_employer_opportunity_path, class: 'btn btn-lg btn-primary'
   = render(@opportunities)
   = will_paginate(@opportunities, renderer: BootstrapPagination::Rails)

@@ -1,8 +1,12 @@
-
 - requirements_placeholder = "- Bachelor's degree in computer science or equivalent experience.\n- Solid grasp of distributed algorithms like RAFT, CHORD, etc.\n- Published work in distributed algorithms is a plus."
 
-- target_path = @opportunity.new_record? ? opportunities_url(@company.slug) : opportunity_url(@company.slug, @opportunity)
-= form_for [@company.slug, @opportunity], url: target_path, :html => { :class => 'form-horizontal' } do |f|
+= form_for [:employer, @opportunity], :html => { :class => 'form-horizontal' } do |f|
+  - if @opportunity.errors.any?
+    .errorExplaination.alert.alert-danger
+      %p= "#{pluralize(@opportunity.errors.count, "error")} prevented this application from being saved:"
+      %ul
+        - @opportunity.errors.full_messages.each do |msg|
+          %li= msg
   .control-group
     = f.label :title, :class => 'control-label'
     = f.text_field :title, :class => 'text_field form-control'

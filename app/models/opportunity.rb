@@ -23,7 +23,7 @@ class Opportunity < ActiveRecord::Base
   belongs_to :employer
   has_many :applications
 
-  validates :company, :employer, presence: true
+  validates :company, :employer, :title, :description, :city, :state, presence: true
 
   def self.through_partners(school)
     ids = Opportunity.joins(company: {employers: :partnerships})
