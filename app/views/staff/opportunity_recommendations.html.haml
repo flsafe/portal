@@ -3,9 +3,8 @@
 
 = content_for(:center_content) do
   = render 'opportunity_box', opp: @opportunity, actions: false
-  %hr
-  %h1 Student Recommendations 
+  %h1 Recommend Students 
   = render 'student_filter_form', target_path: staff_opportunity_recommendations_path
-  %br
+  %hr
   = render 'student_boxes', students: @students, render_recommendation_button: true
   = will_paginate @students, renderer: BootstrapPagination::Rails
