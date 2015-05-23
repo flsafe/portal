@@ -1,0 +1,8 @@
+= content_for(:sidebar) do
+  = render 'employer/sidebar', active: :students
+= content_for(:center_content) do
+  %ul.nav.nav-tabs
+    %li{class: 'active', role: 'presentation'}= link_to 'Students', ''
+  %br
+  .row
+    = render 'student_boxes', students: @students

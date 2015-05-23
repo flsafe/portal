@@ -1,13 +1,15 @@
-class EmployerController < ApplicationController
+class Employer::EmployerController < ApplicationController
+  layout 'employer'
+  
   before_action :ensure_employer
   before_action :ensure_employer_profile_complete, except: [:edit_employer_profile, :update_employer_profile]
 
   def activity
-    @activity_messages = current_user.activity_feed.paginate(page: params[:page], per_page: 15)
+    @activity_messages = ActivityMessage.employer_feed(current_user.schools.pluck(:id))
+                                        .paginate(page: params[:page], per_page: 15)
   end
 
   def edit_employer_profile
-    # TODO render profile form, update the employer password, delete invite
   end
 
   def update_employer_profile

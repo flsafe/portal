@@ -10,7 +10,7 @@
               = ""
             .media-body
               .title
-                = link_to opportunity.title, edit_opportunity_path(opportunity)
+                = link_to opportunity.title, edit_employer_opportunity_path(opportunity)
               %br
               .description
                 = truncate(opportunity.description, length: 150)
@@ -18,8 +18,7 @@
                 %span.label.label-default= opportunity.skills
               %br
               .actions
-                = link_to "View Applications (#{opportunity.applications_count || 0})", staff_opportunity_applications_path(opportunity), class: 'btn btn-default'
-                = link_to "Recommend Student", staff_opportunity_recommendations_path(opportunity), class: 'btn btn-default'
+                = link_to "View Applications (#{opportunity.applications_count || 0})", '', class: 'btn btn-default'
             .media-right
               .time-stamp
                 = "#{time_ago_in_words(opportunity.created_at)} ago"

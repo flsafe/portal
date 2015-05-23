@@ -16,7 +16,7 @@ module UserHomePage
     when user.staff? 
       staff_home_url
     when user.employer? 
-      employer_home_url(user.company.slug)
+      employer_employer_home_url
     when user.student?
       student_home_url
     else

@@ -16,7 +16,7 @@
               %li= link_to "Home", user_home_url(current_user)
               - if current_user && !current_user.admin?  # There is no profile page for the admin yet.
                 - if current_user.employer?
-                  %li= link_to("Profile", eval("edit_#{current_user.type.parameterize.underscore}_profile_path(current_user.company.slug)"))
+                  %li= link_to("Profile", eval("employer_edit_#{current_user.type.parameterize.underscore}_profile_path"))
                 - else
                   %li= link_to("Profile", eval("edit_#{current_user.type.parameterize.underscore}_profile_path"))
                 - if current_user.staff?

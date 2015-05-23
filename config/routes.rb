@@ -101,13 +101,13 @@ Rails.application.routes.draw do
   end
 
   # Employer 
-  scope '/employer', controller: :employer do
-    get '/' => :activity, as: :employer_home
-    patch '/' => :update, as: :company_update
-    get '/edit' => :edit, as: :company_edit
+  namespace :employer do
+    get '/' => 'employer#activity', as: :employer_home
+    patch '/' => 'employer#update', as: :company_update
+    get '/edit' => 'employer#edit', as: :company_edit
 
-    get '/profile' => :edit_employer_profile, as: :edit_employer_profile
-    patch '/profile' => :update_employer_profile, as: :update_employer_profile
+    get '/profile' => 'employer#edit_employer_profile', as: :edit_employer_profile
+    patch '/profile' => 'employer#update_employer_profile', as: :update_employer_profile
     resources :opportunities
     resources :students
   end

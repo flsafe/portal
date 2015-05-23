@@ -32,12 +32,5 @@ class Employer < User
   belongs_to :company
   has_many :partnerships
   has_many :schools, through: :partnerships
-
-  def activity_feed
-    ActivityMessage.where(school_id: schools.pluck(:id),
-                          type: %w[ApplicationMessage
-                                   ApplicationRecommendationMessage
-                                   OpportunityRecommendationMessage])
-  end
 end
 

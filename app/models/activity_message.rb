@@ -35,4 +35,11 @@ class ActivityMessage < ActiveRecord::Base
   belongs_to :school 
 
   validates :school, presence: true
+
+  def self.employer_feed(partner_school_ids)
+    ActivityMessage.where(school_id: partner_school_ids,
+                          type: %w[ApplicationMessage
+                                   ApplicationRecommendationMessage
+                                   OpportunityRecommendationMessage])
+  end
 end

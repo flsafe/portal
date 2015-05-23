@@ -1,4 +1,4 @@
-class OpportunitiesController < EmployerPortalController 
+class Employer::OpportunitiesController < EmployerPortalController 
   layout 'employer'
   before_action :set_company
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy]

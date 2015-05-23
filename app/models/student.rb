@@ -52,4 +52,9 @@ class Student < User
   def self.current_semester
     Student.semesters.invert[(Date.today.month - 1) / 3]
   end
+
+  def self.school_directories(school_ids)
+    school_ids = [*school_ids]
+    Student.joins(campus: :school).where('schools.id' => school_ids)
+  end
 end
