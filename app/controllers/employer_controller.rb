@@ -2,10 +2,8 @@ class EmployerController < ApplicationController
   before_action :ensure_employer
   before_action :ensure_employer_profile_complete, except: [:edit_employer_profile, :update_employer_profile]
 
-  before_action :set_company
-
   def activity
-    @activity_messages = current_user.activity_feed
+    @activity_messages = current_user.activity_feed.paginate(page: params[:page], per_page: 15)
   end
 
   def edit_employer_profile
@@ -39,12 +37,6 @@ class EmployerController < ApplicationController
 
   def ensure_employer_profile_complete
     redirect_to(edit_employer_profile_url, notice: 'Welcome! Please set your password.') unless current_user.valid?
-  end
-
-  def set_company
-    @company = Company.find_by!(slug: params[:companyslug])
-    return if current_user.admin_or_staff?
-    redirect_to(employer_home_url(current_user.company.slug)) unless current_user.company.id == @company.id
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

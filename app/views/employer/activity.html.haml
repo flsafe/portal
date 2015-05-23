@@ -5,6 +5,7 @@
     %li.active{role: 'presentation'}= link_to 'Activity'
   %br
   = render 'activity_message_inbox'
+  = will_paginate(@activity_messages, renderer: BootstrapPagination::Rails)
 
   / %ul
   /   %li= link_to "Edit My Company", company_edit_path(@company.slug)

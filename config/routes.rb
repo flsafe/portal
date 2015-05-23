@@ -101,7 +101,7 @@ Rails.application.routes.draw do
   end
 
   # Employer 
-  scope '/:companyslug', controller: :employer do
+  scope '/employer', controller: :employer do
     get '/' => :activity, as: :employer_home
     patch '/' => :update, as: :company_update
     get '/edit' => :edit, as: :company_edit

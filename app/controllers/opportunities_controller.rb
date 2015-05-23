@@ -1,5 +1,5 @@
-class OpportunitiesController < ApplicationController
-  before_action :set_company, except: [:show]
+class OpportunitiesController < EmployerPortalController 
+  before_action :set_company
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy]
 
   # GET /opportunities
@@ -60,12 +60,6 @@ class OpportunitiesController < ApplicationController
   end
 
   private
-
-  def set_company
-    @company = Company.find_by_slug!(params[:companyslug])
-    return if current_user.admin_or_staff?
-    redirect_home(current_user) unless current_user.company == @company
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_opportunity
