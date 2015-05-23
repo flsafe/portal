@@ -1,32 +1,6 @@
-- model_class = Opportunity
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:city)
-      %th= model_class.human_attribute_name(:state)
-      %th= model_class.human_attribute_name(:is_open)
-      %th= model_class.human_attribute_name(:is_affilated)
-      %th= model_class.human_attribute_name(:company_id)
-      %th= model_class.human_attribute_name(:created_at)
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @opportunities.each do |opportunity|
-      %tr
-        %td= link_to opportunity.id, opportunity_path(opportunity)
-        %td= opportunity.title
-        %td= opportunity.description
-        %td= opportunity.city
-        %td= opportunity.state
-        %td= opportunity.is_open
-        %td= opportunity.is_affilated
-        %td= opportunity.company_id
-        %td=l opportunity.created_at
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_opportunity_path(opportunity), :class => 'btn btn-mini'
+= content_for(:sidebar) do
+  = render 'employer/sidebar', active: :opportunities
 
-= link_to t('.new', :default => t("helpers.links.new")), new_opportunity_path(@company.slug), :class => 'btn btn-primary'
+= content_for(:center_content) do
+  = render(@opportunities)
+  = will_paginate(@opportunities, renderer: BootstrapPagination::Rails)

@@ -109,6 +109,7 @@ Rails.application.routes.draw do
     get '/profile' => :edit_employer_profile, as: :edit_employer_profile
     patch '/profile' => :update_employer_profile, as: :update_employer_profile
     resources :opportunities
+    resources :students
   end
 
   resources :opportunities, only: [:show] do

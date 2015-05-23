@@ -1,11 +1,14 @@
 class OpportunitiesController < EmployerPortalController 
+  layout 'employer'
   before_action :set_company
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy]
 
   # GET /opportunities
   # GET /opportunities.json
   def index
-    @opportunities = Opportunity.where(company: @company).includes(:company).all
+    @opportunities = Opportunity.where(company: @company)
+                                .includes(:company)
+                                .paginate(page: params[:page], per_page: 10)
   end
 
   # GET /opportunities/1
