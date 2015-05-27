@@ -3,6 +3,7 @@
     - applications.in_groups_of(2) do |group|
       - group.select(&:present?).each do |application|
         - student = application.student
+        - recommendation = @recommendations.find{|r| r.application.eql? application} 
         .col-sm-6
           .panel.panel-default
             .person-box{'data-student-id': student.id}
@@ -17,3 +18,8 @@
                   .phone
                     = student.phone
                 %br
+                .recommendation{class: (recommendation ? '' : 'hidden')}
+                  - if recommendation
+                    = link_to '', class: 'btn btn-xs btn-default' do
+                      %span{class: 'glyphicon glyphicon-star'}
+                      View Recommendations 

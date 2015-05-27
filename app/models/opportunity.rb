@@ -19,8 +19,6 @@
 #
 
 class Opportunity < ActiveRecord::Base
-  default_scope { order('created_at DESC') }
-
   belongs_to :company
   belongs_to :employer
   has_many :applications
@@ -31,6 +29,6 @@ class Opportunity < ActiveRecord::Base
     ids = Opportunity.joins(company: {employers: :partnerships})
                      .select('DISTINCT opportunities.id')
                      .where('partnerships.school_id = ?', school.id)
-    Opportunity.includes(:company).where(id: ids).order('created_at DESC')
+    Opportunity.includes(:company).where(id: ids).order('opportunities.created_at DESC')
   end
 end

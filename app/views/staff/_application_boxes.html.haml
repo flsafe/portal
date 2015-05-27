@@ -8,7 +8,7 @@
             .panel.panel-default
               .person-box
                 .panel-body
-                  %span{id: "star-#{application.id}", class: (@recommended_applications.include?(application) ? 'glyphicon glyphicon-star' : 'hide-star glyphicon glyphicon-star')}
+                  %span{id: "star-#{application.id}", class: (@recommended_applications.include?(application) ? 'glyphicon glyphicon-star' : 'hidden-elm glyphicon glyphicon-star')}
                   = image_tag student.avatar.medium_avatar, class: 'img-circle', 'data-student-id' => student.id
                 .panel-footer
                   .name

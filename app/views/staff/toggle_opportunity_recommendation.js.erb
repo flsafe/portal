@@ -1,10 +1,10 @@
 $('#recommended-students').html("<%=escape_javascript render('recommended_students')%>")
 <% if @recommendation %>
-  $('#star-<%= @student.id %>').removeClass('hide-star');
+  $('#star-<%= @student.id %>').removeClass('hidden-elm');
   $('#button-<%= @student.id %>').removeClass('btn-primary');
   $('#button-<%= @student.id %>').addClass('btn-warning');
 <% else %>
-  $('#star-<%= @student.id %>').addClass('hide-star');
+  $('#star-<%= @student.id %>').addClass('hidden-elm');
   $('#button-<%= @student.id %>').removeClass('btn-warning');
   $('#button-<%= @student.id %>').addClass('btn-primary');
 <% end %>

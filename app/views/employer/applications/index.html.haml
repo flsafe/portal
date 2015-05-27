@@ -4,7 +4,7 @@
   %ul.nav.nav-tabs
     %li{class: 'active', role: 'presentation'}= link_to 'Jobs', '#'
   %ol.breadcrumb
-    %li{role: 'presentation'}= link_to 'Jobs', employer_opportunities_path
-    %li{class: 'active', role: 'presentation'}= link_to 'Applications', employer_opportunity_applications_path(@opportunity)
+    %li= link_to 'Jobs', employer_opportunities_path
+    %li{class: 'active'}= link_to "Applications for #{@opportunity.title}", employer_opportunity_applications_path(@opportunity)
   %br
   = render 'application_boxes', applications: @applications
