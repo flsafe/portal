@@ -8,6 +8,13 @@ class Employer::ApplicationsController < EmployerPortalController
     @recommendations = ApplicationRecommendation.where(application: @applications)
   end
 
+  def show
+    @application = Application.includes(:student)
+                              .find_by(opportunity: @opportunity, id: params[:id])
+    @recommendations = ApplicationRecommendation.includes(:staffer)
+                                                .where(application: @application)
+  end
+
   private
 
   def ensure_opportunity_belongs_to_employer

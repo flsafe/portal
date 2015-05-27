@@ -20,6 +20,6 @@
                 %br
                 .recommendation{class: (recommendation ? '' : 'hidden')}
                   - if recommendation
-                    = link_to '', class: 'btn btn-xs btn-default' do
+                    = link_to employer_opportunity_application_path(@opportunity, application), class: 'btn btn-xs btn-warning' do
                       %span{class: 'glyphicon glyphicon-star'}
                       View Recommendations 

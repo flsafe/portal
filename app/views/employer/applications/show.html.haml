@@ -1,0 +1,35 @@
+= content_for(:sidebar) do
+  = render 'employer/sidebar', active: :opportunities
+= content_for(:center_content) do
+  %ul.nav.nav-tabs
+    %li{class: 'active', role: 'presentation'}= link_to 'Jobs', '#'
+  %ol.breadcrumb
+    %li= link_to "Jobs", employer_opportunities_path
+    %li= link_to "#{@opportunity.title}", employer_opportunity_applications_path(@opportunity, @application)
+    %li.active= "#{@application.student.name}'s Recommendations"
+  %ul.media-list
+    %li.media
+      .media-left
+        = image_tag @application.student.avatar.medium_avatar, class: 'media-object img-circle'
+      .media-body
+        %p Student information. Lorem ipsum dolor sit amet.
+        %br
+        %br
+        %br
+        %hr
+        - @recommendations.each do |rec|
+          .employer-application-recommendation
+            .media
+              .media-left
+                = image_tag rec.staffer.avatar.medium_avatar, class: 'media-object img-rounded'
+              .media-body
+                .staffer-location
+                  %span.staffer-name= rec.staffer.name
+                  %span.staffer-school= rec.staffer.school.name
+                  %span.staffer-city= rec.staffer.city
+                .staffer-email
+                  = rec.staffer.email
+                .staffer-phone
+                  = rec.staffer.phone.present? ? rec.staffer.phone : "(915) 920-0102"
+
+                %blockquote.staffer-quote= "\"Lorem ipsum dolor sit amet, vix te malis semper quaestio. Epicurei persecuti ad vis. Regione probatus eos ei. Probatus constituam cotidieque et eum.\""
