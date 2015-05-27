@@ -1,11 +1,10 @@
 class Employer::OpportunitiesController < EmployerPortalController 
-  layout 'employer'
-
   before_action :set_company
   before_action :set_opportunity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @opportunities = Opportunity.where(company: @company)
+    @opportunities = Opportunity.where(employer: current_user,
+                                       company: @company)
                                 .includes(:company)
                                 .order(created_at: :desc)
                                 .paginate(page: params[:page], per_page: 10)

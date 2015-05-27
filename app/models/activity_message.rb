@@ -24,6 +24,7 @@ class ActivityMessage < ActiveRecord::Base
     .includes(application: :application_state_changed_by)
     .includes(:application_event, :staffer, :employer)
     .includes(opportunity: :company)
+    .includes(:student)
   }
 
   belongs_to :application

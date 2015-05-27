@@ -1,0 +1,10 @@
+= content_for(:sidebar) do
+  = render 'employer/sidebar', active: :opportunities
+= content_for(:center_content) do
+  %ul.nav.nav-tabs
+    %li{class: 'active', role: 'presentation'}= link_to 'Jobs', '#'
+  %ol.breadcrumb
+    %li{role: 'presentation'}= link_to 'Jobs', employer_opportunities_path
+    %li{class: 'active', role: 'presentation'}= link_to 'Applications', employer_opportunity_applications_path(@opportunity)
+  %br
+  = render 'application_boxes', applications: @applications

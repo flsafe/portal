@@ -1,4 +1,6 @@
 class EmployerPortalController < ApplicationController
+  layout 'employer'
+  
   before_action :ensure_employer
   before_action :set_company
 

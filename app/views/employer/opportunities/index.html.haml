@@ -4,6 +4,8 @@
 = content_for(:center_content) do
   %ul.nav.nav-tabs
     %li{class: 'active', role: 'presentation'}= link_to 'Jobs'
+  %ol.breadcrumb
+    %li{class: 'active', role: 'presentation'}= link_to 'Jobs', employer_opportunities_path
   %br
   = link_to "Post A New Job", new_employer_opportunity_path, class: 'btn btn-lg btn-primary'
   = render(@opportunities)

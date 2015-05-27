@@ -1,0 +1,19 @@
+.col-sm-9
+  .row
+    - applications.in_groups_of(2) do |group|
+      - group.select(&:present?).each do |application|
+        - student = application.student
+        .col-sm-6
+          .panel.panel-default
+            .person-box{'data-student-id': student.id}
+              .panel-body
+                = image_tag student.avatar.medium_avatar, class: 'img-circle'
+              .panel-footer
+                .name
+                  = link_to student.name
+                .info
+                  .email
+                    = student.email
+                  .phone
+                    = student.phone
+                %br

@@ -1,6 +1,4 @@
-class Employer::EmployerController < ApplicationController
-  layout 'employer'
-  
+class Employer::EmployerController < EmployerPortalController
   before_action :ensure_employer
   before_action :ensure_employer_profile_complete, except: [:edit_employer_profile, :update_employer_profile]
 
