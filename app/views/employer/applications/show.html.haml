@@ -6,30 +6,64 @@
   %ol.breadcrumb
     %li= link_to "Jobs", employer_opportunities_path
     %li= link_to "#{@opportunity.title}", employer_opportunity_applications_path(@opportunity, @application)
-    %li.active= "#{@application.student.name}'s Recommendations"
-  %ul.media-list
-    %li.media
+    %li.active= "#{@student.name}"
+  .media
+    .person-box
       .media-left
-        = image_tag @application.student.avatar.medium_avatar, class: 'media-object img-circle'
+        = image_tag @student.avatar.medium_avatar, class: 'img-circle'
       .media-body
-        %p Student information. Lorem ipsum dolor sit amet.
-        %br
-        %br
-        %br
-        %hr
-        - @recommendations.each do |rec|
-          .employer-application-recommendation
-            .media
-              .media-left
-                = image_tag rec.staffer.avatar.medium_avatar, class: 'media-object img-rounded'
-              .media-body
-                .staffer-location
-                  %span.staffer-name= rec.staffer.name
-                  %span.staffer-school= rec.staffer.school.name
-                  %span.staffer-city= rec.staffer.city
-                .staffer-email
-                  = rec.staffer.email
-                .staffer-phone
-                  = rec.staffer.phone.present? ? rec.staffer.phone : "(915) 920-0102"
+        %h1.media-heading
+          = link_to "#{@student.name}"
+        .info
+          %address
+            .address
+              = "#{@student.address1} #{@student.address2}"
+            .city-state
+              = "#{@student.city} #{@student.state} #{@student.zip}"
+          .email
+            = @student.email
+          .phone
+            = @student.phone
+          .links
+            = link_to "Github"
+            &nbsp;
+            = link_to "LinkedIn" 
+  %br
+  %h1 Application
+  %hr
+  .employer-application
+    .row
+      .col-sm-3.section
+        %h4 Cover Letter
+      .col-sm-9
+        != @md.render(@application.cover_letter || '')
+    .row
+      .col-sm-3.section
+        %h4 Resume
+      .col-sm-9
+        != @md.render(@application.resume || '')
+    - if @application.resume_file.present?
+      .row
+        .col-sm-3.section
+          %h4 Resume File
+        .col-sm-9
+          = link_to "Download Resume", @application.resume_file.url
+  - if @recommendations.any?
+    %h1 Recommendations
+    %hr
+    - @recommendations.each do |rec|
+      .employer-application-recommendation
+        .media
+          .media-left
+            = image_tag rec.staffer.avatar.medium_avatar, class: 'media-object img-circle'
+          .media-body
+            .staffer-location
+              %span.staffer-name= rec.staffer.name
+              %span.staffer-school= rec.staffer.school.name
+              %span.staffer-city= rec.staffer.city
+            .staffer-email
+              = rec.staffer.email
+            .staffer-phone
+              = rec.staffer.phone.present? ? rec.staffer.phone : "(915) 920-0102"
 
-                %blockquote.staffer-quote= "\"Lorem ipsum dolor sit amet, vix te malis semper quaestio. Epicurei persecuti ad vis. Regione probatus eos ei. Probatus constituam cotidieque et eum.\""
+            %blockquote.staffer-quote= "\"Lorem ipsum dolor sit amet, vix te malis semper quaestio. Epicurei persecuti ad vis. Regione probatus eos ei. Probatus constituam cotidieque et eum.\""

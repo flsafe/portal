@@ -6,5 +6,9 @@
   %ol.breadcrumb
     %li= link_to 'Jobs', employer_opportunities_path
     %li{class: 'active'}= "#{@opportunity.title}"
-  %br
-  = render 'application_boxes', applications: @applications
+  .opportunity-box
+    .title= link_to @opportunity.title, edit_employer_opportunity_path(@opportunity)
+    .description= truncate(@opportunity.description, length: 500)
+  %hr
+  .row
+    = render 'application_boxes', applications: @applications

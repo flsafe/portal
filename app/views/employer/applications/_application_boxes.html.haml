@@ -12,14 +12,15 @@
               .panel-footer
                 .name
                   = link_to student.name
+                .school
+                  = "#{student.campus.school.name} #{student.campus.city}, #{student.campus.state}"
                 .info
                   .email
                     = student.email
                   .phone
                     = student.phone
                 %br
-                .recommendation{class: (recommendation ? '' : 'hidden')}
-                  - if recommendation
-                    = link_to employer_opportunity_application_path(@opportunity, application), class: 'btn btn-xs btn-warning' do
-                      %span{class: 'glyphicon glyphicon-star'}
-                      View Recommendations 
+                .recommendation
+                  = link_to employer_opportunity_application_path(@opportunity, application), class: "btn btn-xs #{recommendation ? 'btn-info' : 'btn-default'}" do
+                    %span{class: "#{recommendation ? '' : 'no-display'} glyphicon glyphicon-star"}
+                    View Application 

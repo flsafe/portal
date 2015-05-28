@@ -12,13 +12,19 @@
   .name {
     font-size: 1.35em;
   } 
+  .school {
+    font-weight: bold;  
+  }
   .info {
-    .semester {
-      font-weight: bold; 
-    }
-
     .email, .phone {
       color: rgb(125, 125, 125);
+      font-family: "Georgia";
+      font-size: 1.0em;
+      font-weight: bold;
+    }
+    .address, .city-state {
+      color: rgb(50, 50, 50) ;
+      font-weight: bold;
     }
   }
 }
