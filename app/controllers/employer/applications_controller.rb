@@ -2,6 +2,7 @@ class Employer::ApplicationsController < EmployerPortalController
   before_action :ensure_opportunity_belongs_to_employer
 
   def index 
+    @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML) 
     @applications = @opportunity.applications
                                 .includes(:student)
                                 .paginate(page: params[:page], per_page: 10)

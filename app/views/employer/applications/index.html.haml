@@ -8,7 +8,7 @@
     %li{class: 'active'}= "#{@opportunity.title}"
   .opportunity-box
     .title= link_to @opportunity.title, edit_employer_opportunity_path(@opportunity)
-    .description= truncate(@opportunity.description, length: 500)
+    .description!= @md.render(truncate(@opportunity.description, length: 500))
   %hr
   .row
     = render 'application_boxes', applications: @applications
