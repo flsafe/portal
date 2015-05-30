@@ -257,9 +257,9 @@ class StaffController < ApplicationController
     @event = ApplicationEvent.includes(application: :student).find(params[:event_id])
     @application = @event.application
     @student = @application.student
-    @event.destroy
+    ApplicationEventMessage.find_by!(application_event: @event).destroy!
+    @event.destroy!
     @events = @application.application_events
-
     respond_to do |format|
       format.html {
         redirect_to_session_or(staff_edit_student_placement_profile_url(@student, @application), flash: {success: "Note Deleted"})
