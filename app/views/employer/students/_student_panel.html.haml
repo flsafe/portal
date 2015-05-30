@@ -1,0 +1,21 @@
+.panel.panel-default
+  .panel-body
+    .media.person-box
+      .media-left
+        = image_tag @student.avatar.medium_avatar, class: 'img-circle'
+      .media-body
+        %h1.media-heading
+          = link_to "#{@student.name}", employer_student_path(@student)
+        .info
+          %address
+            3500 N. Capital of Texas Hwy apt. #1308
+            %br
+            Austin, Texas 78746
+          .email
+            = @student.email
+          .phone
+            = @student.phone
+          .links
+            = link_to "Github"
+            |
+            = link_to "LinkedIn" 

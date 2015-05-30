@@ -3,7 +3,7 @@
     .col-sm-3
       %span.timestamp= msg.created_at.to_s(:long)
     .col-sm-9
-      %span.message= link_to "#{msg.application.student.name}"
+      %span.message= link_to "#{msg.application.student.name}", employer_student_path(msg.application.student)
       %span.message applied to 
-      %span.opportunity= link_to msg.application.opportunity.title
+      %span.opportunity= link_to msg.application.opportunity.title, employer_opportunity_application_path(msg.application.opportunity, msg.application)
       %hr

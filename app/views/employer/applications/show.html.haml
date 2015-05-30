@@ -7,23 +7,9 @@
     %li= link_to "Jobs", employer_opportunities_path
     %li= link_to "#{@opportunity.title}", employer_opportunity_applications_path(@opportunity, @application)
     %li.active= "#{@student.name}"
-  .media
-    .person-box
-      .media-left
-        = image_tag @student.avatar.medium_avatar, class: 'img-circle'
-      .media-body
-        %h1.media-heading
-          = link_to "#{@student.name}"
-        .info
-          %address
-            .address
-              = "#{@student.address1} #{@student.address2}"
-            .city-state
-              = "#{@student.city} #{@student.state} #{@student.zip}"
-          .email
-            = @student.email
-          .phone
-            = @student.phone
+  .row
+    .col-sm-12
+      = render 'employer/students/student_panel' 
   %br
   %h1 Application
   %hr

@@ -1,0 +1,57 @@
+- content_for(:sidebar) do
+  = render 'employer/sidebar', active: :students
+- content_for(:center_content) do
+  %ul.nav.nav-tabs
+    %li{class: 'active', role: 'presentation'}= link_to 'Students', ''
+  %ol.breadcrumb
+    %li= link_to 'Students', employer_students_path
+    %li.active= @student.name
+  .row
+    .col-sm-12
+      =render 'student_panel'
+  %h1 Project Portfolio
+  %hr
+  .row
+    .col-sm-3
+      %h2 About
+    .col-sm-8
+      %p
+        Lorem ipsum dolor sit amet, veri dictas convenire eos at, tation nullam vix ei, est graece possit putant id. Populo accusata disputationi id qui. Ferri equidem eum ne. Tollit quodsi vix te, agam purto copiosae eam at, democritum adversarium cum eu.
+
+        Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam. Et eam justo putent adolescens, nec vocibus volutpat euripidis ad, vix agam assentior id.
+  %hr
+  .row
+    .col-sm-3
+      %h2 Skills
+    .col-sm-8
+      %p
+        Lorem ipsum dolor sit amet, veri dictas convenire eos at, tation nullam vix ei, est graece possit putant id.
+      %ul
+        %li Javascript
+        %li Git
+        %li HTML, CSS, Design
+  %hr
+  .row
+    .col-sm-3
+      %h2 Projects
+    .col-sm-8
+      .row
+        .col-sm-6
+          = image_tag 'http://placehold.it/300x200', class: 'img-thumbnail'
+        .col-sm-6
+          %p
+            Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam.
+      %hr
+      .row
+        .col-sm-6
+          = image_tag 'http://placehold.it/300x200', class: 'img-thumbnail'
+        .col-sm-6
+          %p
+            Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam.    %hr
+      %hr
+      .row
+        .col-sm-6
+          = image_tag 'http://placehold.it/300x200', class: 'img-thumbnail'
+        .col-sm-6
+          %p
+            Accusam gubergren cum in, ad eius prodesset philosophia vel. Id menandri omittantur neglegentur pri, tollit facilis nec an. An quo dicit viderer, aeque aliquando est ut. In per mollis repudiandae, est vitae theophrastus et. Cum veri equidem ad. Vis et prompta deleniti sensibus, diam cibo prompta ex vix, in eos quodsi impetus numquam.

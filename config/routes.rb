@@ -111,12 +111,13 @@ Rails.application.routes.draw do
     resources :opportunities do
       resources :applications, only: [:index, :show]
     end
-    resources :students
+    resources :students, only: [:index, :show]
   end
 
   resources :opportunities, only: [:show] do
     resources :applications, shallow: :true
   end
 
+  get 'revisions' => 'landing#revisions'
   root 'landing#index'
 end

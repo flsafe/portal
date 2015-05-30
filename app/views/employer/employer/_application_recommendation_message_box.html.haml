@@ -5,7 +5,7 @@
     .col-sm-9
       %span.staff_name= msg.application.application_state_changed_by.name
       %span.message recommended
-      %span.message= link_to "#{msg.application.student.name}'s application"
+      %span.message= link_to "#{msg.application.student.name}'s application", employer_opportunity_application_path(msg.application.opportunity, msg.application)
       %span.message to 
-      %span.opportunity= link_to msg.application.opportunity.title
+      %span.opportunity= link_to msg.application.opportunity.title, edit_employer_opportunity_path(msg.application.opportunity)
       %hr

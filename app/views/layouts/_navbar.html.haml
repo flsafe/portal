@@ -23,6 +23,8 @@
                   %li= link_to 'Campuses', staff_campuses_path
                   %li= link_to 'Companies', staff_companies_path
                   %li= link_to 'Team', staff_team_path
+              %hr
+              %li= link_to "About", revisions_path
         - if current_user 
           %li= link_to "Logout", logout_path, method: :delete
         - else

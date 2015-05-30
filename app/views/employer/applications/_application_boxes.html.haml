@@ -11,7 +11,7 @@
                 = image_tag student.avatar.medium_avatar, class: 'img-circle'
               .panel-footer
                 .name
-                  = link_to student.name
+                  = link_to student.name, employer_student_path(student)
                 .school
                   = "#{student.campus.school.name} #{student.campus.city}, #{student.campus.state}"
                 .info

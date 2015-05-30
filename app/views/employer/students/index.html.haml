@@ -3,6 +3,8 @@
 = content_for(:center_content) do
   %ul.nav.nav-tabs
     %li{class: 'active', role: 'presentation'}= link_to 'Students', ''
+  %ol.breadcrumb
+    %li Students
   %br
   .row
     = render 'student_boxes', students: @students
