@@ -6,7 +6,7 @@
   %li.active
     = @opportunity.title 
 
-= render partial: 'opportunities/description'
+= render partial: 'employer/opportunities/description'
 
 - if Application.exists?(opportunity: @opportunity, student_id: current_user)
   %em You have already applied to this opportunity.
