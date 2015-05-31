@@ -14,9 +14,13 @@ class Employer::ApplicationsController < EmployerPortalController
     @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML) 
     @application = Application.includes(:student)
                               .find_by(opportunity: @opportunity, id: params[:id])
-    @student = @application.student
-    @recommendations = ApplicationRecommendation.includes(:staffer)
-                                                .where(application: @application)
+    if @application.approved?
+      @student = @application.student
+      @recommendations = ApplicationRecommendation.includes(:staffer)
+                                                  .where(application: @application)
+    else
+      redirect_home(current_user)
+    end
   end
 
   private

@@ -5,7 +5,7 @@
     %li{class: 'active', role: 'presentation'}= link_to 'Jobs', '#'
   %ol.breadcrumb
     %li= link_to "Jobs", employer_opportunities_path
-    %li= link_to "#{@opportunity.title}", employer_opportunity_applications_path(@opportunity, @application)
+    %li= link_to "#{@opportunity.title}", employer_opportunity_applications_path(@opportunity)
     %li.active= "#{@student.name}"
   .row
     .col-sm-12
