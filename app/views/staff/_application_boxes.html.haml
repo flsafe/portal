@@ -12,7 +12,7 @@
                   = image_tag student.avatar.medium_avatar, class: 'img-circle', 'data-student-id' => student.id
                 .panel-footer
                   .name
-                    = link_to "#{student.first_name} #{student.last_name}", staff_student_resume_path(student)
+                    = link_to "#{student.first_name} #{student.last_name} #{application.pending? ? '(Pending)' : ''}", staff_student_resume_path(student)
                   .info
                     .semester
                       = "#{student.semester} #{student.year}".titleize

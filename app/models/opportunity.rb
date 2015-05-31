@@ -31,4 +31,11 @@ class Opportunity < ActiveRecord::Base
                      .where('partnerships.school_id = ?', school.id)
     Opportunity.includes(:company).where(id: ids).order('opportunities.created_at DESC')
   end
+
+  def self.get_application_counts(opportunities, application_state)
+    Opportunity.joins(
+      "JOIN applications ON applications.opportunity_id = opportunities.id AND applications.application_state = '#{application_state}'"
+    ).where(id: opportunities.map(&:id))
+     .group('opportunities.id').count 
+  end
 end

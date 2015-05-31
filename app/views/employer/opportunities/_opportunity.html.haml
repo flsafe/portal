@@ -18,7 +18,7 @@
                 %span.label.label-default= opportunity.skills
               %br
               .actions
-                = link_to "View Applications (#{opportunity.applications_count || 0})", employer_opportunity_applications_path(opportunity), class: 'btn btn-default'
+                = link_to "View Applications (#{@approved_count[opportunity.id] || 0})", employer_opportunity_applications_path(opportunity), class: 'btn btn-default'
             .media-right
               .time-stamp
                 = "#{time_ago_in_words(opportunity.created_at)} ago"

@@ -8,6 +8,7 @@ class Employer::OpportunitiesController < EmployerPortalController
                                 .includes(:company)
                                 .order(created_at: :desc)
                                 .paginate(page: params[:page], per_page: 10)
+    @approved_count = Opportunity.get_application_counts(@opportunities, 'approved')
   end
 
   def show
