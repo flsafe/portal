@@ -24,9 +24,6 @@ class Application < ActiveRecord::Base
   belongs_to :application_state_changed_by, foreign_key: :application_state_changed_by, class_name: 'Staffer'
   has_many :application_events, -> { order(event_date: :desc, created_at: :desc) }
 
-  after_create :email_new_application, :pub_new_application
-  after_update :email_updated_application, :pub_updated_application
-
   validates :application_state_changed_date, :application_state_changed_by, presence: true, unless: "application_state.eql? 'pending'"
   validates :application_state, inclusion: { in: %w[pending approved rejected] }
   validates :cover_letter, presence: true
@@ -78,22 +75,5 @@ class Application < ActiveRecord::Base
 
   def rejected?
     application_state.eql? 'rejected'
-  end
-
-  def email_new_application
-    # email staff
-  end
-
-  def email_updated_application
-    # email employer if the application has been approved
-  end
-
-  def pub_new_application
-    # publish new application event
-  end
-
-  def pub_updated_application
-    # publish approved application event if
-    # this application has been approved
   end
 end
