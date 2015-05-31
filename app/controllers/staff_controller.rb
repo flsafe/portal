@@ -257,7 +257,6 @@ class StaffController < ApplicationController
     @event = ApplicationEvent.includes(application: :student).find(params[:event_id])
     @application = @event.application
     @student = @application.student
-    ApplicationEventMessage.find_by!(application_event: @event).destroy!
     @event.destroy!
     @events = @application.application_events
     respond_to do |format|

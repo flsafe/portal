@@ -5,6 +5,7 @@ class Employer::ApplicationsController < EmployerPortalController
     @md = Redcarpet::Markdown.new(Redcarpet::Render::HTML) 
     @applications = @opportunity.applications
                                 .includes(student: {campus: :school})
+                                .approved
                                 .paginate(page: params[:page], per_page: 10)
     @recommendations = ApplicationRecommendation.where(application: @applications)
   end
