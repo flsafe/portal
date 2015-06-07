@@ -108,6 +108,7 @@ Rails.application.routes.draw do
 
     get '/profile' => 'employer#edit_employer_profile', as: :edit_employer_profile
     patch '/profile' => 'employer#update_employer_profile', as: :update_employer_profile
+    post '/confirm/:activity_message_id' => 'employer#toggle_confirmation', as: :toggle_confirmation
     resources :opportunities do
       resources :applications, only: [:index, :show]
     end

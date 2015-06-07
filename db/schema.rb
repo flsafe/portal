@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521023727) do
+ActiveRecord::Schema.define(version: 20150607023839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,18 @@ ActiveRecord::Schema.define(version: 20150521023727) do
 
   add_index "invites", ["email"], name: "index_invites_on_email", unique: true, using: :btree
   add_index "invites", ["token"], name: "index_invites_on_token", unique: true, using: :btree
+
+  create_table "message_confirmations", force: :cascade do |t|
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.integer  "activity_message_id"
+    t.string   "activity_message_type"
+  end
+
+  add_index "message_confirmations", ["activity_message_type", "activity_message_id"], name: "index_msg_cnfm_activity_msg", using: :btree
+  add_index "message_confirmations", ["user_type", "user_id"], name: "index_msg_cnfrm_user", using: :btree
 
   create_table "opportunities", force: :cascade do |t|
     t.string   "title"

@@ -1,8 +1,10 @@
 .row
   .activity-message-box
+    .col-sm-2
+      = render 'toggle_confrimation_button', msg_id: msg, confirmed: @confirmed[msg.id]
     .col-sm-3
       %span.timestamp= msg.created_at.to_s(:long)
-    .col-sm-9
+    .col-sm-8
       %span.staff_name= msg.staffer.name
       %span.message recommended
       %span.message= link_to "#{msg.student.name}"

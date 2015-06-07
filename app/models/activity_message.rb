@@ -35,14 +35,18 @@ class ActivityMessage < ActiveRecord::Base
   belongs_to :opportunity
   belongs_to :school 
 
+  has_many :message_confirmation
+
   validates :school, presence: true
 
   def self.employer_feed(partner_school_ids)
     ActivityMessage.joins(:application)
-                  .where(school_id: partner_school_ids,
-                         'applications.application_state' => 'approved',
-                         type: %w[ApplicationMessage
+                   .joins('LEFT OUTER JOIN message_confirmations ON message_confirmations.activity_message_id = activity_messages.id')
+                   .where(school_id: partner_school_ids,
+                          'applications.application_state' => 'approved',
+                          type: %w[ApplicationMessage
                                    ApplicationRecommendationMessage
                                    OpportunityRecommendationMessage])
+                    .where('message_confirmations.created_at IS NULL')
   end
 end

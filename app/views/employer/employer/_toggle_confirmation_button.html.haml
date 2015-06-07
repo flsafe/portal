@@ -1,0 +1,4 @@
+%div{id: "#{msg_id}", class: "#{@confirmed[msg_id] ? 'hidden' : ''}"}
+  = link_to employer_toggle_confirmation_path(msg_id), method: :post, remote: true, class: 'btn btn-xs btn-default' do
+    ok
+    %span{class: 'glyphicon glyphicon-ok'}
