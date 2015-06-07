@@ -5,8 +5,8 @@ class Employer::EmployerController < EmployerPortalController
   def activity
     @activity_messages = ActivityMessage.employer_feed(current_user.schools.pluck(:id))
                                         .paginate(page: params[:page], per_page: 15)
-    @confirmed = MessageConfirmation.where(user: current_user, activity_message: @activity_messages.map(&:id))
-                                    .group_by(&:activity_message_id)
+    @confirmed = MessageConfirmation.build_confirmed_hash(current_user,
+                                                          @activity_messages.map(&:id))
   end
 
   def edit_employer_profile
@@ -32,19 +32,6 @@ class Employer::EmployerController < EmployerPortalController
       else
         format.html {render action: 'edit'}
       end
-    end
-  end
-
-  def toggle_confirmation
-    @activity_message = ActivityMessage.find(params[:activity_message_id])
-    if @confirmation = MessageConfirmation.find_by(user: current_user, activity_message: @activity_message)
-      @confirmation.destroy!
-      @confirmation = nil
-    else
-      @confirmation = MessageConfirmation.create!(user: current_user, activity_message: @activity_message)
-    end
-    respond_to do |format|
-      format.js
     end
   end
 

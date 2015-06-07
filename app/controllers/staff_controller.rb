@@ -75,8 +75,9 @@ class StaffController < ApplicationController
   end
 
   def activity
-    @activity_messages = current_user.school.activity_messages
-                                            .paginate(page: params[:page], per_page: 25)
+    @activity_messages = ActivityMessage.staff_feed(current_user)
+                                         .paginate(page: params[:page], per_page: 25)
+    @confirmed = MessageConfirmation.build_confirmed_hash(current_user, @activity_messages.map(&:id))
   end
 
   def recomendations

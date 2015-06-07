@@ -1,8 +1,10 @@
 .row
   .activity-message-box
+    .col-sm-1
+      = render 'message_confirmations/toggle_confirmation_button', confirmed: @confirmed, msg_id: msg.id
     .col-sm-3
       %span.timestamp= msg.created_at.to_s(:long)
-    .col-sm-9
+    .col-sm-8
       %span.staff_name= msg.staffer.name
       %span.message recommended
       %span.message= link_to "#{msg.application.student.name}'s application", staff_application_path(msg.application)

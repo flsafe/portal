@@ -14,4 +14,10 @@
 class MessageConfirmation < ActiveRecord::Base
   belongs_to :user, polymorphic: true
   belongs_to :activity_message, polymorphic: true
+
+  def self.build_confirmed_hash(user, activity_message_ids)
+    MessageConfirmation.where(user: user,
+                              activity_message_id: activity_message_ids) 
+                              .group_by(&:activity_message_id)
+  end
 end

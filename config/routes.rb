@@ -108,16 +108,18 @@ Rails.application.routes.draw do
 
     get '/profile' => 'employer#edit_employer_profile', as: :edit_employer_profile
     patch '/profile' => 'employer#update_employer_profile', as: :update_employer_profile
-    post '/confirm/:activity_message_id' => 'employer#toggle_confirmation', as: :toggle_confirmation
     resources :opportunities do
       resources :applications, only: [:index, :show]
     end
     resources :students, only: [:index, :show]
   end
 
+
   resources :opportunities, only: [:show] do
     resources :applications, shallow: :true
   end
+
+  post "toggle_confirmation/:activity_message_id" => 'message_confirmations#toggle_confirmation', as: :toggle_confirmation
 
   get 'revisions' => 'landing#revisions'
   root 'landing#index'

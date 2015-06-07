@@ -1,7 +1,7 @@
 .row
   .activity-message-box
     .col-sm-1
-      = render 'toggle_confirmation_button', msg_id: msg.id, confirmed: @confirmed[msg.id]
+      = render 'message_confirmations/toggle_confirmation_button', msg_id: msg.id, confirmed: @confirmed[msg.id]
     .col-sm-3
       %span.timestamp= msg.created_at.to_s(:long)
     .col-sm-8

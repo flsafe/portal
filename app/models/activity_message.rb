@@ -39,6 +39,13 @@ class ActivityMessage < ActiveRecord::Base
 
   validates :school, presence: true
 
+  def self.staff_feed(staffer)
+    @activity_messages = staffer.school
+                                .activity_messages
+                                .joins('LEFT OUTER JOIN message_confirmations ON message_confirmations.activity_message_id = activity_messages.id')
+                                .where('message_confirmations.created_at IS NULL')
+  end
+
   def self.employer_feed(partner_school_ids)
     ActivityMessage.joins(:application)
                    .joins('LEFT OUTER JOIN message_confirmations ON message_confirmations.activity_message_id = activity_messages.id')
